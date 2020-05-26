@@ -49,6 +49,7 @@
     <Compile Include="Data\HTMLData.cs" />
     <Compile Include="Data\InputData.cs" />
     <Compile Include="Data\ProcessedResource.cs" />
+    <Compile Include="Data\URLData.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +62,7 @@
     <Compile Include="Service\FilterService.cs" />
     <Compile Include="Service\InputService.cs" />
     <Compile Include="Service\ParseService.cs" />
+    <Compile Include="Service\ResourceFilterService.cs" />
     <Compile Include="Service\SaveService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
