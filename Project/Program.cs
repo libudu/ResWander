@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ResWander.Service;
 
 namespace ResWander
 {
@@ -14,6 +15,7 @@ namespace ResWander
         [STAThread]
         static void Main()
         {
+            ImgInputService inputService = new ImgInputService();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
