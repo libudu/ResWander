@@ -15,7 +15,6 @@ namespace ResWander
         [STAThread]
         static void Main()
         {
-            ImgInputService inputService = new ImgInputService();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
