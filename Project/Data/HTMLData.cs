@@ -14,6 +14,6 @@ namespace ResWander.Data
         /// <summary>
         /// 存储下载得到的HTML代码
         /// </summary>
-        public List<string> HTMLCodes { get; set; }
+        public Queue<string> HTMLCodes { get; set; }
     }
 }
