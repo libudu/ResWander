@@ -11,3 +11,6 @@ D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\HtmlA
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\HtmlAgilityPack.pdb
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\HtmlAgilityPack.xml
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.csproj.CopyComplete
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Form1.resources
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Form2.resources
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Picture.resources

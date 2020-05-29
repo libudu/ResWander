@@ -33,7 +33,7 @@ namespace ResWander.Service
         /// <param name="imageSources">将待筛选的目标图片传入</param>
         /// <param name="imgInputData">筛选条件</param>
         /// <returns>将筛选结果返回</returns>
-        public List<Image> FilterImages(List<Image> imageSources, ImgInputData imgInputData)
+        public static List<Image> FilterImages(List<Image> imageSources, ImgInputData imgInputData)
         {
             // 按照宽度、高度、大小、格式对图片进行筛选
             imageSources.RemoveAll(img =>

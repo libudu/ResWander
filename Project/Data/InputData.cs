@@ -61,7 +61,7 @@ namespace ResWander.Data
         /// <summary>
         /// 构造函数，主要对参数初始化
         /// </summary>
-        ImgInputData()
+        public ImgInputData()
         {
             MinX = 0;
             MaxX = int.MaxValue;
