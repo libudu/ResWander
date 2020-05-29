@@ -47,10 +47,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ServiceTest\SaveServiceTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataTest\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Project\ResWander.csproj">
+      <Project>{511cc68d-a67c-4a55-8e07-108a2574d679}</Project>
+      <Name>ResWander</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
