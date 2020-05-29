@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 
 namespace ResWander.Service
 {
@@ -16,7 +17,7 @@ namespace ResWander.Service
         /// </summary>
         /// <param name="htmlCode">html源代码</param>
         /// <returns>返回一组url</returns>
-        public abstract string[] Parse(string htmlCode);
+        public abstract List<string> Parse(string htmlCode);
     }
 
     /// <summary>
@@ -24,11 +25,31 @@ namespace ResWander.Service
     /// </summary>
     public class HTMLParseService : ParseService
     {
-        //TODO:正则表达式
-        public string HTMLRegex { get; set; }
-        public override string[] Parse(string htmlCode)
+        //使用HtmlAgility类实现html代码的解析
+        public override List<string> Parse(string htmlCode)
         {
-            return null;
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlCode);
+            //获取网页链接：寻找a标签下的href属性
+            HtmlNodeCollection hrefList = htmlDocument.DocumentNode.SelectNodes(".//a[@href]");
+            List<string> hrefUrlList = new List<string>();
+            if (hrefList != null)
+            {
+                foreach (HtmlNode href in hrefList)
+                {
+                    //获得网页url
+                    string url = href.Attributes["href"].Value;
+
+                    //根据初始条件筛选url
+                    if (!url.Contains("/"))
+                    {
+                        continue;
+                    }
+                    //......
+                    hrefUrlList.Add(url);
+                }
+            }
+            return hrefUrlList;
         }
     }
 
@@ -37,10 +58,26 @@ namespace ResWander.Service
     /// </summary>
     public class ImgParseService : ParseService
     {
-        public string ImgRegex { get; set; }
-        public override string[] Parse(string htmlCode)
+        public override List<string> Parse(string htmlCode)
         {
-            return null;
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlCode);
+            //获取网页链接：寻找a标签下的href属性
+            HtmlNodeCollection imgList = htmlDocument.DocumentNode.SelectNodes(".//img[@src]");
+            List<string> imgUrlList = new List<string>();
+            if (imgUrlList != null)
+            {
+                foreach (HtmlNode img in imgList)
+                {
+                    //获得网页url
+                    string url = img.Attributes["src"].Value;
+
+                    //根据初始条件筛选url
+                    //......
+                    imgUrlList.Add(url);
+                }
+            }
+            return imgUrlList;
         }
     }
 }
