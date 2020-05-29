@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ResWander.Data;
+using System.Drawing.Imaging;
 
 namespace ResWander.Service
 {
@@ -118,18 +119,18 @@ namespace ResWander.Service
         /// 添加一个图片格式
         /// </summary>
         /// <param name="Format">图片格式的字符串</param>
-        public void addImgFormat(string Format)
+        public void addImgFormat(ImageFormat Format)
         {
-            inputData.ImgFormat.Add(Format);
+            inputData.TargetImgFormat.Add(Format);
         }
 
         /// <summary>
         /// 添加一组图片格式
         /// </summary>
         /// <param name="Format">图片格式字符串的数组</param>
-        public void addImgFormat(string[] Format)
+        public void addImgFormat(ImageFormat[] Format)
         {
-            inputData.ImgFormat.AddRange(Format);
+            inputData.TargetImgFormat.AddRange(Format);
         }
 
         public void setUrl(string Url)

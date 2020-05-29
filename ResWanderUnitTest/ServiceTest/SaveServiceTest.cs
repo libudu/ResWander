@@ -15,13 +15,13 @@ namespace ResWanderUnitTest.ServiceTest
     [TestClass]
     public class SaveServiceTest
     {
-        private List<Image> imageSources;
+        private static List<Image> imageSources;
 
         /// <summary>
         /// 在方法调用之前初始化资源文件
         /// </summary>
         [ClassInitialize]
-        public void InitSourceFiles()
+        public static void InitSourceFiles(TestContext testContext)
         {
             imageSources = new List<Image>();
             imageSources.Add(new Bitmap("/测试文件/图片.png"));
@@ -33,7 +33,8 @@ namespace ResWanderUnitTest.ServiceTest
         [TestMethod]
         public void ImageSaveTest()
         {
-            SaveService.SaveImages(this.imageSources);
+            SaveService.SaveImages(SaveServiceTest.imageSources);
+            Assert.AreEqual(true, true);
         }
     }
 }

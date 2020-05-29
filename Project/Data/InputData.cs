@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,19 +44,19 @@ namespace ResWander.Data
         public int MaxY { get; set; }
 
         /// <summary>
-        /// 下载图片的最小尺寸
+        /// 下载图片的最小尺寸,单位：字节
         /// </summary>
         public int MinSize { get; set; }
 
         /// <summary>
-        /// 下载图片的最大尺寸
+        /// 下载图片的最大尺寸,单位：字节
         /// </summary>
         public int MaxSize { get; set; }
 
         /// <summary>
         /// 支持的的图片类型
         /// </summary>
-        public List<string> ImgFormat;
+        public List<ImageFormat> TargetImgFormat;
 
         /// <summary>
         /// 构造函数，主要对参数初始化
@@ -68,6 +69,16 @@ namespace ResWander.Data
             MaxX = int.MaxValue;
             MinSize = 0;
             MaxSize = int.MaxValue;
+            TargetImgFormat = new List<ImageFormat>();
+            TargetImgFormat.Add(ImageFormat.Png);
+            TargetImgFormat.Add(ImageFormat.Jpeg);
+            TargetImgFormat.Add(ImageFormat.Bmp);
+            TargetImgFormat.Add(ImageFormat.Gif);
+            TargetImgFormat.Add(ImageFormat.Tiff);
+            TargetImgFormat.Add(ImageFormat.Emf);
+            TargetImgFormat.Add(ImageFormat.Icon);
+            TargetImgFormat.Add(ImageFormat.Wmf);
+            TargetImgFormat.Add(ImageFormat.MemoryBmp);
         }
     }
 
