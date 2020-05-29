@@ -19,17 +19,18 @@ namespace ResWander.Data
     //}
 
     /// <summary>
-    /// 解析完毕的图片资源类
+    /// 图片集合类
     /// </summary>
-    public class ImgResource
+    public class ImgResourcesContainer
     {
         /// <summary>
         /// 下载下来的未经筛选的图片集合
         /// </summary>
-        public List<Image> RowImages { get; set; }
+        public List<Resource> RowImages { get; set; }
+
         /// <summary>
         /// 经过筛选条件筛选之后的图片集合
         /// </summary>
-        public List<Image> ProcessedImages { get; set; }
+        public List<Resource> ProcessedImages { get; set; }
     }
 }
