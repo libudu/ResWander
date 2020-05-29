@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ResWander
 {
-    public partial class Form1 : Form
+    public partial class Picture : Form
     {
-        public Form1()
+        public Picture()
         {
             InitializeComponent();
+        }
+
+        private void PictureBox_DoubleClick(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
