@@ -61,17 +61,17 @@
     <Compile Include="Service\ParseService.cs" />
     <Compile Include="Service\ResourceFilterService.cs" />
     <Compile Include="Service\SaveService.cs" />
-    <Compile Include="Windows\MainWindow.cs">
+    <Compile Include="Windows\ResWanderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\MainWindow.designer.cs">
-      <DependentUpon>MainWindow.cs</DependentUpon>
+    <Compile Include="Windows\ResWanderForm.designer.cs">
+      <DependentUpon>ResWanderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SaveWindow.cs">
+    <Compile Include="Windows\SaveForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\SaveWindow.designer.cs">
-      <DependentUpon>SaveWindow.cs</DependentUpon>
+    <Compile Include="Windows\SaveForm.designer.cs">
+      <DependentUpon>SaveForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Picture.cs">
       <SubType>Form</SubType>
@@ -88,11 +88,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Windows\MainWindow.resx">
-      <DependentUpon>MainWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\ResWanderForm.resx">
+      <DependentUpon>ResWanderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\SaveWindow.resx">
-      <DependentUpon>SaveWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\SaveForm.resx">
+      <DependentUpon>SaveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Picture.resx">
       <DependentUpon>Picture.cs</DependentUpon>

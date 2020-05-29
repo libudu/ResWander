@@ -50,6 +50,7 @@
             this.resourceTabPage = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.previewTabPage = new System.Windows.Forms.TabPage();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -58,7 +59,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,6 +66,7 @@
             this.resourceTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.previewTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -74,14 +75,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // crawButton
             // 
             this.crawButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.crawButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.crawButton.Location = new System.Drawing.Point(744, 2);
+            this.crawButton.Location = new System.Drawing.Point(764, 2);
             this.crawButton.Name = "crawButton";
             this.crawButton.Size = new System.Drawing.Size(74, 28);
             this.crawButton.TabIndex = 2;
@@ -95,7 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.urlTextBox.Location = new System.Drawing.Point(90, 3);
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(639, 25);
+            this.urlTextBox.Size = new System.Drawing.Size(659, 25);
             this.urlTextBox.TabIndex = 3;
             // 
             // label1
@@ -113,7 +113,7 @@
             // choseButton
             // 
             this.choseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.choseButton.Location = new System.Drawing.Point(602, 49);
+            this.choseButton.Location = new System.Drawing.Point(622, 49);
             this.choseButton.Name = "choseButton";
             this.choseButton.Size = new System.Drawing.Size(100, 28);
             this.choseButton.TabIndex = 6;
@@ -124,7 +124,7 @@
             // setButton
             // 
             this.setButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.setButton.Location = new System.Drawing.Point(719, 49);
+            this.setButton.Location = new System.Drawing.Point(739, 49);
             this.setButton.Name = "setButton";
             this.setButton.Size = new System.Drawing.Size(100, 28);
             this.setButton.TabIndex = 7;
@@ -141,7 +141,7 @@
             this.panel1.Controls.Add(this.crawButton);
             this.panel1.Location = new System.Drawing.Point(1, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(825, 34);
+            this.panel1.Size = new System.Drawing.Size(845, 34);
             this.panel1.TabIndex = 8;
             // 
             // panel2
@@ -276,7 +276,7 @@
             this.resourceTabControl.Location = new System.Drawing.Point(7, 120);
             this.resourceTabControl.Name = "resourceTabControl";
             this.resourceTabControl.SelectedIndex = 0;
-            this.resourceTabControl.Size = new System.Drawing.Size(818, 345);
+            this.resourceTabControl.Size = new System.Drawing.Size(838, 345);
             this.resourceTabControl.TabIndex = 12;
             // 
             // resourceTabPage
@@ -285,7 +285,7 @@
             this.resourceTabPage.Location = new System.Drawing.Point(4, 25);
             this.resourceTabPage.Name = "resourceTabPage";
             this.resourceTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.resourceTabPage.Size = new System.Drawing.Size(810, 316);
+            this.resourceTabPage.Size = new System.Drawing.Size(830, 316);
             this.resourceTabPage.TabIndex = 0;
             this.resourceTabPage.Text = "资源爬取情况";
             this.resourceTabPage.UseVisualStyleBackColor = true;
@@ -300,7 +300,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(929, 307);
+            this.dataGridView1.Size = new System.Drawing.Size(949, 307);
             this.dataGridView1.TabIndex = 0;
             // 
             // previewTabPage
@@ -321,6 +321,15 @@
             this.previewTabPage.TabIndex = 1;
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Location = new System.Drawing.Point(225, 178);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(160, 130);
+            this.pictureBox6.TabIndex = 8;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.DoubleClick += new System.EventHandler(this.PictureBox6_DoubleClick);
             // 
             // pictureBox8
             // 
@@ -392,25 +401,16 @@
             this.panel4.Controls.Add(this.upDateButton);
             this.panel4.Controls.Add(this.reChoseButton);
             this.panel4.Controls.Add(this.openListButton);
-            this.panel4.Location = new System.Drawing.Point(407, 83);
+            this.panel4.Location = new System.Drawing.Point(427, 83);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Location = new System.Drawing.Point(225, 178);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(160, 130);
-            this.pictureBox6.TabIndex = 8;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.DoubleClick += new System.EventHandler(this.PictureBox6_DoubleClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 465);
+            this.ClientSize = new System.Drawing.Size(848, 465);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.resourceTabControl);
             this.Controls.Add(this.panel3);
@@ -419,7 +419,7 @@
             this.Controls.Add(this.setButton);
             this.Controls.Add(this.choseButton);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ResWander";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -430,6 +430,7 @@
             this.resourceTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.previewTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -438,7 +439,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }
