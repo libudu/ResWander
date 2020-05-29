@@ -7,3 +7,7 @@ D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWa
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.csproj.GenerateResource.cache
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.exe
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.pdb
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\HtmlAgilityPack.dll
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\HtmlAgilityPack.pdb
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\HtmlAgilityPack.xml
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.csproj.CopyComplete
