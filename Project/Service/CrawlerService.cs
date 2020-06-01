@@ -36,7 +36,7 @@ namespace ResWander.Service
             {
                 if (true/*一些筛选条件*/)
                 {
-                    project.URLData.HTMLUrls.Enqueue(item);
+                    project.URLData.ImgUrls.Enqueue(item);
                 }
             }
 
