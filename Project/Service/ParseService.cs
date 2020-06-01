@@ -7,25 +7,25 @@ using HtmlAgilityPack;
 
 namespace ResWander.Service
 {
-    /// <summary>
-    /// 对下载完毕的html代码进行解析资源的父类
-    /// </summary>
-    public abstract class ParseService
-    {
-        /// <summary>
-        /// 对一个html代码进行解析：根据条件筛选一些资源url
-        /// </summary>
-        /// <param name="htmlCode">html源代码</param>
-        /// <returns>返回一组url</returns>
-        public abstract List<string> Parse(string htmlCode);
-    }
+    ///// <summary>
+    ///// 对下载完毕的html代码进行解析资源的父类
+    ///// </summary>
+    //public abstract class ParseService
+    //{
+    //    /// <summary>
+    //    /// 对一个html代码进行解析：根据条件筛选一些资源url
+    //    /// </summary>
+    //    /// <param name="htmlCode">html源代码</param>
+    //    /// <returns>返回一组url</returns>
+    //    public abstract List<string> Parse(string htmlCode);
+    //}
 
     /// <summary>
     /// 找出一个html代码中的图片url
     /// </summary>
-    public class ImgParseService : ParseService
+    public class ImgParseService /*: ParseService*/
     {
-        public override List<string> Parse(string htmlCode)
+        public static /*override*/ List<string> Parse(string htmlCode)
         {
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(htmlCode);

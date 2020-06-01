@@ -15,7 +15,7 @@ namespace ResWander.Data
         /// <summary>
         /// 用户输入的网址，已经预处理
         /// </summary>
-        public string Url;
+        public string Url { get; set; }
     }
 
     /// <summary>

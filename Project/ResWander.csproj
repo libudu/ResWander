@@ -50,12 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\HTMLData.cs" />
+    <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Resource.cs" />
     <Compile Include="Data\InputData.cs" />
     <Compile Include="Data\ProcessedResource.cs" />
     <Compile Include="Data\URLData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\CrawlerService.cs" />
     <Compile Include="Service\DownloadService.cs" />
     <Compile Include="Service\FilterService.cs" />
     <Compile Include="Service\HTMLService.cs" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ResWander.Data;
+using ResWander.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,11 @@ namespace ResWander
 {
     public partial class Form1 : Form
     {
+        public Project  CrawlerProject { get; set; }
         public Form1()
         {
             InitializeComponent();
+            CrawlerProject = new Project();
         }
 
         public string stoPath;             //用来保存用户指定的存储路径
@@ -26,6 +30,10 @@ namespace ResWander
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
         {
+            CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
+            //此处填入其他的输入
+            CrawlerService.StartCrawl(CrawlerProject);
+
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
         /// <summary>
@@ -62,7 +70,7 @@ namespace ResWander
         /// <param name="e"></param>
         private void UpDateButton_Click(object sender, EventArgs e)
         {
-
+            SaveService.SaveImages(CrawlerProject.ImgResourcesContainer.ProcessedImages);
         }
         /// <summary>
         /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前指定的资源下载目录，方便查看下载的资源
