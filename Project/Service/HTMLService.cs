@@ -34,38 +34,31 @@ namespace ResWander.Service
                 return "";
             }
         }
-
-        /// <summary>
-        /// 找出一个html代码中的链接到另一个网页的url
-        /// </summary>
-        public class HTMLParseService : ParseService
+        //使用HtmlAgility类实现html代码的解析
+        public static List<string> Parse(string htmlCode)
         {
-            //使用HtmlAgility类实现html代码的解析
-            public override List<string> Parse(string htmlCode)
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlCode);
+            //获取网页链接：寻找a标签下的href属性
+            HtmlNodeCollection hrefList = htmlDocument.DocumentNode.SelectNodes(".//a[@href]");
+            List<string> hrefUrlList = new List<string>();
+            if (hrefList != null)
             {
-                HtmlDocument htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(htmlCode);
-                //获取网页链接：寻找a标签下的href属性
-                HtmlNodeCollection hrefList = htmlDocument.DocumentNode.SelectNodes(".//a[@href]");
-                List<string> hrefUrlList = new List<string>();
-                if (hrefList != null)
+                foreach (HtmlNode href in hrefList)
                 {
-                    foreach (HtmlNode href in hrefList)
-                    {
-                        //获得网页url
-                        string url = href.Attributes["href"].Value;
+                    //获得网页url
+                    string url = href.Attributes["href"].Value;
 
-                        //根据初始条件筛选url
-                        if (!url.Contains("/"))
-                        {
-                            continue;
-                        }
-                        //......
-                        hrefUrlList.Add(url);
+                    //根据初始条件筛选url
+                    if (!url.Contains("/"))
+                    {
+                        continue;
                     }
+                    //......
+                    hrefUrlList.Add(url);
                 }
-                return hrefUrlList;
             }
+            return hrefUrlList;
         }
     }
 }

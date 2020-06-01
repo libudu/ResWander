@@ -9,11 +9,19 @@ namespace ResWander.Data
     /// <summary>
     /// 负责存储一个网页中的url
     /// </summary>
-    class URLData
+    public class URLData
     {
         /// <summary>
         /// html代码里的网页url
         /// </summary>
         public Queue<string> HTMLUrls { get; set; }
+
+        public Queue<string> ImgUrls { get; set; }
+
+        public URLData()
+        {
+            HTMLUrls = new Queue<string>();
+            ImgUrls = new Queue<string>();
+        }
     }
 }
