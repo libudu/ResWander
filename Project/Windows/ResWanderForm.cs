@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ResWander.Service;
+using ResWander.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,7 +55,7 @@ namespace ResWander
         /// <param name="e"></param>
         private void SelectAllButton_Click(object sender, EventArgs e)
         {
-
+           
         }
         /// <summary>
         /// 当用户点击下载选中按钮后，会调用该方法，把选中的资源下载到用户指定的目录中

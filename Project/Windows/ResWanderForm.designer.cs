@@ -38,10 +38,6 @@
             this.messageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.elseCheckBox = new System.Windows.Forms.CheckBox();
-            this.mediaCheckBox = new System.Windows.Forms.CheckBox();
-            this.textCheckBox = new System.Windows.Forms.CheckBox();
-            this.photoCheckBox = new System.Windows.Forms.CheckBox();
             this.reChoseButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.upDateButton = new System.Windows.Forms.Button();
@@ -59,6 +55,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.widthLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.heightLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.sizeLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.formatLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -167,60 +171,24 @@
             this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(3, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 15);
+            this.label2.Size = new System.Drawing.Size(82, 15);
             this.label2.TabIndex = 5;
-            this.label2.Text = "爬取的资源的数量：";
+            this.label2.Text = "爬取情况：";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.elseCheckBox);
-            this.panel3.Controls.Add(this.mediaCheckBox);
-            this.panel3.Controls.Add(this.textCheckBox);
-            this.panel3.Controls.Add(this.photoCheckBox);
+            this.panel3.Controls.Add(this.formatLabel);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.sizeLabel);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.heightLabel);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.widthLabel);
+            this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(1, 83);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(339, 28);
+            this.panel3.Size = new System.Drawing.Size(423, 28);
             this.panel3.TabIndex = 10;
-            // 
-            // elseCheckBox
-            // 
-            this.elseCheckBox.AutoSize = true;
-            this.elseCheckBox.Location = new System.Drawing.Point(268, 3);
-            this.elseCheckBox.Name = "elseCheckBox";
-            this.elseCheckBox.Size = new System.Drawing.Size(59, 19);
-            this.elseCheckBox.TabIndex = 3;
-            this.elseCheckBox.Text = "其他";
-            this.elseCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // mediaCheckBox
-            // 
-            this.mediaCheckBox.AutoSize = true;
-            this.mediaCheckBox.Location = new System.Drawing.Point(169, 3);
-            this.mediaCheckBox.Name = "mediaCheckBox";
-            this.mediaCheckBox.Size = new System.Drawing.Size(74, 19);
-            this.mediaCheckBox.TabIndex = 2;
-            this.mediaCheckBox.Text = "多媒体";
-            this.mediaCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // textCheckBox
-            // 
-            this.textCheckBox.AutoSize = true;
-            this.textCheckBox.Location = new System.Drawing.Point(90, 3);
-            this.textCheckBox.Name = "textCheckBox";
-            this.textCheckBox.Size = new System.Drawing.Size(59, 19);
-            this.textCheckBox.TabIndex = 1;
-            this.textCheckBox.Text = "文本";
-            this.textCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // photoCheckBox
-            // 
-            this.photoCheckBox.AutoSize = true;
-            this.photoCheckBox.Location = new System.Drawing.Point(11, 3);
-            this.photoCheckBox.Name = "photoCheckBox";
-            this.photoCheckBox.Size = new System.Drawing.Size(59, 19);
-            this.photoCheckBox.TabIndex = 0;
-            this.photoCheckBox.Text = "图片";
-            this.photoCheckBox.UseVisualStyleBackColor = true;
             // 
             // reChoseButton
             // 
@@ -317,7 +285,7 @@
             this.previewTabPage.Location = new System.Drawing.Point(4, 25);
             this.previewTabPage.Name = "previewTabPage";
             this.previewTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.previewTabPage.Size = new System.Drawing.Size(810, 316);
+            this.previewTabPage.Size = new System.Drawing.Size(830, 316);
             this.previewTabPage.TabIndex = 1;
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
@@ -406,6 +374,78 @@
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "宽度：";
+            // 
+            // widthLabel
+            // 
+            this.widthLabel.AutoSize = true;
+            this.widthLabel.Location = new System.Drawing.Point(47, 3);
+            this.widthLabel.Name = "widthLabel";
+            this.widthLabel.Size = new System.Drawing.Size(63, 15);
+            this.widthLabel.TabIndex = 1;
+            this.widthLabel.Text = "min~max";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(113, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "高度：";
+            // 
+            // heightLabel
+            // 
+            this.heightLabel.AutoSize = true;
+            this.heightLabel.Location = new System.Drawing.Point(158, 3);
+            this.heightLabel.Name = "heightLabel";
+            this.heightLabel.Size = new System.Drawing.Size(63, 15);
+            this.heightLabel.TabIndex = 3;
+            this.heightLabel.Text = "min~max";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(220, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "大小：";
+            // 
+            // sizeLabel
+            // 
+            this.sizeLabel.AutoSize = true;
+            this.sizeLabel.Location = new System.Drawing.Point(265, 3);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(63, 15);
+            this.sizeLabel.TabIndex = 5;
+            this.sizeLabel.Text = "min~max";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(334, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "格式：";
+            // 
+            // formatLabel
+            // 
+            this.formatLabel.AutoSize = true;
+            this.formatLabel.Location = new System.Drawing.Point(380, 3);
+            this.formatLabel.Name = "formatLabel";
+            this.formatLabel.Size = new System.Drawing.Size(23, 15);
+            this.formatLabel.TabIndex = 7;
+            this.formatLabel.Text = "kb";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -452,10 +492,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.CheckBox elseCheckBox;
-        private System.Windows.Forms.CheckBox mediaCheckBox;
-        private System.Windows.Forms.CheckBox textCheckBox;
-        private System.Windows.Forms.CheckBox photoCheckBox;
         private System.Windows.Forms.Button reChoseButton;
         private System.Windows.Forms.Button selectAllButton;
         private System.Windows.Forms.Button upDateButton;
@@ -475,6 +511,14 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label sizeLabel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label heightLabel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label widthLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label formatLabel;
     }
 }
 
