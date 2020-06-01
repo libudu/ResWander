@@ -11,7 +11,7 @@ namespace ResWander.Service
     /// <summary>
     /// 对HTML进行下载、解析操作
     /// </summary>
-    public class HTMLService
+    class HTMLService
     {
         /// <summary>
         /// 从指定网址下载html代码
@@ -34,13 +34,9 @@ namespace ResWander.Service
                 return "";
             }
         }
-
-        /// <summary>
-        /// 找出一个html代码中的链接到另一个网页的url
-        /// </summary>
-        public static List<string> HTMLParse(string htmlCode)
+        //使用HtmlAgility类实现html代码的解析
+        public static List<string> Parse(string htmlCode)
         {
-            //使用HtmlAgility类实现html代码的解析
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(htmlCode);
             //获取网页链接：寻找a标签下的href属性
@@ -62,7 +58,6 @@ namespace ResWander.Service
                     hrefUrlList.Add(url);
                 }
             }
-
             return hrefUrlList;
         }
     }

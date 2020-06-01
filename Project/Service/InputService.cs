@@ -19,13 +19,13 @@ namespace ResWander.Service
         /// </summary>
         /// <param name="OriginUrl">原Url</param>
         /// <returns>调整后的Url</returns>
-        protected string AdjustUrl(string OriginUrl)
+        public static string AdjustUrl(InputData inputData)
         {
+            string OriginUrl = inputData.Url;
             if (OriginUrl.StartsWith("http://") || OriginUrl.StartsWith("https://"))
             {
                 return OriginUrl;
             }
-
             string AdjustedUrl;
             if (OriginUrl.StartsWith("www."))
             {
@@ -35,6 +35,7 @@ namespace ResWander.Service
             {
                 AdjustedUrl = "https://www." + OriginUrl;
             }
+            inputData.Url = AdjustedUrl;
             return AdjustedUrl;
         }
 
@@ -44,8 +45,9 @@ namespace ResWander.Service
         /// </summary>
         /// <param name="url">目标网址</param>
         /// <returns>返回状态码或错误信息</returns>
-        public static string GetWebStatusCode(string url)
+        public static string GetWebStatusCode(InputData inputData)
         {
+            string url = inputData.Url;
             HttpWebRequest req = null;
             try
             {
@@ -75,7 +77,7 @@ namespace ResWander.Service
         /// </summary>
     public class ImgInputService:InputService
     {
-        public ImgInputData inputData { get; }
+        //public ImgInputData inputData { get; }
 
         /// <summary>
         ///  设置图片尺寸范围
@@ -85,7 +87,7 @@ namespace ResWander.Service
         /// <param name="MinY">最小高度</param>
         /// <param name="MaxY">最大高度</param>
         /// <returns></returns>
-        public bool setXYRange(int MinX = 0, int MaxX = int.MaxValue, int MinY = 0, int MaxY = int.MaxValue)
+        public static bool setXYRange(ImgInputData inputData,int MinX = 0, int MaxX = int.MaxValue, int MinY = 0, int MaxY = int.MaxValue)
         {
             if(MinX > 0 && MinX <= MaxX && MinY > 0 && MinY <= MaxY)
             {
@@ -104,7 +106,7 @@ namespace ResWander.Service
         /// <param name="MinSize">最小尺寸</param>
         /// <param name="MaxSize">最大尺寸</param>
         /// <returns></returns>
-        public bool setSizeRange(int MinSize, int MaxSize)
+        public static bool setSizeRange(ImgInputData inputData,int MinSize, int MaxSize)
         {
             if (MinSize > 0 && MaxSize >= MinSize)
             {
@@ -119,7 +121,7 @@ namespace ResWander.Service
         /// 添加一个图片格式
         /// </summary>
         /// <param name="Format">图片格式的字符串</param>
-        public void addImgFormat(ImageFormat Format)
+        public static  void addImgFormat(ImgInputData inputData,ImageFormat Format)
         {
             inputData.TargetImgFormat.Add(Format);
         }
@@ -128,12 +130,12 @@ namespace ResWander.Service
         /// 添加一组图片格式
         /// </summary>
         /// <param name="Format">图片格式字符串的数组</param>
-        public void addImgFormat(ImageFormat[] Format)
+        public static void addImgFormat(ImgInputData inputData,ImageFormat[] Format)
         {
             inputData.TargetImgFormat.AddRange(Format);
         }
 
-        public void setUrl(string Url)
+        public static void setUrl(ImgInputData inputData ,string Url)
         {
             inputData.Url = Url;
         }

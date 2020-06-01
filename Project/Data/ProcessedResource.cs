@@ -32,5 +32,11 @@ namespace ResWander.Data
         /// 经过筛选条件筛选之后的图片集合
         /// </summary>
         public List<Resource> ProcessedImages { get; set; }
+
+        public ImgResourcesContainer()
+        {
+            RowImages = new List<Resource>();
+            ProcessedImages = new List<Resource>();
+        }
     }
 }

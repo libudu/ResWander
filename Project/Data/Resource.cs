@@ -17,6 +17,11 @@ namespace ResWander.Data
         /// 资源url
         /// </summary>
         public string Url { get; set; }
+
+        public Resource(string url)
+        {
+            Url = url;
+        }
     }
 
     /// <summary>
@@ -28,5 +33,10 @@ namespace ResWander.Data
         /// 图片
         /// </summary>
         public Image Img { get; set; }
+
+        public ImgResource(Image img, string url) :base(url)
+        {
+            Img = img;
+        }
     }
 }
