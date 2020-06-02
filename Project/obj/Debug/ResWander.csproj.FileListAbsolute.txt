@@ -27,3 +27,4 @@ D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csproj.CoreCompileInputs.ca
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csproj.CopyComplete
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.exe
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.pdb
+D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Windows.SelectForm.resources

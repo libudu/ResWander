@@ -38,6 +38,14 @@
             this.messageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.formatLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.sizeLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.heightLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.widthLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.reChoseButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.upDateButton = new System.Windows.Forms.Button();
@@ -55,14 +63,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.widthLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.heightLabel = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.sizeLabel = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.formatLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -189,6 +189,74 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(423, 28);
             this.panel3.TabIndex = 10;
+            // 
+            // formatLabel
+            // 
+            this.formatLabel.AutoSize = true;
+            this.formatLabel.Location = new System.Drawing.Point(380, 3);
+            this.formatLabel.Name = "formatLabel";
+            this.formatLabel.Size = new System.Drawing.Size(0, 15);
+            this.formatLabel.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(334, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "格式：";
+            // 
+            // sizeLabel
+            // 
+            this.sizeLabel.AutoSize = true;
+            this.sizeLabel.Location = new System.Drawing.Point(265, 3);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(0, 15);
+            this.sizeLabel.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(220, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "大小：";
+            // 
+            // heightLabel
+            // 
+            this.heightLabel.AutoSize = true;
+            this.heightLabel.Location = new System.Drawing.Point(158, 3);
+            this.heightLabel.Name = "heightLabel";
+            this.heightLabel.Size = new System.Drawing.Size(0, 15);
+            this.heightLabel.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(113, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "高度：";
+            // 
+            // widthLabel
+            // 
+            this.widthLabel.AutoSize = true;
+            this.widthLabel.Location = new System.Drawing.Point(47, 3);
+            this.widthLabel.Name = "widthLabel";
+            this.widthLabel.Size = new System.Drawing.Size(0, 15);
+            this.widthLabel.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "宽度：";
             // 
             // reChoseButton
             // 
@@ -374,78 +442,6 @@
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "宽度：";
-            // 
-            // widthLabel
-            // 
-            this.widthLabel.AutoSize = true;
-            this.widthLabel.Location = new System.Drawing.Point(47, 3);
-            this.widthLabel.Name = "widthLabel";
-            this.widthLabel.Size = new System.Drawing.Size(63, 15);
-            this.widthLabel.TabIndex = 1;
-            this.widthLabel.Text = "min~max";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "高度：";
-            // 
-            // heightLabel
-            // 
-            this.heightLabel.AutoSize = true;
-            this.heightLabel.Location = new System.Drawing.Point(158, 3);
-            this.heightLabel.Name = "heightLabel";
-            this.heightLabel.Size = new System.Drawing.Size(63, 15);
-            this.heightLabel.TabIndex = 3;
-            this.heightLabel.Text = "min~max";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(220, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "大小：";
-            // 
-            // sizeLabel
-            // 
-            this.sizeLabel.AutoSize = true;
-            this.sizeLabel.Location = new System.Drawing.Point(265, 3);
-            this.sizeLabel.Name = "sizeLabel";
-            this.sizeLabel.Size = new System.Drawing.Size(63, 15);
-            this.sizeLabel.TabIndex = 5;
-            this.sizeLabel.Text = "min~max";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(334, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "格式：";
-            // 
-            // formatLabel
-            // 
-            this.formatLabel.AutoSize = true;
-            this.formatLabel.Location = new System.Drawing.Point(380, 3);
-            this.formatLabel.Name = "formatLabel";
-            this.formatLabel.Size = new System.Drawing.Size(23, 15);
-            this.formatLabel.TabIndex = 7;
-            this.formatLabel.Text = "kb";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -511,14 +507,14 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Label sizeLabel;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label heightLabel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label widthLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label formatLabel;
+        internal System.Windows.Forms.Label sizeLabel;
+        internal System.Windows.Forms.Label heightLabel;
+        internal System.Windows.Forms.Label widthLabel;
+        internal System.Windows.Forms.Label formatLabel;
     }
 }
 

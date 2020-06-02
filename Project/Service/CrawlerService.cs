@@ -9,7 +9,7 @@ namespace ResWander.Service
 {
     public class CrawlerService
     {
-        //单线程，当个网页爬取
+        //单线程，单个网页爬取
         public static bool StartCrawl(Project project)
         {
             //输入处理
