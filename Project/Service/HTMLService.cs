@@ -11,7 +11,7 @@ namespace ResWander.Service
     /// <summary>
     /// 对HTML进行下载、解析操作
     /// </summary>
-    class HTMLService
+    public class HTMLService
     {
         /// <summary>
         /// 从指定网址下载html代码
