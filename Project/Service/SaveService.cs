@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResWander.Data;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace ResWander.Service
         /// 用于保存指定的图片资源
         /// </summary>
         /// <param name="imageSources">待保存的图片资源</param>
-        internal static void SaveImage(List<Image> imageSources)
+        internal static void SaveImage(List<ImgResource> imageSources)
         {
             // 利用C#封装好的类进行图片等资源的保存
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -50,7 +51,7 @@ namespace ResWander.Service
                 for(int i = 0; i < imageSources.Count; i++)
                 {
                     string[] fileName = saveFileDialog.FileName.Split('.');
-                    imageSources[i].Save(fileName[0] + " " + i + "." + fileName[1]);
+                    imageSources[i].Img.Save(fileName[0] + " " + i + "." + fileName[1]);
 
                 }
 
