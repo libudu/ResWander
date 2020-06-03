@@ -17,7 +17,7 @@ namespace ResWander.Service
             InputService.AdjustUrl(project.ImgInputData);
             //if (InputService.GetWebStatusCode(project.ImgInputData) != "200")
             //{
-            //  return false;//无效起始网页
+            //    return false;//无效起始网页
             //}
             //下载当前url网页的html代码并保存
             project.HTMLData.HTMLCodes.Enqueue(HTMLService.DownloadUrl(project.ImgInputData.Url));
@@ -46,8 +46,11 @@ namespace ResWander.Service
             while (imgUrl != null)
             {
                 ImgResource img = new ImgResource(DownloadService.DownloadImg(imgUrl), imgUrl);
-                project.ImgResourcesContainer.RowImages.Add(img);
-                imgUrl = project.URLData.ImgUrls.Dequeue();
+                if(img != null)
+                {
+                    project.ImgResourcesContainer.RowImages.Add(img);
+                }
+                imgUrl = project.URLData.ImgUrls.Count > 0 ?  project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
             }
             return true;

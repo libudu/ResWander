@@ -21,6 +21,7 @@ namespace ResWander.Service
         /// <param name="imageSources">待保存的图片文件</param>
         public static void SaveImages(List<ImgResource> imageSources)
         {
+
             ImageSaver.SaveImage(imageSources);
         }
     }
