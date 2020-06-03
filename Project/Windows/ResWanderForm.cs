@@ -15,13 +15,16 @@ namespace ResWander
     public partial class Form1 : Form
     {
         public Project  CrawlerProject { get; set; }
+
+        public string stoPath;             //用来保存用户指定的存储路径
+
         public Form1()
         {
             InitializeComponent();
             CrawlerProject = new Project();
         }
 
-        public string stoPath;             //用来保存用户指定的存储路径
+
 
         /// <summary>
         /// 当用户点击爬取按钮后就会调用该方法，对相应网址进行资源爬取
