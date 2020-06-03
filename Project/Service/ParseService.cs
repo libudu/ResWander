@@ -44,6 +44,8 @@ namespace ResWander.Service
                     }
                     //将相对地址转换成绝对地址
                     url = HTMLService.TransferUrl(url);
+                    //字符转义
+                    url = HTMLService.ReplaceChar(url);
                     imgUrlList.Add(url);
                 }
             }
