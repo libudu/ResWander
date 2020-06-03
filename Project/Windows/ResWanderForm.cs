@@ -35,12 +35,12 @@ namespace ResWander
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
             bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
-            if (!crawlResult)            //爬取成功
+            if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
                 messageLabel.Text = "爬取网址" +this.urlTextBox.Text+ "失败";
             }
-            else                //爬取失败               
+            else                //爬取成功               
             {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
                 messageLabel.Text = "网址" + this.urlTextBox.Text+"爬取成功";

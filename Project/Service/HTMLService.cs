@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -18,14 +19,30 @@ namespace ResWander.Service
         /// </summary>
         /// <param name="url">所指定的网址</param>
         /// <returns>下载完毕的html源代码</returns>
+
+        //相对地址转绝对地址
+        public static string TransferUrl(string url)
+        {
+            string OriginUrl = url;
+            if (OriginUrl.StartsWith("http://") || OriginUrl.StartsWith("https://"))
+            {
+                return OriginUrl;
+            }
+            else
+            {
+                return "https:" + OriginUrl;
+            }
+        }
+
+        //将相对地址转化为绝对地址
         public static string DownloadUrl(string url)
         {
             try
             {
-                WebClient webClient = new WebClient();
-                webClient.Encoding = Encoding.UTF8;
                 //将该网址的源html代码下载返回
-                string html = webClient.DownloadString(url);
+                HttpWebRequest request = WebRequest.CreateHttp(url);
+                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
+                string html = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
                 return html;
             }
             catch (Exception ex)
@@ -48,12 +65,8 @@ namespace ResWander.Service
                 {
                     //获得网页url
                     string url = href.Attributes["href"].Value;
-
-                    //根据初始条件筛选url
-                    if (!url.Contains("/"))
-                    {
-                        continue;
-                    }
+                    //将相对地址转换成绝对地址
+                    url = TransferUrl(url);
                     //......
                     hrefUrlList.Add(url);
                 }
