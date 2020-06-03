@@ -9,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ResWander.Windows;
 
 namespace ResWander
 {
     public partial class Form1 : Form
     {
         public Project  CrawlerProject { get; set; }
+
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +34,17 @@ namespace ResWander
         {
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            CrawlerService.StartCrawl(CrawlerProject);
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
+            if (!crawlResult)
+            {
+                //中间还应加上爬取失败的网址，这个网址要得到
+                messageLabel.Text = "爬取网址" + "失败";
+            }
+            else
+            {
+                //中间还应加上成功爬取的网址，这个网址要得到
+                messageLabel.Text = "网址" + "爬取成功";
+            }
 
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
@@ -43,7 +55,9 @@ namespace ResWander
         /// <param name="e"></param>
         private void ChoseButton_Click(object sender, EventArgs e)
         {
-
+            SelectForm select = new SelectForm();           
+            select.Show();                      //展示筛选条件的窗口
+            select.form1 = this;
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
@@ -70,7 +84,7 @@ namespace ResWander
         /// <param name="e"></param>
         private void UpDateButton_Click(object sender, EventArgs e)
         {
-            SaveService.SaveImages(CrawlerProject.ImgResourcesContainer.ProcessedImages);
+           // SaveService.SaveImages(CrawlerProject.ImgResourcesContainer.ProcessedImages);
         }
         /// <summary>
         /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前指定的资源下载目录，方便查看下载的资源

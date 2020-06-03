@@ -29,7 +29,7 @@ namespace ResWander.Service
         {
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(htmlCode);
-            //获取网页链接：寻找a标签下的href属性
+            //获取网页链接：寻找img标签
             HtmlNodeCollection imgList = htmlDocument.DocumentNode.SelectNodes(".//img[@src]");
             List<string> imgUrlList = new List<string>();
             if (imgUrlList != null)

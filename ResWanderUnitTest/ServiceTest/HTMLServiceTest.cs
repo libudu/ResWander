@@ -35,7 +35,7 @@ namespace ResWanderUnitTest.ServiceTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void HTMLParseTest1()
         {
-            HTMLService.HTMLParse(null);
+            HTMLService.Parse(null);
         }
 
         //传入非空值
@@ -43,10 +43,10 @@ namespace ResWanderUnitTest.ServiceTest
         public void HTMLParseTest2()
         {
             List<string> urlList;
-            urlList = HTMLService.HTMLParse("");
+            urlList = HTMLService.Parse("");
             Assert.AreEqual(0, urlList.Count);
             string htmlCode = HTMLService.DownloadUrl("https://www.baidu.com/");
-            urlList = HTMLService.HTMLParse(htmlCode);
+            urlList = HTMLService.Parse(htmlCode);
             Assert.AreNotEqual(0, urlList.Count);
             foreach(string url in urlList)
             {
