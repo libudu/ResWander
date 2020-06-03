@@ -19,7 +19,7 @@ namespace ResWander.Service
         /// 前端调用接口：图片文件存储
         /// </summary>
         /// <param name="imageSources">待保存的图片文件</param>
-        public static void SaveImages(List<Image> imageSources)
+        public static void SaveImages(List<ImgResource> imageSources)
         {
             ImageSaver.SaveImage(imageSources);
         }
