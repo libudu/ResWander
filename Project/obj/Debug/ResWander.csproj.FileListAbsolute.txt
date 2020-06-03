@@ -19,7 +19,6 @@ D:\teamworkResWanderCode\Project\bin\Debug\HtmlAgilityPack.pdb
 D:\teamworkResWanderCode\Project\bin\Debug\HtmlAgilityPack.xml
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Properties.Resources.resources
-D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Form1.resources
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Form2.resources
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Picture.resources
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csproj.GenerateResource.cache
@@ -28,3 +27,4 @@ D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csproj.CopyComplete
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.exe
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.pdb
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Windows.SelectForm.resources
+D:\teamworkResWanderCode\Project\obj\Debug\ResWander.ResWanderForm.resources
