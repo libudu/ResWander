@@ -1,6 +1,6 @@
 ﻿namespace ResWander
 {
-    partial class Form1
+    partial class ResWanderForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.crawButton = new System.Windows.Forms.Button();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,6 +64,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.imgMessageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -79,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgMessageBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // crawButton
@@ -331,12 +335,17 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.urlDataGridViewTextBoxColumn});
+            this.dataGridView1.DataMember = "RowImages";
+            this.dataGridView1.DataSource = this.imgMessageBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(-4, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(949, 307);
+            this.dataGridView1.Size = new System.Drawing.Size(839, 307);
             this.dataGridView1.TabIndex = 0;
             // 
             // previewTabPage
@@ -442,7 +451,19 @@
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
             // 
-            // Form1
+            // imgMessageBindingSource
+            // 
+            this.imgMessageBindingSource.DataSource = typeof(ResWander.Data.ImgResourcesContainer);
+            // 
+            // urlDataGridViewTextBoxColumn
+            // 
+            this.urlDataGridViewTextBoxColumn.DataPropertyName = "Url";
+            this.urlDataGridViewTextBoxColumn.HeaderText = "Url";
+            this.urlDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
+            this.urlDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // ResWanderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -454,7 +475,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.setButton);
             this.Controls.Add(this.choseButton);
-            this.Name = "Form1";
+            this.Name = "ResWanderForm";
             this.Text = "ResWander";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -475,6 +496,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgMessageBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -515,6 +537,8 @@
         internal System.Windows.Forms.Label heightLabel;
         internal System.Windows.Forms.Label widthLabel;
         internal System.Windows.Forms.Label formatLabel;
+        private System.Windows.Forms.BindingSource imgMessageBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn urlDataGridViewTextBoxColumn;
     }
 }
 

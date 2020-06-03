@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ResWander.Service
 {
     /// <summary>
-    /// 从指定网址下载html代码
+    /// 从指定网址下载资源文件
     /// </summary>
     public class DownloadService
     {

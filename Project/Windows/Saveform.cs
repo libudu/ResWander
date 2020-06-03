@@ -17,7 +17,7 @@ namespace ResWander
             InitializeComponent();
         }
 
-        public Form1 formone;          //声明一个窗口1的引用，便于传输数据
+        public ResWanderForm formone;          //声明一个窗口1的引用，便于传输数据
         /// <summary>
         /// 当用户点击确认按钮后，调用该方法，将用户输入的路径保存
         /// </summary>

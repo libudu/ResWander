@@ -13,11 +13,11 @@ using ResWander.Windows;
 
 namespace ResWander
 {
-    public partial class Form1 : Form
+    public partial class ResWanderForm : Form
     {
         public Project  CrawlerProject { get; set; }
 
-        public Form1()
+        public ResWanderForm()
         {
             InitializeComponent();
             CrawlerProject = new Project();
@@ -28,22 +28,38 @@ namespace ResWander
         /// <summary>
         /// 当用户点击爬取按钮后就会调用该方法，对相应网址进行资源爬取
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender"></param> 
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
         {
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
             bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
-            if (!crawlResult)
+            if (!crawlResult)            //爬取成功
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
-                messageLabel.Text = "爬取网址" + "失败";
+                messageLabel.Text = "爬取网址" +this.urlTextBox.Text+ "失败";
             }
-            else
-            {
+            else                //爬取失败               
+            {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
-                messageLabel.Text = "网址" + "爬取成功";
+                messageLabel.Text = "网址" + this.urlTextBox.Text+"爬取成功";
+                int i = 0;
+                pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                i++;
+                pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
             }
 
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
@@ -57,7 +73,7 @@ namespace ResWander
         {
             SelectForm select = new SelectForm(CrawlerProject);           
             select.Show();                      //展示筛选条件的窗口
-            select.form1 = this;
+            select.resForm = this;
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
