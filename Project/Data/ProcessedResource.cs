@@ -26,17 +26,17 @@ namespace ResWander.Data
         /// <summary>
         /// 下载下来的未经筛选的图片集合
         /// </summary>
-        public List<Resource> RowImages { get; set; }
+        public List<ImgResource> RowImages { get; set; }
 
         /// <summary>
         /// 经过筛选条件筛选之后的图片集合
         /// </summary>
-        public List<Resource> ProcessedImages { get; set; }
+        public List<ImgResource> ProcessedImages { get; set; }
 
         public ImgResourcesContainer()
         {
-            RowImages = new List<Resource>();
-            ProcessedImages = new List<Resource>();
+            RowImages = new List<ImgResource>();
+            ProcessedImages = new List<ImgResource>();
         }
     }
 }

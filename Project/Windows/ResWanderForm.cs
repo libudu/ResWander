@@ -55,7 +55,7 @@ namespace ResWander
         /// <param name="e"></param>
         private void ChoseButton_Click(object sender, EventArgs e)
         {
-            SelectForm select = new SelectForm();           
+            SelectForm select = new SelectForm(CrawlerProject);           
             select.Show();                      //展示筛选条件的窗口
             select.form1 = this;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResWander.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,9 +14,11 @@ namespace ResWander.Windows
     public partial class SelectForm : Form
     {
         public Form1 form1;
-        public SelectForm()
+        public Project  Project { get; set; }
+        public SelectForm(Project project)
         {
             InitializeComponent();
+            Project = project;
         }
 
         private void AffirmButton_Click(object sender, EventArgs e)
@@ -28,6 +31,14 @@ namespace ResWander.Windows
                 form1.heightLabel.Text = minHeightTextBox.Text + "~" + maxHeightTextBox.Text;
                 form1.sizeLabel.Text = minSizeTextBox.Text + "~" + maxSizeTextBox.Text;
                 form1.formatLabel.Text = (string)formatComboBox.SelectedItem;
+                
+                this.Project.ImgInputData.MaxX = int.Parse(maxWidthTextBox.Text);
+                this.Project.ImgInputData.MinX = int.Parse(minWidthTextBox.Text);
+                this.Project.ImgInputData.MaxY = int.Parse(maxHeightTextBox.Text);
+                this.Project.ImgInputData.MinY = int.Parse(minHeightTextBox.Text);
+                this.Project.ImgInputData.MaxSize = int.Parse(maxSizeTextBox.Text);
+                this.Project.ImgInputData.MinSize = int.Parse(minSizeTextBox.Text);
+
                 //在这还要调用相应的筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
                 this.Close();
             }
