@@ -64,8 +64,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.imgMessageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgMessageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -89,7 +89,7 @@
             // 
             this.crawButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.crawButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.crawButton.Location = new System.Drawing.Point(764, 2);
+            this.crawButton.Location = new System.Drawing.Point(942, 2);
             this.crawButton.Name = "crawButton";
             this.crawButton.Size = new System.Drawing.Size(74, 28);
             this.crawButton.TabIndex = 2;
@@ -103,7 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.urlTextBox.Location = new System.Drawing.Point(90, 3);
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(659, 25);
+            this.urlTextBox.Size = new System.Drawing.Size(837, 25);
             this.urlTextBox.TabIndex = 3;
             // 
             // label1
@@ -121,7 +121,7 @@
             // choseButton
             // 
             this.choseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.choseButton.Location = new System.Drawing.Point(622, 49);
+            this.choseButton.Location = new System.Drawing.Point(800, 49);
             this.choseButton.Name = "choseButton";
             this.choseButton.Size = new System.Drawing.Size(100, 28);
             this.choseButton.TabIndex = 6;
@@ -132,7 +132,7 @@
             // setButton
             // 
             this.setButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.setButton.Location = new System.Drawing.Point(739, 49);
+            this.setButton.Location = new System.Drawing.Point(917, 49);
             this.setButton.Name = "setButton";
             this.setButton.Size = new System.Drawing.Size(100, 28);
             this.setButton.TabIndex = 7;
@@ -149,7 +149,7 @@
             this.panel1.Controls.Add(this.crawButton);
             this.panel1.Location = new System.Drawing.Point(1, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(845, 34);
+            this.panel1.Size = new System.Drawing.Size(1023, 34);
             this.panel1.TabIndex = 8;
             // 
             // panel2
@@ -191,7 +191,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(1, 83);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(423, 28);
+            this.panel3.Size = new System.Drawing.Size(548, 28);
             this.panel3.TabIndex = 10;
             // 
             // formatLabel
@@ -205,7 +205,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(334, 3);
+            this.label6.Location = new System.Drawing.Point(322, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 15);
             this.label6.TabIndex = 6;
@@ -316,7 +316,7 @@
             this.resourceTabControl.Location = new System.Drawing.Point(7, 120);
             this.resourceTabControl.Name = "resourceTabControl";
             this.resourceTabControl.SelectedIndex = 0;
-            this.resourceTabControl.Size = new System.Drawing.Size(838, 345);
+            this.resourceTabControl.Size = new System.Drawing.Size(1016, 345);
             this.resourceTabControl.TabIndex = 12;
             // 
             // resourceTabPage
@@ -325,7 +325,7 @@
             this.resourceTabPage.Location = new System.Drawing.Point(4, 25);
             this.resourceTabPage.Name = "resourceTabPage";
             this.resourceTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.resourceTabPage.Size = new System.Drawing.Size(830, 316);
+            this.resourceTabPage.Size = new System.Drawing.Size(1008, 316);
             this.resourceTabPage.TabIndex = 0;
             this.resourceTabPage.Text = "资源爬取情况";
             this.resourceTabPage.UseVisualStyleBackColor = true;
@@ -345,7 +345,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(839, 307);
+            this.dataGridView1.Size = new System.Drawing.Size(1017, 307);
             this.dataGridView1.TabIndex = 0;
             // 
             // previewTabPage
@@ -362,7 +362,7 @@
             this.previewTabPage.Location = new System.Drawing.Point(4, 25);
             this.previewTabPage.Name = "previewTabPage";
             this.previewTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.previewTabPage.Size = new System.Drawing.Size(830, 316);
+            this.previewTabPage.Size = new System.Drawing.Size(979, 316);
             this.previewTabPage.TabIndex = 1;
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
@@ -446,14 +446,10 @@
             this.panel4.Controls.Add(this.upDateButton);
             this.panel4.Controls.Add(this.reChoseButton);
             this.panel4.Controls.Add(this.openListButton);
-            this.panel4.Location = new System.Drawing.Point(427, 83);
+            this.panel4.Location = new System.Drawing.Point(605, 83);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
-            // 
-            // imgMessageBindingSource
-            // 
-            this.imgMessageBindingSource.DataSource = typeof(ResWander.Data.ImgResourcesContainer);
             // 
             // urlDataGridViewTextBoxColumn
             // 
@@ -463,11 +459,15 @@
             this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
             this.urlDataGridViewTextBoxColumn.Width = 125;
             // 
+            // imgMessageBindingSource
+            // 
+            this.imgMessageBindingSource.DataSource = typeof(ResWander.Data.ImgResourcesContainer);
+            // 
             // ResWanderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 465);
+            this.ClientSize = new System.Drawing.Size(1026, 465);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.resourceTabControl);
             this.Controls.Add(this.panel3);

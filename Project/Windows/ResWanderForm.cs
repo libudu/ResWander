@@ -61,7 +61,6 @@ namespace ResWander
                 i++;
                 pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
             }
-
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
         /// <summary>
@@ -74,6 +73,13 @@ namespace ResWander
             SelectForm select = new SelectForm();           
             select.Show();                      //展示筛选条件的窗口
             select.resForm = this;
+            select.maxWidthTextBox.Text = "20";
+            select.minWidthTextBox.Text = "5";
+            select.maxHeightTextBox.Text = "20";
+            select.minHeightTextBox.Text = "5";
+            select.maxSizeTextBox.Text = "256";
+            select.minSizeTextBox.Text = "64";
+            select.formatCheckedListBox.SetItemChecked(0, true);
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
