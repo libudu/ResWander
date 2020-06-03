@@ -15,10 +15,10 @@ namespace ResWander.Service
         {
             //输入处理
             InputService.AdjustUrl(project.ImgInputData);
-            if (InputService.GetWebStatusCode(project.ImgInputData) != "200")
-            {
-                return false;//无效起始网页
-            }
+            //if (InputService.GetWebStatusCode(project.ImgInputData) != "200")
+            //{
+            //  return false;//无效起始网页
+            //}
             //下载当前url网页的html代码并保存
             project.HTMLData.HTMLCodes.Enqueue(HTMLService.DownloadUrl(project.ImgInputData.Url));
             string htmlcode = project.HTMLData.HTMLCodes.Dequeue();
