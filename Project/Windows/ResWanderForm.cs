@@ -70,16 +70,21 @@ namespace ResWander
         /// <param name="e"></param>
         private void ChoseButton_Click(object sender, EventArgs e)
         {
-            SelectForm select = new SelectForm(CrawlerProject);           
-            select.Show();                      //展示筛选条件的窗口
-            select.resForm = this;
-            select.maxWidthTextBox.Text = "20";
+            //每一次点击筛选按钮都要重置值
+            formatLabel.Text = null;
+            SelectForm select = new SelectForm(CrawlerProject);
+
+            //为筛选条件赋默认值
+            select.maxWidthTextBox.Text = "20";                     
             select.minWidthTextBox.Text = "5";
             select.maxHeightTextBox.Text = "20";
             select.minHeightTextBox.Text = "5";
             select.maxSizeTextBox.Text = "256";
             select.minSizeTextBox.Text = "64";
             select.formatCheckedListBox.SetItemChecked(0, true);
+
+            select.resForm = this;
+            select.Show();                      //展示筛选条件的窗口
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
