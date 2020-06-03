@@ -12,29 +12,34 @@ namespace ResWanderUnitTest.ServiceTest
     /// <summary>
     /// 保存服务测试类(SaveService 测试类)
     /// </summary>
-    [TestClass]
+    [TestClass()]
     public class SaveServiceTest
     {
-        private static List<Image> imageSources;
+        private List<Image> imageSources;
 
         /// <summary>
         /// 在方法调用之前初始化资源文件
         /// </summary>
-        [ClassInitialize]
-        public static void InitSourceFiles(TestContext testContext)
+        [TestInitialize]
+        public void InitSourceFiles()
         {
             imageSources = new List<Image>();
-            imageSources.Add(new Bitmap("/测试文件/图片.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory +@"\TestFiles\Pic.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\Study.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\Trade.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\100.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\BookShell.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\BookStudy.png"));
+            imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\Theme.png"));
         }
 
         /// <summary>
-        /// 存储照片方法初始化
+        /// 存储照片方法初始化功能测试
         /// </summary>
         [TestMethod]
         public void ImageSaveTest()
         {
-            SaveService.SaveImages(SaveServiceTest.imageSources);
-            Assert.AreEqual(true, true);
+            SaveService.SaveImages(this.imageSources);
         }
     }
 }

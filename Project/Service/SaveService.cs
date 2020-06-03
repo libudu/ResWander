@@ -49,7 +49,8 @@ namespace ResWander.Service
                 // 依次保存每个文件
                 for(int i = 0; i < imageSources.Count; i++)
                 {
-                    imageSources[i].Save(saveFileDialog.FileName +" " + i);
+                    string[] fileName = saveFileDialog.FileName.Split('.');
+                    imageSources[i].Save(fileName[0] + " " + i + "." + fileName[1]);
 
                 }
 
