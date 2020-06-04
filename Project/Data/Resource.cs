@@ -19,6 +19,7 @@ namespace ResWander.Data
         /// 资源url
         /// </summary>
         public string Url { get; set; }
+
         //图片格式【ImageFormat或者string】，先用string，后面看实现再说
         public string PhotoFormat { get; set; }
         //资源名称

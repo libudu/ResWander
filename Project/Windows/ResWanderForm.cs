@@ -54,35 +54,36 @@ namespace ResWander
                     switch (i)
                     {
                         case 0:
-                            pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                            //pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
                         case 1:
-                            pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 2:
-                            pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 3:
-                            pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 4:
-                            pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 5:
-                            pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 6:
-                            pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 7:
-                            pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                     }
