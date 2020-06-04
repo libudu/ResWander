@@ -31,19 +31,22 @@ namespace ResWander
         /// <param name="sender"></param> 
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
-        {
+        {         
+
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
             bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
+ 
+            
             if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
-                messageLabel.Text = "爬取网址" +this.urlTextBox.Text+ "失败";
+                messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
             }
             else                //爬取成功               
             {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
-                messageLabel.Text = "网址" + this.urlTextBox.Text+"爬取成功";
+                messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
                 //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
                 //while循环加switch【switch用来判断图片和那个picturebox绑定】
                 //来实现遍历，同时加条件来避免超出索引范围。
@@ -54,43 +57,59 @@ namespace ResWander
                     switch (i)
                     {
                         case 0:
+                            if (pictureBox1.DataBindings != null)
+                                pictureBox1.DataBindings.Clear();
                             pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             //pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
                         case 1:
+                            if (pictureBox2.DataBindings != null)
+                                pictureBox2.DataBindings.Clear();
                             pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 2:
+                            if (pictureBox3.DataBindings != null)
+                                pictureBox3.DataBindings.Clear();
                             pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 3:
+                            if (pictureBox4.DataBindings != null)
+                                pictureBox4.DataBindings.Clear();
                             pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 4:
+                            if (pictureBox5.DataBindings != null)
+                                pictureBox5.DataBindings.Clear();
                             pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 5:
+                            if (pictureBox6.DataBindings != null)
+                                pictureBox6.DataBindings.Clear();
                             pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 6:
+                            if (pictureBox7.DataBindings != null)
+                                pictureBox7.DataBindings.Clear();
                             pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                         case 7:
+                            if (pictureBox8.DataBindings != null)
+                                pictureBox8.DataBindings.Clear();
                             pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
                             i++;
                             break;
                     }
                 }
-                
-                
+                    
             }
+            
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
         /// <summary>
