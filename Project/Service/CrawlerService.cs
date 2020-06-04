@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace ResWander.Service
 {
@@ -48,7 +49,20 @@ namespace ResWander.Service
                 ImgResource img = new ImgResource(DownloadService.DownloadImg(imgUrl), imgUrl);
                 if(img != null)
                 {
+                    Stopwatch watch = new Stopwatch();
+                    watch.Start();
                     project.ImgResourcesContainer.RowImages.Add(img);
+                    watch.Stop();
+                    img.DownloadTime = watch.ElapsedMilliseconds;
+                    if (img.Img != null)
+                    {
+                        img.State = "Successful";
+                    }
+                    img.ResourceNumber = project.ImgResourcesContainer.RowImages.IndexOf(img) + 1;
+                    string format;
+                    ImageService.GetImageFormat(img.Img,out format);
+                    img.PhotoFormat = format;
+                    img.ResourceName = "待定，测试";
                 }
                 imgUrl = project.URLData.ImgUrls.Count > 0 ?  project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
