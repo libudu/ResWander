@@ -24,7 +24,8 @@ namespace ResWander.Service
             //下载图片
             //try
             //{
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 WebResponse response = request.GetResponse();
                 return Image.FromStream(response.GetResponseStream());
