@@ -34,6 +34,22 @@ namespace ResWander.Service
             }
         }
 
+        //html文本与url的一些字符需要转义
+        public static string ReplaceChar(string url)
+        {
+            //&符号
+            url = url.Replace("&amp;", "&");
+            //'
+            url = url.Replace("&apos;", "'");
+            //"
+            url = url.Replace("&quot;", "\"");
+            //>
+            url = url.Replace("&gt;", ">");
+            //<
+            url = url.Replace("&lt;", "<");
+            return url;
+        }
+
         //将相对地址转化为绝对地址
         public static string DownloadUrl(string url)
         {
@@ -42,6 +58,9 @@ namespace ResWander.Service
                 //将该网址的源html代码下载返回
                 HttpWebRequest request = WebRequest.CreateHttp(url);
                 request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
+                //WebResponse response = request.GetResponse();
+                //WebHeaderCollection headers = response.Headers;
+                //string type = headers.Get("Content-Type");
                 string html = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
                 return html;
             }
@@ -67,6 +86,8 @@ namespace ResWander.Service
                     string url = href.Attributes["href"].Value;
                     //将相对地址转换成绝对地址
                     url = TransferUrl(url);
+                    //字符转义
+                    url = ReplaceChar(url);
                     //......
                     hrefUrlList.Add(url);
                 }
