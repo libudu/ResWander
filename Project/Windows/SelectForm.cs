@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ResWander.Service;
 
 namespace ResWander.Windows
 {
@@ -50,6 +51,7 @@ namespace ResWander.Windows
                     }
                 }
                 //在这还要调用相应的筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
+
                 //存储相应的筛选条件
                 Project.ImgInputData.MaxX = int.Parse(maxWidthTextBox.Text);
                 Project.ImgInputData.MinX = int.Parse(minWidthTextBox.Text);
@@ -90,7 +92,7 @@ namespace ResWander.Windows
                         }
                     }
                 }
-
+                ImageFilterService.FilterImages(Project);
                 this.Close();
             }
             else
