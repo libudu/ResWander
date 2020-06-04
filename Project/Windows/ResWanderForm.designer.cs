@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.crawButton = new System.Windows.Forms.Button();
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,7 +52,7 @@
             this.openListButton = new System.Windows.Forms.Button();
             this.resourceTabControl = new System.Windows.Forms.TabControl();
             this.resourceTabPage = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.resourceDataGridView = new System.Windows.Forms.DataGridView();
             this.previewTabPage = new System.Windows.Forms.TabPage();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -64,14 +63,12 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgMessageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.resourceTabControl.SuspendLayout();
             this.resourceTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).BeginInit();
             this.previewTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -82,7 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgMessageBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // crawButton
@@ -321,7 +317,7 @@
             // 
             // resourceTabPage
             // 
-            this.resourceTabPage.Controls.Add(this.dataGridView1);
+            this.resourceTabPage.Controls.Add(this.resourceDataGridView);
             this.resourceTabPage.Location = new System.Drawing.Point(4, 25);
             this.resourceTabPage.Name = "resourceTabPage";
             this.resourceTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -330,23 +326,18 @@
             this.resourceTabPage.Text = "资源爬取情况";
             this.resourceTabPage.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // resourceDataGridView
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.resourceDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.urlDataGridViewTextBoxColumn});
-            this.dataGridView1.DataMember = "RowImages";
-            this.dataGridView1.DataSource = this.imgMessageBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(-4, 6);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(1012, 333);
-            this.dataGridView1.TabIndex = 0;
+            this.resourceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resourceDataGridView.Location = new System.Drawing.Point(-4, 6);
+            this.resourceDataGridView.Name = "resourceDataGridView";
+            this.resourceDataGridView.RowHeadersWidth = 51;
+            this.resourceDataGridView.RowTemplate.Height = 27;
+            this.resourceDataGridView.Size = new System.Drawing.Size(1012, 333);
+            this.resourceDataGridView.TabIndex = 0;
             // 
             // previewTabPage
             // 
@@ -459,18 +450,6 @@
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
             // 
-            // urlDataGridViewTextBoxColumn
-            // 
-            this.urlDataGridViewTextBoxColumn.DataPropertyName = "Url";
-            this.urlDataGridViewTextBoxColumn.HeaderText = "Url";
-            this.urlDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
-            this.urlDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // imgMessageBindingSource
-            // 
-            this.imgMessageBindingSource.DataSource = typeof(ResWander.Data.ImgResourcesContainer);
-            // 
             // ResWanderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -493,7 +472,7 @@
             this.panel3.PerformLayout();
             this.resourceTabControl.ResumeLayout(false);
             this.resourceTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).EndInit();
             this.previewTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -504,7 +483,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imgMessageBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -524,19 +502,11 @@
         private System.Windows.Forms.Button openListButton;
         private System.Windows.Forms.TabControl resourceTabControl;
         private System.Windows.Forms.TabPage resourceTabPage;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView resourceDataGridView;
         private System.Windows.Forms.TabPage previewTabPage;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -545,8 +515,14 @@
         internal System.Windows.Forms.Label heightLabel;
         internal System.Windows.Forms.Label widthLabel;
         internal System.Windows.Forms.Label formatLabel;
-        private System.Windows.Forms.BindingSource imgMessageBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn urlDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.PictureBox pictureBox8;
+        internal System.Windows.Forms.PictureBox pictureBox7;
+        internal System.Windows.Forms.PictureBox pictureBox5;
+        internal System.Windows.Forms.PictureBox pictureBox4;
+        internal System.Windows.Forms.PictureBox pictureBox3;
+        internal System.Windows.Forms.PictureBox pictureBox2;
+        internal System.Windows.Forms.PictureBox pictureBox1;
+        internal System.Windows.Forms.PictureBox pictureBox6;
     }
 }
 

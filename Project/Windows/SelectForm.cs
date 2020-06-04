@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ResWander.Service;
 
 namespace ResWander.Windows
 {
@@ -49,7 +50,7 @@ namespace ResWander.Windows
                         resForm.formatLabel.Text = resForm.formatLabel.Text + formatCheckedListBox.GetItemText(formatCheckedListBox.Items[j])+" ";
                     }
                 }
-                //在这还要调用相应的筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
+                
                 //存储相应的筛选条件
                 Project.ImgInputData.MaxX = int.Parse(maxWidthTextBox.Text);
                 Project.ImgInputData.MinX = int.Parse(minWidthTextBox.Text);
@@ -90,7 +91,111 @@ namespace ResWander.Windows
                         }
                     }
                 }
-
+                //调用筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
+               Project.ImgResourcesContainer.ProcessedImages = ImageFilterService.FilterImages(Project);
+                //调用筛选方法后，对于预览中的图片要重新绑定数据，要绑定到已经筛选了的List图片列表中
+                //将pictureBox重新绑定到相应的List图片列表中
+                int i = 0;
+                int count = Project.ImgResourcesContainer.ProcessedImages.Count;
+                while (i < count && i < 8)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            resForm.pictureBox1.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 1:                         
+                            resForm.pictureBox2.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 2:                        
+                            resForm.pictureBox3.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 3:           
+                            resForm.pictureBox4.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 4:                        
+                            resForm.pictureBox5.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 5:                   
+                            resForm.pictureBox6.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 6:                          
+                            resForm.pictureBox7.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                        case 7:                     
+                            resForm.pictureBox8.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                            i++;
+                            break;
+                    }
+                }
+                //将那些没有得到值的pictureBox置为空
+                if (count < 8)
+                {
+                    switch (count)
+                    {
+                        case 0:
+                            resForm.pictureBox1.Image = null;
+                            resForm.pictureBox2.Image = null;
+                            resForm.pictureBox3.Image = null;
+                            resForm.pictureBox4.Image = null;
+                            resForm.pictureBox5.Image = null;
+                            resForm.pictureBox6.Image = null;
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 1:     
+                            resForm.pictureBox2.Image = null;
+                            resForm.pictureBox3.Image = null;
+                            resForm.pictureBox4.Image = null;
+                            resForm.pictureBox5.Image = null;
+                            resForm.pictureBox6.Image = null;
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 2:                    
+                            resForm.pictureBox3.Image = null;
+                            resForm.pictureBox4.Image = null;
+                            resForm.pictureBox5.Image = null;
+                            resForm.pictureBox6.Image = null;
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 3:                   
+                            resForm.pictureBox4.Image = null;
+                            resForm.pictureBox5.Image = null;
+                            resForm.pictureBox6.Image = null;
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 4:                   
+                            resForm.pictureBox5.Image = null;
+                            resForm.pictureBox6.Image = null;
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 5:
+                            resForm.pictureBox6.Image = null;
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 6:  
+                            resForm.pictureBox7.Image = null;
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        case 7:
+                            resForm.pictureBox8.Image = null;
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 this.Close();
             }
             else

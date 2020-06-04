@@ -16,11 +16,15 @@ namespace ResWander
     public partial class ResWanderForm : Form
     {
         public Project  CrawlerProject { get; set; }
+        BindingSource resourceBindingSource = new BindingSource();
+        CrawlerService crawlerService = new CrawlerService();
 
         public ResWanderForm()
         {
             InitializeComponent();
+            resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
+            crawlerService.DownloadedImag += Crawler_PageDownloaded;
         }
 
         public string stoPath;             //用来保存用户指定的存储路径
@@ -31,11 +35,12 @@ namespace ResWander
         /// <param name="sender"></param> 
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
-        {         
-
+        {
+            //每一次新爬取时都要把以前爬取得到的图片列表给清空
+            CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject,crawlerService);
  
             
             if (!crawlResult)            //爬取失败
@@ -56,58 +61,41 @@ namespace ResWander
                 {
                     switch (i)
                     {
-                        case 0:
-                            if (pictureBox1.DataBindings != null)
-                                pictureBox1.DataBindings.Clear();
-                            pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
-                            //pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                        case 0:            
+                            pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 1:
-                            if (pictureBox2.DataBindings != null)
-                                pictureBox2.DataBindings.Clear();
-                            pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                        case 1:                       
+                            pictureBox2.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 2:
-                            if (pictureBox3.DataBindings != null)
-                                pictureBox3.DataBindings.Clear();
-                            pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                        case 2:                        
+                            pictureBox3.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 3:
-                            if (pictureBox4.DataBindings != null)
-                                pictureBox4.DataBindings.Clear();
-                            pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                        case 3:                      
+                            pictureBox4.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 4:
-                            if (pictureBox5.DataBindings != null)
-                                pictureBox5.DataBindings.Clear();
-                            pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                        case 4:                       
+                            pictureBox5.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 5:
-                            if (pictureBox6.DataBindings != null)
-                                pictureBox6.DataBindings.Clear();
-                            pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                        case 5:                      
+                            pictureBox6.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
                         case 6:
-                            if (pictureBox7.DataBindings != null)
-                                pictureBox7.DataBindings.Clear();
-                            pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                            pictureBox7.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 7:
-                            if (pictureBox8.DataBindings != null)
-                                pictureBox8.DataBindings.Clear();
-                            pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages[i], "Img");
+                        case 7:                        
+                            pictureBox8.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
                     }
                 }
-                    
+               
             }
             
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
@@ -234,6 +222,23 @@ namespace ResWander
             Picture picture = new Picture();
             picture.Show();
             picture.pictureBox1.Image = this.pictureBox8.Image;
+        }
+
+        private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
+        {
+            var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
+            Action action = () => { resourceBindingSource.Add(pageInfo); };
+            //将第二列URL的宽度设置为自动填充
+            if(this.resourceDataGridView.Columns.Count>1)
+                this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (this.InvokeRequired)
+            {
+                this.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ namespace ResWander.Data
 {
     public class Project
     {
+       
         public HTMLData HTMLData { get; set; }
         public URLData URLData { get; set; }
         public ImgInputData ImgInputData { get; set; }
