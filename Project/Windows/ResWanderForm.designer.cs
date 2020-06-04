@@ -158,13 +158,13 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(1, 44);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(571, 33);
+            this.panel2.Size = new System.Drawing.Size(735, 33);
             this.panel2.TabIndex = 9;
             // 
             // messageLabel
             // 
             this.messageLabel.AutoSize = true;
-            this.messageLabel.Location = new System.Drawing.Point(151, 9);
+            this.messageLabel.Location = new System.Drawing.Point(80, 9);
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(0, 15);
             this.messageLabel.TabIndex = 6;
@@ -191,7 +191,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(1, 83);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(548, 28);
+            this.panel3.Size = new System.Drawing.Size(582, 28);
             this.panel3.TabIndex = 10;
             // 
             // formatLabel
@@ -362,7 +362,7 @@
             this.previewTabPage.Location = new System.Drawing.Point(4, 25);
             this.previewTabPage.Name = "previewTabPage";
             this.previewTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.previewTabPage.Size = new System.Drawing.Size(979, 316);
+            this.previewTabPage.Size = new System.Drawing.Size(1008, 316);
             this.previewTabPage.TabIndex = 1;
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
