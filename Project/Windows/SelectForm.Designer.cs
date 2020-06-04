@@ -41,8 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.formatComboBox = new System.Windows.Forms.ComboBox();
             this.affirmButton = new System.Windows.Forms.Button();
+            this.formatCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -145,25 +145,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(239, 209);
+            this.label7.Location = new System.Drawing.Point(230, 211);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 15);
             this.label7.TabIndex = 12;
             this.label7.Text = "图片格式：";
-            // 
-            // formatComboBox
-            // 
-            this.formatComboBox.FormattingEnabled = true;
-            this.formatComboBox.Items.AddRange(new object[] {
-            "JPG",
-            "PNG",
-            "TIF",
-            "GIF",
-            "*..*"});
-            this.formatComboBox.Location = new System.Drawing.Point(327, 206);
-            this.formatComboBox.Name = "formatComboBox";
-            this.formatComboBox.Size = new System.Drawing.Size(101, 23);
-            this.formatComboBox.TabIndex = 13;
             // 
             // affirmButton
             // 
@@ -175,13 +161,27 @@
             this.affirmButton.UseVisualStyleBackColor = true;
             this.affirmButton.Click += new System.EventHandler(this.AffirmButton_Click);
             // 
+            // formatCheckedListBox
+            // 
+            this.formatCheckedListBox.FormattingEnabled = true;
+            this.formatCheckedListBox.Items.AddRange(new object[] {
+            "JPG",
+            "PNG",
+            "TIF",
+            "GIF",
+            "*..*"});
+            this.formatCheckedListBox.Location = new System.Drawing.Point(318, 182);
+            this.formatCheckedListBox.Name = "formatCheckedListBox";
+            this.formatCheckedListBox.Size = new System.Drawing.Size(120, 84);
+            this.formatCheckedListBox.TabIndex = 15;
+            // 
             // SelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.formatCheckedListBox);
             this.Controls.Add(this.affirmButton);
-            this.Controls.Add(this.formatComboBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -205,19 +205,19 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox maxWidthTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox minWidthTextBox;
-        private System.Windows.Forms.TextBox maxHeightTextBox;
-        private System.Windows.Forms.TextBox minHeightTextBox;
-        private System.Windows.Forms.TextBox maxSizeTextBox;
-        private System.Windows.Forms.TextBox minSizeTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox formatComboBox;
         private System.Windows.Forms.Button affirmButton;
+        internal System.Windows.Forms.TextBox maxWidthTextBox;
+        internal System.Windows.Forms.TextBox minWidthTextBox;
+        internal System.Windows.Forms.TextBox maxHeightTextBox;
+        internal System.Windows.Forms.TextBox minHeightTextBox;
+        internal System.Windows.Forms.TextBox maxSizeTextBox;
+        internal System.Windows.Forms.TextBox minSizeTextBox;
+        internal System.Windows.Forms.CheckedListBox formatCheckedListBox;
     }
 }

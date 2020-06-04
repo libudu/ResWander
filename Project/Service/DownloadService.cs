@@ -22,10 +22,18 @@ namespace ResWander.Service
         public static Image DownloadImg(string url)
         {
             //下载图片
+            //try
+            //{
+            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            WebResponse response = request.GetResponse();
-            return Image.FromStream(response.GetResponseStream());
+                request.Method = "GET";
+                WebResponse response = request.GetResponse();
+                return Image.FromStream(response.GetResponseStream());
+            //}
+            //catch (Exception) 
+           // {
+                //return null;
+            //}
         }
     }
 }

@@ -13,14 +13,18 @@ using ResWander.Windows;
 
 namespace ResWander
 {
-    public partial class Form1 : Form
+    public partial class ResWanderForm : Form
     {
         public Project  CrawlerProject { get; set; }
+        BindingSource resourceBindingSource = new BindingSource();
+        CrawlerService crawlerService = new CrawlerService();
 
-        public Form1()
+        public ResWanderForm()
         {
             InitializeComponent();
+            resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
+            crawlerService.DownloadedImag += Crawler_PageDownloaded;
         }
 
         public string stoPath;             //用来保存用户指定的存储路径
@@ -28,24 +32,72 @@ namespace ResWander
         /// <summary>
         /// 当用户点击爬取按钮后就会调用该方法，对相应网址进行资源爬取
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender"></param> 
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
         {
+            //每一次新爬取时都要把以前爬取得到的图片列表给清空
+            CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
-            if (!crawlResult)
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject,crawlerService);
+ 
+            
+            if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
-                messageLabel.Text = "爬取网址" + "失败";
+                messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
             }
-            else
-            {
+            else                //爬取成功               
+            {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
-                messageLabel.Text = "网址" + "爬取成功";
+                messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
+                //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
+                //while循环加switch【switch用来判断图片和那个picturebox绑定】
+                //来实现遍历，同时加条件来避免超出索引范围。
+                int i = 0;
+                int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
+                while (i < count && i < 8)
+                {
+                    switch (i)
+                    {
+                        case 0:            
+                            pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 1:                       
+                            pictureBox2.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 2:                        
+                            pictureBox3.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 3:                      
+                            pictureBox4.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 4:                       
+                            pictureBox5.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 5:                      
+                            pictureBox6.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 6:
+                            pictureBox7.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                        case 7:                        
+                            pictureBox8.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                            i++;
+                            break;
+                    }
+                }
+               
             }
-
+            
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
         /// <summary>
@@ -55,9 +107,21 @@ namespace ResWander
         /// <param name="e"></param>
         private void ChoseButton_Click(object sender, EventArgs e)
         {
-            SelectForm select = new SelectForm();           
+            //每一次点击筛选按钮都要重置值
+            formatLabel.Text = null;
+            SelectForm select = new SelectForm(CrawlerProject);
+
+            //为筛选条件赋默认值
+            select.maxWidthTextBox.Text = "20";                     
+            select.minWidthTextBox.Text = "5";
+            select.maxHeightTextBox.Text = "20";
+            select.minHeightTextBox.Text = "5";
+            select.maxSizeTextBox.Text = "256";
+            select.minSizeTextBox.Text = "64";
+            select.formatCheckedListBox.SetItemChecked(0, true);
+
+            select.resForm = this;
             select.Show();                      //展示筛选条件的窗口
-            select.form1 = this;
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
@@ -158,6 +222,23 @@ namespace ResWander
             Picture picture = new Picture();
             picture.Show();
             picture.pictureBox1.Image = this.pictureBox8.Image;
+        }
+
+        private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
+        {
+            var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
+            Action action = () => { resourceBindingSource.Add(pageInfo); };
+            //将第二列URL的宽度设置为自动填充
+            if(this.resourceDataGridView.Columns.Count>1)
+                this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (this.InvokeRequired)
+            {
+                this.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
         }
     }
 }

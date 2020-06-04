@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ResWander.Service;
+using ResWander.Data;
 
 namespace ResWanderUnitTest.ServiceTest
 {
@@ -15,7 +16,7 @@ namespace ResWanderUnitTest.ServiceTest
     [TestClass()]
     public class SaveServiceTest
     {
-        private List<Image> imageSources;
+        private List<ImgResource> imageSources;
 
         /// <summary>
         /// 在方法调用之前初始化资源文件
@@ -23,7 +24,7 @@ namespace ResWanderUnitTest.ServiceTest
         [TestInitialize]
         public void InitSourceFiles()
         {
-            imageSources = new List<Image>();
+            imageSources = new List<ImgResource>();
             imageSources.Add(new Bitmap(Environment.CurrentDirectory +@"\TestFiles\Pic.png"));
             imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\Study.png"));
             imageSources.Add(new Bitmap(Environment.CurrentDirectory + @"\TestFiles\Trade.png"));

@@ -13,10 +13,21 @@ namespace ResWander.Data
     
     public class Resource
     {
+        //资源序号
+        public int ResourceNumber { get; set; } 
         /// <summary>
         /// 资源url
         /// </summary>
         public string Url { get; set; }
+
+        //图片格式【ImageFormat或者string】，先用string，后面看实现再说
+        public string PhotoFormat { get; set; }
+        //资源名称
+        public string ResourceName { get; set; }
+        //下载时间
+        public long DownloadTime { get; set; }
+        //状态
+        public string State { get; set; }
 
         public Resource(string url)
         {

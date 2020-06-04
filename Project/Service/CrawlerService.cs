@@ -5,20 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace ResWander.Service
 {
     public class CrawlerService
     {
+        public event Action<int, string, string, string, long, string> DownloadedImag;
         //单线程，单个网页爬取
-        public static bool StartCrawl(Project project)
+        public static bool StartCrawl(Project project, CrawlerService crawler)
         {
             //输入处理
             InputService.AdjustUrl(project.ImgInputData);
-            if (InputService.GetWebStatusCode(project.ImgInputData) != "200")
-            {
-                return false;//无效起始网页
-            }
+            //if (InputService.GetWebStatusCode(project.ImgInputData) != "200")
+            //{
+            //    return false;//无效起始网页
+            //}
             //下载当前url网页的html代码并保存
             project.HTMLData.HTMLCodes.Enqueue(HTMLService.DownloadUrl(project.ImgInputData.Url));
             string htmlcode = project.HTMLData.HTMLCodes.Dequeue();
@@ -46,9 +48,26 @@ namespace ResWander.Service
             while (imgUrl != null)
             {
                 ImgResource img = new ImgResource(DownloadService.DownloadImg(imgUrl), imgUrl);
-                project.ImgResourcesContainer.RowImages.Add(img);
-                imgUrl = project.URLData.ImgUrls.Dequeue();
+                if(img != null)
+                {
+                    Stopwatch watch = new Stopwatch();
+                    watch.Start();
+                    project.ImgResourcesContainer.RowImages.Add(img);
+                    watch.Stop();
+                    img.DownloadTime = watch.ElapsedMilliseconds;
+                    if (img.Img != null)
+                    {
+                        img.State = "Successful";
+                    }
+                    img.ResourceNumber = project.ImgResourcesContainer.RowImages.IndexOf(img) + 1;
+                    string format;
+                    ImageService.GetImageFormat(img.Img,out format);
+                    img.PhotoFormat = format;
+                    img.ResourceName = "待定，测试";
+                }
+                imgUrl = project.URLData.ImgUrls.Count > 0 ?  project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
+                crawler.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
             }
             return true;
         }
