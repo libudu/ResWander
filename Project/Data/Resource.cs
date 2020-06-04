@@ -24,7 +24,7 @@ namespace ResWander.Data
         //资源名称
         public string ResourceName { get; set; }
         //下载时间
-        public int DownloadTime { get; set; }
+        public long DownloadTime { get; set; }
         //状态
         public string State { get; set; }
 

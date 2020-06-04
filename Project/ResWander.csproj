@@ -61,6 +61,7 @@
     <Compile Include="Service\DownloadService.cs" />
     <Compile Include="Service\FilterService.cs" />
     <Compile Include="Service\HTMLService.cs" />
+    <Compile Include="Service\ImageService.cs" />
     <Compile Include="Service\InputService.cs" />
     <Compile Include="Service\ParseService.cs" />
     <Compile Include="Service\ResourceFilterService.cs" />
