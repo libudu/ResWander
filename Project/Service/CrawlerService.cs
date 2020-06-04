@@ -46,8 +46,11 @@ namespace ResWander.Service
             while (imgUrl != null)
             {
                 ImgResource img = new ImgResource(DownloadService.DownloadImg(imgUrl), imgUrl);
-                project.ImgResourcesContainer.RowImages.Add(img);
-                imgUrl = project.URLData.ImgUrls.Dequeue();
+                if(img != null)
+                {
+                    project.ImgResourcesContainer.RowImages.Add(img);
+                }
+                imgUrl = project.URLData.ImgUrls.Count > 0 ?  project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
             }
             return true;

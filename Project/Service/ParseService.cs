@@ -38,6 +38,14 @@ namespace ResWander.Service
                 {
                     //获得网页url
                     string url = img.Attributes["src"].Value;
+                    if (!url.Contains("/"))
+                    {
+                        continue;
+                    }
+                    //将相对地址转换成绝对地址
+                    url = HTMLService.TransferUrl(url);
+                    //字符转义
+                    url = HTMLService.ReplaceChar(url);
                     imgUrlList.Add(url);
                 }
             }

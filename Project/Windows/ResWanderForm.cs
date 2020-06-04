@@ -35,33 +35,61 @@ namespace ResWander
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
             bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
-            if (!crawlResult)            //爬取成功
+            if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
                 messageLabel.Text = "爬取网址" +this.urlTextBox.Text+ "失败";
             }
-            else                //爬取失败               
+            else                //爬取成功               
             {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
                 messageLabel.Text = "网址" + this.urlTextBox.Text+"爬取成功";
+                //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
+                //while循环加switch【switch用来判断图片和那个picturebox绑定】
+                //来实现遍历，同时加条件来避免超出索引范围。
                 int i = 0;
-                pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
-                i++;
-                pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
+                while (i < count && i < 8)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 1:
+                            pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 2:
+                            pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 3:
+                            pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 4:
+                            pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 5:
+                            pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 6:
+                            pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                        case 7:
+                            pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            i++;
+                            break;
+                    }
+                }
+                
+                
             }
-
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
         /// <summary>
@@ -71,9 +99,21 @@ namespace ResWander
         /// <param name="e"></param>
         private void ChoseButton_Click(object sender, EventArgs e)
         {
-            SelectForm select = new SelectForm(CrawlerProject);           
-            select.Show();                      //展示筛选条件的窗口
+            //每一次点击筛选按钮都要重置值
+            formatLabel.Text = null;
+            SelectForm select = new SelectForm(CrawlerProject);
+
+            //为筛选条件赋默认值
+            select.maxWidthTextBox.Text = "20";                     
+            select.minWidthTextBox.Text = "5";
+            select.maxHeightTextBox.Text = "20";
+            select.minHeightTextBox.Text = "5";
+            select.maxSizeTextBox.Text = "256";
+            select.minSizeTextBox.Text = "64";
+            select.formatCheckedListBox.SetItemChecked(0, true);
+
             select.resForm = this;
+            select.Show();                      //展示筛选条件的窗口
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
