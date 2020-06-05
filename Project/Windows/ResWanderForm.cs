@@ -16,8 +16,10 @@ namespace ResWander
     public partial class ResWanderForm : Form
     {
         public Project  CrawlerProject { get; set; }
-        BindingSource resourceBindingSource = new BindingSource();
-        CrawlerService crawlerService = new CrawlerService();
+        public BindingSource resourceBindingSource = new BindingSource();
+        public CrawlerService crawlerService = new CrawlerService();
+        //声明一个int型list，记录爬取到的图片的Index
+        public List<int> pictureIndex = new List<int>();
 
         public ResWanderForm()
         {
@@ -228,6 +230,7 @@ namespace ResWander
         {
             var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
             Action action = () => { resourceBindingSource.Add(pageInfo); };
+            pictureIndex.Add(pageInfo.Index);
             //将第二列URL的宽度设置为自动填充
             if(this.resourceDataGridView.Columns.Count>1)
                 this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

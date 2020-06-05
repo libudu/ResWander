@@ -196,6 +196,49 @@ namespace ResWander.Windows
                             break;
                     }
                 }
+                BindingSource processedImageSource = new BindingSource();
+                //用一个int类型的List列表来记录筛选得到的图片的Index
+                //根据图片序号是否相同，来判断是否移除资源爬取情况中的某一行记录
+                List<int> index = new List<int>();
+                for (int q = 0; q < Project.ImgResourcesContainer.ProcessedImages.Count; q++)
+                {
+                    var pageInfo = new { Index = Project.ImgResourcesContainer.ProcessedImages[q].ResourceNumber,
+                                         URL = Project.ImgResourcesContainer.ProcessedImages[q].Url,
+                                         PhotoFormat = Project.ImgResourcesContainer.ProcessedImages[q].PhotoFormat,
+                                         ResourceName = Project.ImgResourcesContainer.ProcessedImages[q].ResourceName,
+                                         DownloadTime = Project.ImgResourcesContainer.ProcessedImages[q].DownloadTime,
+                                         Status = Project.ImgResourcesContainer.ProcessedImages[q].State };
+                    processedImageSource.Add(pageInfo);
+                    index.Add(pageInfo.Index);
+                }
+                //用来记录应该被移除的图片序号
+                List<int> removePictureIndex = new List<int>();
+                //用来标记这一行资源记录应不应该被移除
+                bool remove;
+                for (int l = 0; l < resForm.resourceBindingSource.Count; l++)
+                {
+                    remove = true;
+                   for(int x = 0; x < processedImageSource.Count; x++)
+                    {
+                        if (resForm.pictureIndex[l]==index[x])
+                        {
+                            remove = false;
+                            break;
+                        }
+                    }
+                    if (remove)
+                        removePictureIndex.Add(l);
+                }
+                //记录删除次数
+                int removeNumber = 0;
+                //遍历删除记录在removePictureIndex列表里的图片【根据序号】
+                for(int j = 0; j < removePictureIndex.Count; j++)
+                {
+                    resForm.resourceBindingSource.Remove(resForm.resourceBindingSource[removePictureIndex[j]-removeNumber]);
+                    removeNumber++;
+                }
+                //清空上一次爬取记录的所有图片的index，避免下一次爬取保存index时出现错误
+                resForm.pictureIndex.Clear();
                 this.Close();
             }
             else
