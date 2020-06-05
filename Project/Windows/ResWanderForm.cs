@@ -16,8 +16,10 @@ namespace ResWander
     public partial class ResWanderForm : Form
     {
         public Project  CrawlerProject { get; set; }
-        BindingSource resourceBindingSource = new BindingSource();
-        CrawlerService crawlerService = new CrawlerService();
+        public BindingSource resourceBindingSource = new BindingSource();
+        public CrawlerService crawlerService = new CrawlerService();
+        //声明一个int型list，记录爬取到的图片的Index
+        public List<int> pictureIndex = new List<int>();
 
         public ResWanderForm()
         {
@@ -26,6 +28,8 @@ namespace ResWander
             CrawlerProject = new Project();
             crawlerService.DownloadedImag += Crawler_PageDownloaded;
         }
+
+ 
 
         public string stoPath;             //用来保存用户指定的存储路径
 
@@ -109,19 +113,17 @@ namespace ResWander
         {
             //每一次点击筛选按钮都要重置值
             formatLabel.Text = null;
-            SelectForm select = new SelectForm(CrawlerProject);
-
-            //为筛选条件赋默认值
-            select.maxWidthTextBox.Text = "20";                     
-            select.minWidthTextBox.Text = "5";
-            select.maxHeightTextBox.Text = "20";
-            select.minHeightTextBox.Text = "5";
-            select.maxSizeTextBox.Text = "256";
-            select.minSizeTextBox.Text = "64";
-            select.formatCheckedListBox.SetItemChecked(0, true);
-
-            select.resForm = this;
-            select.Show();                      //展示筛选条件的窗口
+            SelectForm SelectForm = new SelectForm(CrawlerProject);
+            ////为筛选条件赋默认值
+            //SelectForm.maxWidthTextBox.Text = "2000";
+            //SelectForm.minWidthTextBox.Text = "0";
+            //SelectForm.maxHeightTextBox.Text = "2000";
+            //SelectForm.minHeightTextBox.Text = "0";
+            //SelectForm.maxSizeTextBox.Text = "10240";
+            //SelectForm.minSizeTextBox.Text = "0";
+            //SelectForm.formatCheckedListBox.SetItemChecked(0, true);
+            SelectForm.resForm = this;
+            SelectForm.Show();                      //展示筛选条件的窗口
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
@@ -148,7 +150,7 @@ namespace ResWander
         /// <param name="e"></param>
         private void UpDateButton_Click(object sender, EventArgs e)
         {
-           // SaveService.SaveImages(CrawlerProject.ImgResourcesContainer.ProcessedImages);
+           SaveService.SaveImages(CrawlerProject.ImgResourcesContainer.ProcessedImages);
         }
         /// <summary>
         /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前指定的资源下载目录，方便查看下载的资源
@@ -228,6 +230,7 @@ namespace ResWander
         {
             var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
             Action action = () => { resourceBindingSource.Add(pageInfo); };
+            pictureIndex.Add(pageInfo.Index);
             //将第二列URL的宽度设置为自动填充
             if(this.resourceDataGridView.Columns.Count>1)
                 this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
