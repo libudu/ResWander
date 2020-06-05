@@ -64,21 +64,21 @@ namespace ResWander.Data
         public ImgInputData()
         {
             MinX = 0;
-            MaxX = int.MaxValue;
+            MaxX = 1080;
             MinY = 0;
-            MaxX = int.MaxValue;
+            MaxY = 1080;
             MinSize = 0;
-            MaxSize = int.MaxValue;
+            MaxSize = 10240;
             TargetImgFormat = new List<ImageFormat>();
             TargetImgFormat.Add(ImageFormat.Png);
             TargetImgFormat.Add(ImageFormat.Jpeg);
-            TargetImgFormat.Add(ImageFormat.Bmp);
-            TargetImgFormat.Add(ImageFormat.Gif);
-            TargetImgFormat.Add(ImageFormat.Tiff);
-            TargetImgFormat.Add(ImageFormat.Emf);
-            TargetImgFormat.Add(ImageFormat.Icon);
-            TargetImgFormat.Add(ImageFormat.Wmf);
-            TargetImgFormat.Add(ImageFormat.MemoryBmp);
+            //TargetImgFormat.Add(ImageFormat.Bmp);
+            //TargetImgFormat.Add(ImageFormat.Gif);
+            //TargetImgFormat.Add(ImageFormat.Tiff);
+            //TargetImgFormat.Add(ImageFormat.Emf);
+            //TargetImgFormat.Add(ImageFormat.Icon);
+            //TargetImgFormat.Add(ImageFormat.Wmf);
+            //TargetImgFormat.Add(ImageFormat.MemoryBmp);
         }
     }
 

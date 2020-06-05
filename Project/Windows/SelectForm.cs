@@ -22,7 +22,40 @@ namespace ResWander.Windows
         {
             InitializeComponent();
             Project = project;
+            SelctInit();
 
+        }
+
+        public void SelctInit()
+        {
+            //为筛选条件显示为上一次的筛选条件以供参考
+            this.maxWidthTextBox.Text = Project.ImgInputData.MaxX.ToString();
+            this.minWidthTextBox.Text = Project.ImgInputData.MinX.ToString();
+            this.maxHeightTextBox.Text = Project.ImgInputData.MaxY.ToString();
+            this.minHeightTextBox.Text = Project.ImgInputData.MinY.ToString();
+            this.maxSizeTextBox.Text = Project.ImgInputData.MaxSize.ToString();
+            this.minSizeTextBox.Text = Project.ImgInputData.MinSize.ToString();
+            foreach (ImageFormat format in Project.ImgInputData.TargetImgFormat)
+            {
+                if(format==ImageFormat.Jpeg)
+                    this.formatCheckedListBox.SetItemChecked(0, true);
+                else if (format == ImageFormat.Png)
+                    this.formatCheckedListBox.SetItemChecked(1, true);
+                else if (format == ImageFormat.Tiff)
+                    this.formatCheckedListBox.SetItemChecked(2, true);
+                else if (format == ImageFormat.Gif)
+                    this.formatCheckedListBox.SetItemChecked(3, true);
+                else
+                {
+                    this.formatCheckedListBox.SetItemChecked(0, true);
+                    this.formatCheckedListBox.SetItemChecked(1, true); 
+                    this.formatCheckedListBox.SetItemChecked(2, true);
+                    this.formatCheckedListBox.SetItemChecked(3, true); 
+
+                }
+
+            }
+            
         }
 
         private void AffirmButton_Click(object sender, EventArgs e)
