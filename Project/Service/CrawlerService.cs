@@ -11,8 +11,9 @@ namespace ResWander.Service
 {
     public class CrawlerService
     {
+        public event Action<int, string, string, string, long, string> DownloadedImag;
         //单线程，单个网页爬取
-        public static bool StartCrawl(Project project)
+        public static bool StartCrawl(Project project, CrawlerService crawler)
         {
             //输入处理
             InputService.AdjustUrl(project.ImgInputData);
@@ -66,6 +67,7 @@ namespace ResWander.Service
                 }
                 imgUrl = project.URLData.ImgUrls.Count > 0 ?  project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
+                crawler.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
             }
             return true;
         }

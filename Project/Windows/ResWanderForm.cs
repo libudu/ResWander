@@ -16,11 +16,15 @@ namespace ResWander
     public partial class ResWanderForm : Form
     {
         public Project  CrawlerProject { get; set; }
+        BindingSource resourceBindingSource = new BindingSource();
+        CrawlerService crawlerService = new CrawlerService();
 
         public ResWanderForm()
         {
             InitializeComponent();
+            resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
+            crawlerService.DownloadedImag += Crawler_PageDownloaded;
         }
 
         public string stoPath;             //用来保存用户指定的存储路径
@@ -32,18 +36,22 @@ namespace ResWander
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
         {
+            //每一次新爬取时都要把以前爬取得到的图片列表给清空
+            CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject);
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject,crawlerService);
+ 
+            
             if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
-                messageLabel.Text = "爬取网址" +this.urlTextBox.Text+ "失败";
+                messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
             }
             else                //爬取成功               
             {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
-                messageLabel.Text = "网址" + this.urlTextBox.Text+"爬取成功";
+                messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
                 //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
                 //while循环加switch【switch用来判断图片和那个picturebox绑定】
                 //来实现遍历，同时加条件来避免超出索引范围。
@@ -53,43 +61,43 @@ namespace ResWander
                 {
                     switch (i)
                     {
-                        case 0:
-                            pictureBox1.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 0:            
+                            pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 1:
-                            pictureBox2.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 1:                       
+                            pictureBox2.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 2:
-                            pictureBox3.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 2:                        
+                            pictureBox3.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 3:
-                            pictureBox4.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 3:                      
+                            pictureBox4.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 4:
-                            pictureBox5.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 4:                       
+                            pictureBox5.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 5:
-                            pictureBox6.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 5:                      
+                            pictureBox6.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
                         case 6:
-                            pictureBox7.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                            pictureBox7.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
-                        case 7:
-                            pictureBox8.DataBindings.Add("Image", CrawlerProject.ImgResourcesContainer.RowImages, "RowImages[i]");
+                        case 7:                        
+                            pictureBox8.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
                             i++;
                             break;
                     }
                 }
-                
-                
+               
             }
+            
             //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
         }
         /// <summary>
@@ -214,6 +222,23 @@ namespace ResWander
             Picture picture = new Picture();
             picture.Show();
             picture.pictureBox1.Image = this.pictureBox8.Image;
+        }
+
+        private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
+        {
+            var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
+            Action action = () => { resourceBindingSource.Add(pageInfo); };
+            //将第二列URL的宽度设置为自动填充
+            if(this.resourceDataGridView.Columns.Count>1)
+                this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (this.InvokeRequired)
+            {
+                this.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
         }
     }
 }
