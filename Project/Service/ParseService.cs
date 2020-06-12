@@ -62,4 +62,47 @@ namespace ResWander.Service
             return imgUrlList;
         }
     }
+
+    /// <summary>
+    /// 找出百度贴吧中源代码中的图片url
+    /// </summary>
+    public class TiebaImgParse
+    {
+        public static List<string> GetImgUrls(string htmlCode)
+        {
+            List<string> imgUrls = new List<string>();
+            //使用HtmlAgility类实现html代码的解析
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlCode);
+            //百度贴吧源代码将正文放在cc标签下
+            HtmlNodeCollection contentLists = htmlDocument.DocumentNode.SelectNodes(".//cc");
+            //没找到正文标签
+            if (contentLists == null)
+            {
+                return null;
+            }
+            foreach (HtmlNode content in contentLists)
+            {
+                //从正文中找到img标签集合
+                HtmlNodeCollection imgList = content.SelectNodes(".//img[@src]");
+                //该正文中没有图片
+                if (imgList == null)
+                {
+                    continue;
+                }
+                foreach (HtmlNode img in imgList)
+                {
+                    string imgUrl = img.Attributes["src"].Value;
+                    //若已经爬取了该图片，则不必重复爬取
+                    if (imgUrls.Contains(imgUrl))
+                    {
+                        continue;
+                    }
+                    Console.WriteLine(imgUrl);
+                    imgUrls.Add(imgUrl);
+                }
+            }
+            return imgUrls;
+        }
+    }
 }
