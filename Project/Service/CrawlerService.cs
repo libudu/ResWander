@@ -75,13 +75,18 @@ namespace ResWander.Service
         public static List<string> CrawlBaiduImg(string BaiduImgUrl)
         {
             var HtmlCode = HTMLService.DownloadUrl(BaiduImgUrl);
-            string pattern = @"{""thumbURL"":""(?<url>.*?)""";
+            string pattern = @"""objURL"":""(?<url>.*?)""";
             List<string> UrlList = new List<string>();
             foreach (Match match in Regex.Matches(HtmlCode, pattern))
             {
                 UrlList.Add(match.Groups["url"].Value);
             }
             return UrlList;
+        }
+
+        public static bool IsBaiduImgUrl(string url)
+        {
+            return url.Contains("//image.baidu.com/search");
         }
     }
 }
