@@ -53,5 +53,17 @@ namespace ResWanderUnitTest.ServiceTest
                 Assert.IsTrue(url.Contains("/"));
             }
         }
+
+        [TestMethod]
+        public void IsTiebaSiteTest()
+        {
+            string site1 = "https://www.baidu.com";
+            string site2 = "https://tieba.baidu.com";
+            string site3 = "https://tieba.baidu.com/p/5604991347";
+
+            Assert.IsFalse(TiebaHTMLService.isTiebaSite(site1));
+            Assert.IsFalse(TiebaHTMLService.isTiebaSite(site2));
+            Assert.IsTrue(TiebaHTMLService.isTiebaSite(site3));
+        }
     }
 }
