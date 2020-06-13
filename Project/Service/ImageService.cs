@@ -56,6 +56,11 @@ namespace ResWander.Service
         /// <returns>以System.Drawing.Imaging.ImageFormat形式返回图片格式</returns>
         public static System.Drawing.Imaging.ImageFormat GetImageFormat(Image _img, out string format)
         {
+            if (_img == null)
+            {
+                format = "";
+                return null;
+            }
             if (_img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
             {
                 format = "jpg";

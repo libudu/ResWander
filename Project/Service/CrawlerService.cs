@@ -153,6 +153,10 @@ namespace ResWander.Service
                     {
                         img.State = "Successful";
                     }
+                    else
+                    {
+                        img.State = "Fail";
+                    }
                     img.ResourceNumber = project.ImgResourcesContainer.RowImages.IndexOf(img) + 1;
                     string format;
                     ImageService.GetImageFormat(img.Img, out format);

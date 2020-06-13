@@ -64,3 +64,4 @@ E:\reswander\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
 E:\reswander\Project\bin\Debug\System.ComponentModel.Annotations.dll
 D:\teamworkResWanderCode\Project\bin\Debug\System.ComponentModel.Annotations.dll
+D:\ResWander\Project\bin\Debug\System.ComponentModel.Annotations.dll
