@@ -56,6 +56,7 @@ namespace ResWander.Windows
 
             }
             
+            
         }
 
         private void AffirmButton_Click(object sender, EventArgs e)
@@ -126,6 +127,10 @@ namespace ResWander.Windows
                 }
                 //调用筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
                Project.ImgResourcesContainer.ProcessedImages = ImageFilterService.FilterImages(Project);
+                //foreach ( var item in Project.ImgResourcesContainer.RowImages)
+                //{
+                //    resForm.pictureIndex.Add(item.ResourceNumber);
+                //}
                 //调用筛选方法后，对于预览中的图片要重新绑定数据，要绑定到已经筛选了的List图片列表中
                 //将pictureBox重新绑定到相应的List图片列表中
                 /*int i = 0;
@@ -272,6 +277,7 @@ namespace ResWander.Windows
                     removeNumber++;
                 }
                 //清空上一次爬取记录的所有图片的index，避免下一次爬取保存index时出现错误
+               // resForm.resourceBindingSource.ResetBindings(false);
                 resForm.pictureIndex.Clear();
                 this.Close();
             }

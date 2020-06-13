@@ -29,7 +29,7 @@ namespace ResWander
             InitializeComponent();
             resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
-            crawlerService.DownloadedImag += Crawler_PageDownloaded;
+            CrawlerService.DownloadedImag += Crawler_PageDownloaded;
         }
 
  
@@ -47,7 +47,7 @@ namespace ResWander
             CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject,crawlerService);
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
  
             
             if (!crawlResult)            //爬取失败
@@ -155,6 +155,35 @@ namespace ResWander
             //SelectForm.formatCheckedListBox.SetItemChecked(0, true);
             SelectForm.resForm = this;
             SelectForm.Show();                      //展示筛选条件的窗口
+            //pictureBox.Clear();
+            //int count = CrawlerProject.ImgResourcesContainer.ProcessedImages.Count;
+            //for (int j = 0; j < count; j++)
+            //{
+            //    PictureBox pBox = new PictureBox();
+            //    pictureBox.Add(pBox);
+            //    pictureBox[j].Parent = previewTabPage;
+            //    pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
+            //    pictureBox[j].Size = new Size(160, 100);
+            //    pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.ProcessedImages[j].Img;
+            //    pictureBox[j].Visible = false;
+            //    pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
+            //}
+            ////为每个图片设置位置
+            //for (int k = 0; k < count; k = k + 3)
+            //{
+            //    pictureBox[k].Location = new Point(95, 60);
+            //    if (k + 1 < count)
+            //        pictureBox[k + 1].Location = new Point(295, 60);
+            //    if (k + 2 < count)
+            //        pictureBox[k + 2].Location = new Point(495, 60);
+            //}
+            ////一次最多展示3张图片
+            //if (0 < count)
+            //    pictureBox[0].Visible = true;
+            //if (1 < count)
+            //    pictureBox[1].Visible = true;
+            //if (2 < count)
+            //    pictureBox[2].Visible = true;
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选

@@ -206,12 +206,28 @@ namespace ResWander.Service
             List<string> urlList = new List<string>();
             //获得该帖的页面总数
             int pagesCount = GetPagesCount(url);
+            pagesCount = pagesCount > 3 ? 3 : pagesCount;
             for (int i = 1; i <= pagesCount; i++)
             {
                 //原网址与?pn=i拼接就形成了该页面的url
                 urlList.Add(url + $"?pn={i}");
             }
             return urlList;
+        }
+    }
+    /// <summary>
+    /// 百度图片使用的HTML解析类
+    /// </summary>
+    public class BaiduHTMLService:HTMLService
+    {
+        /// <summary>
+        /// 判断是否为百度图片的网页
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static bool IsBaiduImgUrl(string url)
+        {
+            return url.Contains("//image.baidu.com/search");
         }
     }
 }
