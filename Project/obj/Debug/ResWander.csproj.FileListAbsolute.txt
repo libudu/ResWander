@@ -43,7 +43,8 @@ C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWan
 C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWander\Project\obj\Debug\ResWander.Picture.resources
 C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWander\Project\obj\Debug\ResWander.Windows.SelectForm.resources
 C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWander\Project\obj\Debug\ResWander.csproj.GenerateResource.Cache
-D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Form1.resources
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Form2.resources
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Picture.resources
 D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Windows.SelectForm.resources
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\System.ComponentModel.Annotations.dll
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.ResWanderForm.resources
