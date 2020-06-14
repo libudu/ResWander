@@ -21,12 +21,15 @@ namespace ResWander
         //声明一个int型list，记录爬取到的图片的Index
         public List<int> pictureIndex = new List<int>();
 
+        //声明一个图片控件列表
+        List<PictureBox> pictureBox = new List<PictureBox>();
+
         public ResWanderForm()
         {
             InitializeComponent();
             resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
-            crawlerService.DownloadedImag += Crawler_PageDownloaded;
+            CrawlerService.DownloadedImag += Crawler_PageDownloaded;
         }
 
  
@@ -44,7 +47,7 @@ namespace ResWander
             CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject,crawlerService);
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
  
             
             if (!crawlResult)            //爬取失败
@@ -59,50 +62,78 @@ namespace ResWander
                 //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
                 //while循环加switch【switch用来判断图片和那个picturebox绑定】
                 //来实现遍历，同时加条件来避免超出索引范围。
-                int i = 0;
+
+                //count用于统计爬取到的图片数量
                 int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
-                while (i < count && i < 8)
+                //将图片加入列表，同时初始化
+                for(int j = 0 ; j < count; j++)
                 {
-                    switch (i)
-                    {
-                        case 0:            
-                            pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 1:                       
-                            pictureBox2.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 2:                        
-                            pictureBox3.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 3:                      
-                            pictureBox4.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 4:                       
-                            pictureBox5.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 5:                      
-                            pictureBox6.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 6:
-                            pictureBox7.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                        case 7:                        
-                            pictureBox8.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                            i++;
-                            break;
-                    }
+                    PictureBox pBox = new PictureBox();
+                    pictureBox.Add(pBox);
+                    pictureBox[j].Parent = previewTabPage;
+                    pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
+                    pictureBox[j].Size = new Size(160, 100);
+                    pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.RowImages[j].Img;
+                    pictureBox[j].Visible = false;
+                    pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
                 }
-               
-            }
-            
-            //messageLabel.Text = ,这块给messageLabel赋值相应的信息去显示
+                //为每个图片设置位置
+                for(int k = 0; k < count; k = k + 3)
+                {
+                    pictureBox[k].Location = new Point(95, 60);
+                    if (k + 1 < count)
+                        pictureBox[k + 1].Location = new Point(295, 60);
+                    if (k + 2 < count)
+                        pictureBox[k + 2].Location = new Point(495, 60);
+                }
+                //一次最多展示3张图片
+                if (0 < count)
+                    pictureBox[0].Visible = true;
+                if (1 < count)
+                    pictureBox[1].Visible = true;
+                if (2 < count)
+                    pictureBox[2].Visible = true;
+            /*   int i = 0;
+                 while (i < count && i < 8)
+                  {
+                      switch (i)
+                      {
+                          case 0:            
+                              pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 1:                       
+                              pictureBox2.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 2:                        
+                              pictureBox3.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 3:                      
+                              pictureBox4.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 4:                       
+                              pictureBox5.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 5:                      
+                              pictureBox6.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 6:
+                              pictureBox7.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                          case 7:                        
+                              pictureBox8.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
+                              i++;
+                              break;
+                      }
+                  }*/
+
+            }        
         }
         /// <summary>
         /// 当用户点击筛选按钮后，会调用该方法，对相应资源按标准进行筛选
@@ -124,6 +155,35 @@ namespace ResWander
             //SelectForm.formatCheckedListBox.SetItemChecked(0, true);
             SelectForm.resForm = this;
             SelectForm.Show();                      //展示筛选条件的窗口
+            //pictureBox.Clear();
+            //int count = CrawlerProject.ImgResourcesContainer.ProcessedImages.Count;
+            //for (int j = 0; j < count; j++)
+            //{
+            //    PictureBox pBox = new PictureBox();
+            //    pictureBox.Add(pBox);
+            //    pictureBox[j].Parent = previewTabPage;
+            //    pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
+            //    pictureBox[j].Size = new Size(160, 100);
+            //    pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.ProcessedImages[j].Img;
+            //    pictureBox[j].Visible = false;
+            //    pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
+            //}
+            ////为每个图片设置位置
+            //for (int k = 0; k < count; k = k + 3)
+            //{
+            //    pictureBox[k].Location = new Point(95, 60);
+            //    if (k + 1 < count)
+            //        pictureBox[k + 1].Location = new Point(295, 60);
+            //    if (k + 2 < count)
+            //        pictureBox[k + 2].Location = new Point(495, 60);
+            //}
+            ////一次最多展示3张图片
+            //if (0 < count)
+            //    pictureBox[0].Visible = true;
+            //if (1 < count)
+            //    pictureBox[1].Visible = true;
+            //if (2 < count)
+            //    pictureBox[2].Visible = true;
         }
         /// <summary>
         /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
@@ -177,54 +237,15 @@ namespace ResWander
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PictureBox1_DoubleClick(object sender, EventArgs e)
+        private void PictureBox_DoubleClick(object sender, EventArgs e)
         {
+            PictureBox pBox = (PictureBox)sender;
             Picture picture = new Picture();
             picture.Show();
-            picture.pictureBox1.Image = this.pictureBox1.Image;
+            picture.pictureBox1.Image = pBox.Image;
         }
-        private void PictureBox2_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox2.Image;
-        }
-        private void PictureBox3_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox3.Image;
-        }
-        private void PictureBox4_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox4.Image;
-        }
-        private void PictureBox5_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox5.Image;
-        }
-        private void PictureBox6_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox6.Image;
-        }
-        private void PictureBox7_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox7.Image;
-        }
-        private void PictureBox8_DoubleClick(object sender, EventArgs e)
-        {
-            Picture picture = new Picture();
-            picture.Show();
-            picture.pictureBox1.Image = this.pictureBox8.Image;
-        }
+       
+       
 
         private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
         {
@@ -243,5 +264,60 @@ namespace ResWander
                 action();
             }
         }
+
+        private void NextPictureBox_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < pictureBox.Count; i++)
+            {
+                if (pictureBox[i].Visible)
+                {
+                    if (i + 3 < pictureBox.Count)
+                    {
+                        pictureBox[i].Visible = false;
+                        pictureBox[i + 1].Visible = false;
+                        pictureBox[i + 2].Visible = false;
+                        pictureBox[i + 3].Visible = true;
+                        if (i + 4 < pictureBox.Count)
+                            pictureBox[i + 4].Visible = true;
+                        if (i + 5 < pictureBox.Count)
+                            pictureBox[i + 5].Visible = true;
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void LastPictureBox_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < pictureBox.Count; i++)
+            {
+                if (pictureBox[i].Visible)
+                {
+                    if (i - 3 >= 0)
+                    {
+                        pictureBox[i].Visible = false;
+                        if (i + 1 < pictureBox.Count)
+                            pictureBox[i + 1].Visible = false;
+                        if (i + 2 < pictureBox.Count)
+                            pictureBox[i + 2].Visible = false;
+                        pictureBox[i - 1].Visible = true;
+                        pictureBox[i - 2].Visible = true;
+                        pictureBox[i - 3].Visible = true;
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
+        }
+
+
     }
 }

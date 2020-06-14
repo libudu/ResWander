@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ResWander.Service
@@ -72,7 +73,11 @@ namespace ResWander.Service
                 {
                     return null; 
                 }
-                string html = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                string html;
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    html = sr.ReadToEnd();
+                }
                 return html;
             }
             catch (Exception ex)
@@ -147,6 +152,82 @@ namespace ResWander.Service
                 }
             }
             return hrefUrlList;
+        }
+    }
+
+    /// <summary>
+    /// 百度贴吧使用的HTML解析类
+    /// </summary>
+    public class TiebaHTMLService:HTMLService
+    {
+        /// <summary>
+        /// 判断一个网页是否是贴吧网页
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static bool isTiebaSite(string url)
+        {
+            return url.StartsWith("https://tieba.baidu.com/p");
+        }
+
+
+        //获取该帖的总页数
+        private static int GetPagesCount(string url)
+        {
+            string html = DownloadUrl(url);
+            //使用HtmlAgility类实现html代码的解析
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(html);
+            //要获得该帖子的总页数，可以在一个input标签下获得
+            HtmlNodeCollection inputNodes = htmlDocument.DocumentNode.SelectNodes(".//input[@max-page]");
+            if (inputNodes == null)
+            {
+                return 0;
+            }
+            foreach (HtmlNode inputNode in inputNodes)
+            {
+                if (inputNode.Attributes["id"].Value == "jumpPage4")
+                {
+                    return int.Parse(inputNode.Attributes["max-page"].Value);
+                }
+            }
+            return 0;
+        }
+
+        public static List<string> TiebaParse(string url)
+        {
+            //若给出的url中包含?，首先根据url获取原网址
+            if (url.Contains("?"))
+            {
+                Regex orginalUrlRegex = new Regex(@"(?<ORGINALSITE>[^?]+)\?(pn=\d)");
+                Match match = orginalUrlRegex.Match(url);
+                url = match.Groups["ORGINALSITE"].Value;
+            }
+            List<string> urlList = new List<string>();
+            //获得该帖的页面总数
+            int pagesCount = GetPagesCount(url);
+            pagesCount = pagesCount > 3 ? 3 : pagesCount;
+            for (int i = 1; i <= pagesCount; i++)
+            {
+                //原网址与?pn=i拼接就形成了该页面的url
+                urlList.Add(url + $"?pn={i}");
+            }
+            return urlList;
+        }
+    }
+    /// <summary>
+    /// 百度图片使用的HTML解析类
+    /// </summary>
+    public class BaiduHTMLService:HTMLService
+    {
+        /// <summary>
+        /// 判断是否为百度图片的网页
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static bool IsBaiduImgUrl(string url)
+        {
+            return url.Contains("//image.baidu.com/search");
         }
     }
 }
