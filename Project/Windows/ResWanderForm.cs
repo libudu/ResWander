@@ -22,7 +22,10 @@ namespace ResWander
         public List<int> pictureIndex = new List<int>();
 
         //声明一个图片控件列表
-        List<PictureBox> pictureBox = new List<PictureBox>();
+        public List<PictureBox> pictureBox = new List<PictureBox>();
+
+        //声明一个复选框控件列表，一个复选框在相应的一个图片下面
+        public List<CheckBox> checkBoxes = new List<CheckBox>();
 
         public ResWanderForm()
         {
@@ -65,74 +68,59 @@ namespace ResWander
 
                 //count用于统计爬取到的图片数量
                 int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
-                //将图片加入列表，同时初始化
+                //将图片和相应的复选框分别加入相应的列表，同时初始化
                 for(int j = 0 ; j < count; j++)
                 {
                     PictureBox pBox = new PictureBox();
+                    CheckBox chekBox = new CheckBox();
                     pictureBox.Add(pBox);
+                    checkBoxes.Add(chekBox);
                     pictureBox[j].Parent = previewTabPage;
                     pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
                     pictureBox[j].Size = new Size(160, 100);
                     pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.RowImages[j].Img;
                     pictureBox[j].Visible = false;
                     pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
+                    checkBoxes[j].Visible = false;
+                    checkBoxes[j].Checked = false;
+                    checkBoxes[j].Text = "选中";
+                    checkBoxes[j].Size = new Size(100, 20);
+                    checkBoxes[j].Parent = previewTabPage;
                 }
-                //为每个图片设置位置
+                //为每个图片以及复选框设置位置
                 for(int k = 0; k < count; k = k + 3)
                 {
                     pictureBox[k].Location = new Point(95, 60);
+                    checkBoxes[k].Location = new Point(111,166);
                     if (k + 1 < count)
+                    {
                         pictureBox[k + 1].Location = new Point(295, 60);
+                        checkBoxes[k + 1].Location = new Point(311, 166);
+                    }  
                     if (k + 2 < count)
+                    {
                         pictureBox[k + 2].Location = new Point(495, 60);
+                        checkBoxes[k + 2].Location = new Point(511, 166);
+                    }
+                       
                 }
-                //一次最多展示3张图片
+                //一次最多展示3张图片以及3个对应的复选框
                 if (0 < count)
+                {
                     pictureBox[0].Visible = true;
+                    checkBoxes[0].Visible = true;
+                }  
                 if (1 < count)
+                {
                     pictureBox[1].Visible = true;
+                    checkBoxes[1].Visible = true;
+                }         
                 if (2 < count)
+                {
                     pictureBox[2].Visible = true;
-            /*   int i = 0;
-                 while (i < count && i < 8)
-                  {
-                      switch (i)
-                      {
-                          case 0:            
-                              pictureBox1.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 1:                       
-                              pictureBox2.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 2:                        
-                              pictureBox3.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 3:                      
-                              pictureBox4.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 4:                       
-                              pictureBox5.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 5:                      
-                              pictureBox6.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 6:
-                              pictureBox7.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                          case 7:                        
-                              pictureBox8.Image = CrawlerProject.ImgResourcesContainer.RowImages[i].Img;
-                              i++;
-                              break;
-                      }
-                  }*/
-
+                    checkBoxes[2].Visible = true;
+                }
+           
             }        
         }
         /// <summary>
@@ -157,22 +145,19 @@ namespace ResWander
             SelectForm.Show();                      //展示筛选条件的窗口
         }
         /// <summary>
-        /// 当用户点击重新筛选按钮后，会调用该方法，对资源按新的标准重新筛选
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ReChoseButton_Click(object sender, EventArgs e)
-        {
-
-        }
-        /// <summary>
         /// 当用户点击全选按钮后，会调用该方法，选中所有的资源
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SelectAllButton_Click(object sender, EventArgs e)
         {
-
+            for(int i = 0; i < checkBoxes.Count; i++)
+            {
+                if (pictureBox[i].Image != null)
+                {
+                    checkBoxes[i].Checked = true;
+                }
+            }
         }
         /// <summary>
         /// 当用户点击下载选中按钮后，会调用该方法，把选中的资源下载到用户指定的目录中
@@ -236,22 +221,37 @@ namespace ResWander
             }
         }
 
+        /// <summary>
+        /// 当用户点了下一个的箭头图标的控件后，会显示后面的图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NextPictureBox_Click(object sender, EventArgs e)
         {
             for(int i = 0; i < pictureBox.Count; i++)
             {
                 if (pictureBox[i].Visible)
                 {
-                    if (i + 3 < pictureBox.Count)
+                    if (i + 3 < pictureBox.Count && pictureBox[i+3].Image != null)
                     {
                         pictureBox[i].Visible = false;
+                        checkBoxes[i].Visible = false;
                         pictureBox[i + 1].Visible = false;
+                        checkBoxes[i + 1].Visible = false;
                         pictureBox[i + 2].Visible = false;
+                        checkBoxes[i + 2].Visible = false;
                         pictureBox[i + 3].Visible = true;
-                        if (i + 4 < pictureBox.Count)
+                        checkBoxes[i + 3].Visible = true;
+                        if (i + 4 < pictureBox.Count && pictureBox[i + 4].Image != null)
+                        {
                             pictureBox[i + 4].Visible = true;
-                        if (i + 5 < pictureBox.Count)
+                            checkBoxes[i + 4].Visible = true;
+                        }                  
+                        if (i + 5 < pictureBox.Count && pictureBox[i + 5].Image != null)
+                        {
                             pictureBox[i + 5].Visible = true;
+                            checkBoxes[i + 5].Visible = true;
+                        }  
                         return;
                     }
                     else
@@ -262,6 +262,11 @@ namespace ResWander
             }
         }
 
+        /// <summary>
+        /// 当用户点了上一个的箭头图标控件后，会显示上一块的图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LastPictureBox_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < pictureBox.Count; i++)
@@ -271,13 +276,23 @@ namespace ResWander
                     if (i - 3 >= 0)
                     {
                         pictureBox[i].Visible = false;
+                        checkBoxes[i].Visible = false;
                         if (i + 1 < pictureBox.Count)
+                        {
                             pictureBox[i + 1].Visible = false;
+                            checkBoxes[i + 1].Visible = false;
+                        }    
                         if (i + 2 < pictureBox.Count)
+                        {
                             pictureBox[i + 2].Visible = false;
+                            checkBoxes[i + 2].Visible = false;
+                        }  
                         pictureBox[i - 1].Visible = true;
+                        checkBoxes[i - 1].Visible = true;
                         pictureBox[i - 2].Visible = true;
+                        checkBoxes[i - 2].Visible = true;
                         pictureBox[i - 3].Visible = true;
+                        checkBoxes[i - 3].Visible = true;
                         return;
                     }
                     else

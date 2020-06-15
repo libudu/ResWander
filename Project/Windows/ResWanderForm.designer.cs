@@ -46,7 +46,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.widthLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.reChoseButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.upDateButton = new System.Windows.Forms.Button();
             this.openListButton = new System.Windows.Forms.Button();
@@ -54,9 +53,9 @@
             this.resourceTabPage = new System.Windows.Forms.TabPage();
             this.resourceDataGridView = new System.Windows.Forms.DataGridView();
             this.previewTabPage = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.lastPictureBox = new System.Windows.Forms.PictureBox();
             this.nextPictureBox = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -64,9 +63,9 @@
             this.resourceTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).BeginInit();
             this.previewTabPage.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // crawButton
@@ -181,7 +180,7 @@
             // formatLabel
             // 
             this.formatLabel.AutoSize = true;
-            this.formatLabel.Location = new System.Drawing.Point(380, 3);
+            this.formatLabel.Location = new System.Drawing.Point(393, 3);
             this.formatLabel.Name = "formatLabel";
             this.formatLabel.Size = new System.Drawing.Size(0, 15);
             this.formatLabel.TabIndex = 7;
@@ -189,7 +188,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(322, 3);
+            this.label6.Location = new System.Drawing.Point(335, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 15);
             this.label6.TabIndex = 6;
@@ -246,21 +245,10 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "宽度：";
             // 
-            // reChoseButton
-            // 
-            this.reChoseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.reChoseButton.Location = new System.Drawing.Point(3, 3);
-            this.reChoseButton.Name = "reChoseButton";
-            this.reChoseButton.Size = new System.Drawing.Size(90, 28);
-            this.reChoseButton.TabIndex = 4;
-            this.reChoseButton.Text = "重新筛选";
-            this.reChoseButton.UseVisualStyleBackColor = true;
-            this.reChoseButton.Click += new System.EventHandler(this.ReChoseButton_Click);
-            // 
             // selectAllButton
             // 
             this.selectAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectAllButton.Location = new System.Drawing.Point(99, 3);
+            this.selectAllButton.Location = new System.Drawing.Point(40, 3);
             this.selectAllButton.Name = "selectAllButton";
             this.selectAllButton.Size = new System.Drawing.Size(90, 28);
             this.selectAllButton.TabIndex = 5;
@@ -271,7 +259,7 @@
             // upDateButton
             // 
             this.upDateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.upDateButton.Location = new System.Drawing.Point(195, 3);
+            this.upDateButton.Location = new System.Drawing.Point(164, 3);
             this.upDateButton.Name = "upDateButton";
             this.upDateButton.Size = new System.Drawing.Size(90, 28);
             this.upDateButton.TabIndex = 6;
@@ -340,18 +328,6 @@
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
             // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.selectAllButton);
-            this.panel4.Controls.Add(this.upDateButton);
-            this.panel4.Controls.Add(this.reChoseButton);
-            this.panel4.Controls.Add(this.openListButton);
-            this.panel4.Location = new System.Drawing.Point(601, 104);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(418, 41);
-            this.panel4.TabIndex = 13;
-            // 
             // lastPictureBox
             // 
             this.lastPictureBox.Image = global::ResWander.Properties.Resources.QQ图片20200612190738;
@@ -373,6 +349,17 @@
             this.nextPictureBox.TabIndex = 3;
             this.nextPictureBox.TabStop = false;
             this.nextPictureBox.Click += new System.EventHandler(this.NextPictureBox_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.selectAllButton);
+            this.panel4.Controls.Add(this.upDateButton);
+            this.panel4.Controls.Add(this.openListButton);
+            this.panel4.Location = new System.Drawing.Point(601, 104);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(418, 41);
+            this.panel4.TabIndex = 13;
             // 
             // ResWanderForm
             // 
@@ -398,9 +385,9 @@
             this.resourceTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).EndInit();
             this.previewTabPage.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -414,7 +401,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button reChoseButton;
         private System.Windows.Forms.Button selectAllButton;
         private System.Windows.Forms.Button upDateButton;
         private System.Windows.Forms.Button openListButton;

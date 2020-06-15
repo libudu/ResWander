@@ -81,6 +81,10 @@ namespace ResWander.Windows
                     if (formatCheckedListBox.GetItemChecked(j))
                     {
                         resForm.formatLabel.Text = resForm.formatLabel.Text + formatCheckedListBox.GetItemText(formatCheckedListBox.Items[j])+" ";
+                        if (formatCheckedListBox.GetItemText(formatCheckedListBox.Items[j]).Equals("*..*")){
+                            resForm.formatLabel.Text = "JPG PNG TIF GIF";
+                            break;
+                        }
                     }
                 }
                 
@@ -125,110 +129,24 @@ namespace ResWander.Windows
                     }
                 }
                 //调用筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
-               Project.ImgResourcesContainer.ProcessedImages = ImageFilterService.FilterImages(Project);
-                //调用筛选方法后，对于预览中的图片要重新绑定数据，要绑定到已经筛选了的List图片列表中
-                //将pictureBox重新绑定到相应的List图片列表中
-                /*int i = 0;
+                Project.ImgResourcesContainer.ProcessedImages = ImageFilterService.FilterImages(Project);
                 int count = Project.ImgResourcesContainer.ProcessedImages.Count;
-                while (i < count && i < 8)
+                //对预览中动态生成的图片控件重新赋值，赋值为筛选的图片以及相应的复选框显示出来
+                for(int i = 0; i < count; i++)
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            resForm.pictureBox1.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 1:                         
-                            resForm.pictureBox2.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 2:                        
-                            resForm.pictureBox3.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 3:           
-                            resForm.pictureBox4.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 4:                        
-                            resForm.pictureBox5.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 5:                   
-                            resForm.pictureBox6.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 6:                          
-                            resForm.pictureBox7.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                        case 7:                     
-                            resForm.pictureBox8.Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                            i++;
-                            break;
-                    }
+                    resForm.pictureBox[i].Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                    resForm.checkBoxes[i].Visible = true;
                 }
-                //将那些没有得到值的pictureBox置为空
-                if (count < 8)
+                //对预览中多余的图片控件置为null同时让相应的复选框隐藏并且设置复选框为未选中状态
+                int c = count;
+                while (c < resForm.pictureBox.Count)
                 {
-                    switch (count)
-                    {
-                        case 0:
-                            resForm.pictureBox1.Image = null;
-                            resForm.pictureBox2.Image = null;
-                            resForm.pictureBox3.Image = null;
-                            resForm.pictureBox4.Image = null;
-                            resForm.pictureBox5.Image = null;
-                            resForm.pictureBox6.Image = null;
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 1:     
-                            resForm.pictureBox2.Image = null;
-                            resForm.pictureBox3.Image = null;
-                            resForm.pictureBox4.Image = null;
-                            resForm.pictureBox5.Image = null;
-                            resForm.pictureBox6.Image = null;
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 2:                    
-                            resForm.pictureBox3.Image = null;
-                            resForm.pictureBox4.Image = null;
-                            resForm.pictureBox5.Image = null;
-                            resForm.pictureBox6.Image = null;
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 3:                   
-                            resForm.pictureBox4.Image = null;
-                            resForm.pictureBox5.Image = null;
-                            resForm.pictureBox6.Image = null;
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 4:                   
-                            resForm.pictureBox5.Image = null;
-                            resForm.pictureBox6.Image = null;
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 5:
-                            resForm.pictureBox6.Image = null;
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 6:  
-                            resForm.pictureBox7.Image = null;
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        case 7:
-                            resForm.pictureBox8.Image = null;
-                            break;
-                        default:
-                            break;
-                    }
-                }*/
+                    resForm.pictureBox[c].Image = null;
+                    resForm.checkBoxes[c].Visible = false;
+                    resForm.checkBoxes[c].Checked = false;
+                    c++;
+                }
+              
                 //实现资源爬取情况在筛选之后的同步
                 BindingSource processedImageSource = new BindingSource();
                 //用一个int类型的List列表来记录筛选得到的图片的Index
