@@ -131,11 +131,10 @@ namespace ResWander.Windows
                 //调用筛选方法，给这个方法传入用户输入的筛选条件，宽度，高度等
                 Project.ImgResourcesContainer.ProcessedImages = ImageFilterService.FilterImages(Project);
                 int count = Project.ImgResourcesContainer.ProcessedImages.Count;
-                //对预览中动态生成的图片控件重新赋值，赋值为筛选的图片以及相应的复选框显示出来
+                //对预览中动态生成的图片控件重新赋值，赋值为筛选的图片
                 for(int i = 0; i < count; i++)
                 {
-                    resForm.pictureBox[i].Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
-                    resForm.checkBoxes[i].Visible = true;
+                    resForm.pictureBox[i].Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;          
                 }
                 //对预览中多余的图片控件置为null同时让相应的复选框隐藏并且设置复选框为未选中状态
                 int c = count;
@@ -146,7 +145,13 @@ namespace ResWander.Windows
                     resForm.checkBoxes[c].Checked = false;
                     c++;
                 }
-              
+
+                resForm.resourceBindingSource.Clear();
+                //对资源重复筛选前，先将资源爬取情况恢复到最初爬取的全部资源
+                for (int re = 0; re < resForm.saveResourceBindingSource.Count; re++)
+                {                                     
+                    resForm.resourceBindingSource.Add(resForm.saveResourceBindingSource[re]);
+                }
                 //实现资源爬取情况在筛选之后的同步
                 BindingSource processedImageSource = new BindingSource();
                 //用一个int类型的List列表来记录筛选得到的图片的Index
@@ -189,8 +194,7 @@ namespace ResWander.Windows
                     resForm.resourceBindingSource.Remove(resForm.resourceBindingSource[removePictureIndex[j]-removeNumber]);
                     removeNumber++;
                 }
-                //清空上一次爬取记录的所有图片的index，避免下一次爬取保存index时出现错误
-                resForm.pictureIndex.Clear();
+
                 this.Close();
             }
             else

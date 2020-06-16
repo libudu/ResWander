@@ -17,6 +17,8 @@ namespace ResWander
     {
         public Project  CrawlerProject { get; set; }
         public BindingSource resourceBindingSource = new BindingSource();
+        //保存resourceBindingSource中的资源，实现重新筛选
+        public BindingSource saveResourceBindingSource = new BindingSource();
         public CrawlerService crawlerService = new CrawlerService();
         //声明一个int型list，记录爬取到的图片的Index
         public List<int> pictureIndex = new List<int>();
@@ -46,6 +48,10 @@ namespace ResWander
         /// <param name="e"></param>
         private void CrawButton_Click(object sender, EventArgs e)
         {
+            //每一次新爬取时清空上一次爬取记录的所有图片的index，避免下一次爬取保存index时出现错误
+            pictureIndex.Clear();
+            resourceBindingSource.Clear();
+            saveResourceBindingSource.Clear();
             //每一次新爬取时都要把以前爬取得到的图片列表给清空
             CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
@@ -143,35 +149,7 @@ namespace ResWander
             //SelectForm.formatCheckedListBox.SetItemChecked(0, true);
             SelectForm.resForm = this;
             SelectForm.Show();                      //展示筛选条件的窗口
-            //pictureBox.Clear();
-            //int count = CrawlerProject.ImgResourcesContainer.ProcessedImages.Count;
-            //for (int j = 0; j < count; j++)
-            //{
-            //    PictureBox pBox = new PictureBox();
-            //    pictureBox.Add(pBox);
-            //    pictureBox[j].Parent = previewTabPage;
-            //    pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
-            //    pictureBox[j].Size = new Size(160, 100);
-            //    pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.ProcessedImages[j].Img;
-            //    pictureBox[j].Visible = false;
-            //    pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
-            //}
-            ////为每个图片设置位置
-            //for (int k = 0; k < count; k = k + 3)
-            //{
-            //    pictureBox[k].Location = new Point(95, 60);
-            //    if (k + 1 < count)
-            //        pictureBox[k + 1].Location = new Point(295, 60);
-            //    if (k + 2 < count)
-            //        pictureBox[k + 2].Location = new Point(495, 60);
-            //}
-            ////一次最多展示3张图片
-            //if (0 < count)
-            //    pictureBox[0].Visible = true;
-            //if (1 < count)
-            //    pictureBox[1].Visible = true;
-            //if (2 < count)
-            //    pictureBox[2].Visible = true;
+           
         }
         /// <summary>
         /// 当用户点击全选按钮后，会调用该方法，选中所有的资源
@@ -195,7 +173,31 @@ namespace ResWander
         /// <param name="e"></param>
         private void UpDateButton_Click(object sender, EventArgs e)
         {
-           SaveService.SaveImages(CrawlerProject.ImgResourcesContainer.ProcessedImages);
+            //声明一个下载队列，将要下载的图片加入队列里
+            List<ImgResource> img = new List<ImgResource>();
+            //当用户点击筛选按钮，筛选出图片后，下载选中是基于筛选图片的列表里来的【看count是否为0】
+            if (CrawlerProject.ImgResourcesContainer.ProcessedImages.Count > 0)
+            {
+                for(int f = 0; f < CrawlerProject.ImgResourcesContainer.ProcessedImages.Count; f++)
+                {
+                    //如果相应图片对应的复选框被选中，则加入下载队列
+                    if(checkBoxes[f].Checked)
+                    {
+                        img.Add(CrawlerProject.ImgResourcesContainer.ProcessedImages[f]);
+                    }
+                }
+            }
+            else
+            {
+                for(int f = 0; f < CrawlerProject.ImgResourcesContainer.RowImages.Count; f++)
+                {
+                    if(checkBoxes[f].Checked)
+                    {
+                        img.Add(CrawlerProject.ImgResourcesContainer.RowImages[f]);
+                    }
+                }
+            }
+           SaveService.SaveImages(img);
         }
         /// <summary>
         /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前指定的资源下载目录，方便查看下载的资源
@@ -235,7 +237,7 @@ namespace ResWander
         private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
         {
             var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
-            Action action = () => { resourceBindingSource.Add(pageInfo); };
+            Action action = () => { resourceBindingSource.Add(pageInfo); saveResourceBindingSource.Add(pageInfo); };
             pictureIndex.Add(pageInfo.Index);
             //将第二列URL的宽度设置为自动填充
             if(this.resourceDataGridView.Columns.Count>1)
@@ -317,11 +319,14 @@ namespace ResWander
                             checkBoxes[i + 2].Visible = false;
                         }  
                         pictureBox[i - 1].Visible = true;
-                        checkBoxes[i - 1].Visible = true;
+                        if (pictureBox[i - 1].Image != null)
+                            checkBoxes[i - 1].Visible = true;
                         pictureBox[i - 2].Visible = true;
-                        checkBoxes[i - 2].Visible = true;
+                        if (pictureBox[i - 2].Image != null)
+                            checkBoxes[i - 2].Visible = true;
                         pictureBox[i - 3].Visible = true;
-                        checkBoxes[i - 3].Visible = true;
+                        if (pictureBox[i - 3].Image != null)
+                            checkBoxes[i - 3].Visible = true;
                         return;
                     }
                     else
@@ -330,9 +335,22 @@ namespace ResWander
                     }
                 }
             }
-
         }
 
+        /// <summary>
+        /// 下面的两个函数实现了鼠标点击控件以及松开时控件的变化，不过是通过改变控件的背景颜色来变的，因为控件被图片充满，所有没变化
+        /// 如果找不到简单的解决办法，可以考虑对图片p一下，点击后直接换图片的方式来完成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NextPictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            nextPictureBox.BackColor = Color.White;
+        }
 
+        private void NextPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            nextPictureBox.BackColor = Color.Black;
+        }
     }
 }

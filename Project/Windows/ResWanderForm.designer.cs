@@ -349,6 +349,8 @@
             this.nextPictureBox.TabIndex = 3;
             this.nextPictureBox.TabStop = false;
             this.nextPictureBox.Click += new System.EventHandler(this.NextPictureBox_Click);
+            this.nextPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseDown);
+            this.nextPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseUp);
             // 
             // panel4
             // 
