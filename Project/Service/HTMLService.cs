@@ -160,6 +160,11 @@ namespace ResWander.Service
     /// </summary>
     public class TiebaHTMLService:HTMLService
     {
+        private static int maxPage = int.MaxValue;
+        /// <summary>
+        /// 设置最大爬取深度
+        /// </summary>
+        private static int MaxPage { get; set; }
         /// <summary>
         /// 判断一个网页是否是贴吧网页
         /// </summary>
@@ -169,7 +174,6 @@ namespace ResWander.Service
         {
             return url.StartsWith("https://tieba.baidu.com/p");
         }
-
 
         //获取该帖的总页数
         private static int GetPagesCount(string url)
@@ -194,6 +198,11 @@ namespace ResWander.Service
             return 0;
         }
 
+        /// <summary>
+        /// 百度贴吧获取一个帖子的所有网址（页数不超过最大页数）
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static List<string> TiebaParse(string url)
         {
             //若给出的url中包含?，首先根据url获取原网址
@@ -206,7 +215,7 @@ namespace ResWander.Service
             List<string> urlList = new List<string>();
             //获得该帖的页面总数
             int pagesCount = GetPagesCount(url);
-            pagesCount = pagesCount > 3 ? 3 : pagesCount;
+            pagesCount = pagesCount > MaxPage ? MaxPage : pagesCount;
             for (int i = 1; i <= pagesCount; i++)
             {
                 //原网址与?pn=i拼接就形成了该页面的url

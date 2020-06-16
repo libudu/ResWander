@@ -42,6 +42,10 @@ namespace ResWander.Service
             // 按照宽度、高度、大小、格式对图片进行筛选
             foreach (ImgResource img in imgResourcesRow)
             {
+                if(img == null)
+                {
+                    continue;
+                }
                 // 宽、高度筛选
                 if (img.Img.Width < imgInputData.MinY ||
                 img.Img.Width > imgInputData.MaxY ||
