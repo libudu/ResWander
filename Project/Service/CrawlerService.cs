@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Collections;
 using System.Threading;
+using System.IO;
 
 namespace ResWander.Service
 {
@@ -169,6 +170,25 @@ namespace ResWander.Service
             }
         }
 
+        public static List<string> ImgSearchImg(string ImgPath)
+        {
+            var APP_ID = "20408952";
+            var API_KEY = "oGP41zYCvdWBzFkyz1xBfUXT";
+            var SECRET_KEY = "CwM4KCyzngkTCQAd2aIy08LYtPgPaDL8";
+
+            var client = new Baidu.Aip.ImageClassify.ImageClassify(API_KEY, SECRET_KEY);
+            client.Timeout = 6000;  // 修改超时时间
+
+            var image = File.ReadAllBytes(ImgPath);
+            // 调用通用物体识别，可能会抛出网络等异常，请使用try/catch捕获
+            var result = client.AdvancedGeneral(image)["result"];
+            List<string> ImgKeywordList = new List<string>();
+            foreach(var i in result)
+            {
+                ImgKeywordList.Add(i["keyword"].ToString());
+            }
+            return ImgKeywordList;
+        }
 
     }
 }
