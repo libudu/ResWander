@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Collections;
 using System.Threading;
+using System.IO;
+using System.Drawing;
 
 namespace ResWander.Service
 {
@@ -34,9 +36,9 @@ namespace ResWander.Service
                 CrawlBaiduImg(project.ImgInputData.Url, out imgUrls);
             }
             // 如果是微博网址则使用爬取贴吧图片的策略
-            else if (WeiboHTMLService.IsWeiboUrl(project.ImgInputData.Url))
+            else if (false)
             {
-                CrawlWeiboImg(project.ImgInputData.Url, out imgUrls);
+                //微博
             }
             //如果是其他网址则使用爬取贴吧图片的策略
             else
@@ -55,6 +57,9 @@ namespace ResWander.Service
             return true;
         }
 
+
+
+
         /// <summary>
         /// 对爬虫的进行初始化，主要处理爬虫的输入
         /// </summary>
@@ -68,12 +73,6 @@ namespace ResWander.Service
             //}
         }
 
-        /// <summary>
-        ///  对贴吧图片爬取的封装
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="urls"></param>
-        /// <param name="imgUrls"></param>
         public static void TibaCrawl(Project project,out List<string> urls,out List<string> imgUrls)
         {
             //解析网页url
@@ -110,12 +109,6 @@ namespace ResWander.Service
             //    }
             //});
         }
-
-        /// <summary>
-        /// 对百度图片爬取的封装
-        /// </summary>
-        /// <param name="BaiduImgUrl"></param>
-        /// <param name="imgUrls"></param>
         public static void CrawlBaiduImg(string BaiduImgUrl, out List<string> imgUrls)
         {
             var HtmlCode = HTMLService.DownloadUrl(BaiduImgUrl);
@@ -127,13 +120,6 @@ namespace ResWander.Service
             }
 
         }
-
-        /// <summary>
-        /// 默认爬取方式
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="urls"></param>
-        /// <param name="imgUrls"></param>
         public static void DefaultCrawl(Project project, out List<string> urls, out List<string> imgUrls)
         {
             //下载当前url网页的html代码并保存
@@ -151,7 +137,6 @@ namespace ResWander.Service
             //解析出该网页上的图片资源
             imgUrls = ImgParseService.Parse(htmlcode);
         }
-        
         public static void CrawlDownload(Project project, List<string> urls, List<string> imgUrls)
         {
             //开始下载图片资源
@@ -186,15 +171,52 @@ namespace ResWander.Service
             }
         }
 
-        /// <summary>
-        /// 对微博上图片爬取的封装
-        /// </summary>
-        /// <param name="weiboImgUrl">待爬取的微博url</param>
-        /// <param name="imgUrls">爬取出来的url列表，已全部转换为绝对地址</param>
-        public static void CrawlWeiboImg(string weiboImgUrl, out List<string> imgUrls)
+        public static List<string> ImgSearchImg(string ImgPath)
         {
-            string htmlCode = WeiboHTMLService.DownloadUrl(weiboImgUrl);
-            imgUrls = WeiboImgParse.GetImgUrls(htmlCode);
+            var APP_ID = "20408952";
+            var API_KEY = "oGP41zYCvdWBzFkyz1xBfUXT";
+            var SECRET_KEY = "CwM4KCyzngkTCQAd2aIy08LYtPgPaDL8";
+
+            var client = new Baidu.Aip.ImageClassify.ImageClassify(API_KEY, SECRET_KEY);
+            client.Timeout = 6000;  // 修改超时时间
+
+            var image = File.ReadAllBytes(ImgPath);
+            // 调用通用物体识别，可能会抛出网络等异常，请使用try/catch捕获
+            var result = client.AdvancedGeneral(image)["result"];
+            List<string> ImgKeywordList = new List<string>();
+            foreach(var i in result)
+            {
+                ImgKeywordList.Add(i["keyword"].ToString());
+            }
+            return ImgKeywordList;
+        }
+
+        /// <summary>
+        /// 根据关键字到百度搜索里查找图片
+        /// 输入一个关键字，返回url
+        /// </summary>
+        public static string SearchKeyword(string keyword)
+        {
+            //若关键字中含有特殊字符，则将其转义
+            keyword = TransferKeyword(keyword);
+
+            //搜索关键字实际上就是生成一个搜索的网址
+            string url = $"https://image.baidu.com/search/index?tn=baiduimage&word={keyword}";
+
+            return url;
+        }
+
+        private static string TransferKeyword(string keyword)
+        {
+            //关键字中若有特定字符则需要转义
+            keyword = keyword.Replace(" ", "%20");
+            keyword = keyword.Replace("/", "%2F");
+            keyword = keyword.Replace("?", "%3F");
+            keyword = keyword.Replace("#", "%23");
+            keyword = keyword.Replace("&", "%26");
+            keyword = keyword.Replace("=", "%3D");
+            //返回转义之后的关键字字符序列
+            return keyword;
         }
     }
 }
