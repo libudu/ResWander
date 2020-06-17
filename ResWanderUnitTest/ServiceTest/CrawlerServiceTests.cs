@@ -47,5 +47,18 @@ namespace ResWander.Service.Tests
                 Console.WriteLine(keyword);
             }
         }
+
+        [TestMethod()]
+        public void SearchKeywordTest()
+        {
+            string[] keywordList = new string[] { "C#", "风景", "Donald Trump", "唐纳德·特朗普" };
+            string url;
+
+            foreach(string keyword in keywordList)
+            {
+                url = CrawlerService.SearchKeyword(keyword);
+                Console.WriteLine(url);
+            }
+        }
     }
 }

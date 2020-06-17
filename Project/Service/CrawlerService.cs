@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Collections;
 using System.Threading;
 using System.IO;
+using System.Drawing;
 
 namespace ResWander.Service
 {
@@ -190,5 +191,32 @@ namespace ResWander.Service
             return ImgKeywordList;
         }
 
+        /// <summary>
+        /// 根据关键字到百度搜索里查找图片
+        /// 输入一个关键字，返回url
+        /// </summary>
+        public static string SearchKeyword(string keyword)
+        {
+            //若关键字中含有特殊字符，则将其转义
+            keyword = TransferKeyword(keyword);
+
+            //搜索关键字实际上就是生成一个搜索的网址
+            string url = $"https://image.baidu.com/search/index?tn=baiduimage&word={keyword}";
+
+            return url;
+        }
+
+        private static string TransferKeyword(string keyword)
+        {
+            //关键字中若有特定字符则需要转义
+            keyword = keyword.Replace(" ", "%20");
+            keyword = keyword.Replace("/", "%2F");
+            keyword = keyword.Replace("?", "%3F");
+            keyword = keyword.Replace("#", "%23");
+            keyword = keyword.Replace("&", "%26");
+            keyword = keyword.Replace("=", "%3D");
+            //返回转义之后的关键字字符序列
+            return keyword;
+        }
     }
 }
