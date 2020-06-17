@@ -107,3 +107,6 @@ D:\Github\cloneq\ResWander\Project\obj\Debug\ResWander.csproj.GenerateResource.c
 D:\Github\cloneq\ResWander\Project\obj\Debug\ResWander.csproj.CopyComplete
 D:\Github\cloneq\ResWander\Project\obj\Debug\ResWander.exe
 D:\Github\cloneq\ResWander\Project\obj\Debug\ResWander.pdb
+D:\teamworkResWanderCode\Project\bin\Debug\AipSdk.dll
+D:\teamworkResWanderCode\Project\bin\Debug\Newtonsoft.Json.dll
+D:\teamworkResWanderCode\Project\bin\Debug\Newtonsoft.Json.xml
