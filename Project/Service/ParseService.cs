@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
@@ -103,6 +104,61 @@ namespace ResWander.Service
                 }
             }
             return imgUrls;
+        }
+    }
+
+    /// <summary>
+    /// 找出微博源代码中的图片url
+    /// </summary>
+    public class WeiboImgParse
+    {
+        /// <summary>
+        /// 找到微博html源代码中的图片url，并以绝对地址的形式返回
+        /// </summary>
+        /// <param name="htmlCode">微博html源代码</param>
+        /// <returns>所有的图片url</returns>
+        public static List<string> GetImgUrls(string htmlCode)
+        {
+            // 用于识别图片url的正则表达式
+            string imgPattern = @"(?<imgNode><[\s\t\r\n]*img[^>]*src[\s\t\r\n]*=[\s\t\r\n]*[\\]*""(?<imgSrc>[^""?]+)[^>]*)";
+            var matches = Regex.Matches(htmlCode, imgPattern);
+
+            // 获取绝对地址网址
+            List<string> imgUrls = new List<string>();
+            string imgUrl;
+            foreach(Match matchUrl in matches)
+            {
+                // 将表情符号过滤
+                if(!Regex.IsMatch(matchUrl.Value, @"W_img_face"))
+                {
+                    imgUrl = matchUrl.Groups["imgSrc"].Value;
+                    imgUrls.Add(WeiboImgParse.RelativeToAbsolute(imgUrl));
+                }
+            }
+
+            return imgUrls;
+        }
+
+        /// <summary>
+        /// 用于将微博爬取的url相对地址转为绝对地址
+        /// </summary>
+        /// <param name="url">直接爬取的weibourl</param>
+        /// <returns>可以直接使用的绝对地址</returns>
+        private static string RelativeToAbsolute(string relativeUrl)
+        {
+            relativeUrl = relativeUrl.Replace(@"\/", "/");
+            if(Regex.IsMatch(relativeUrl, @"http[s]*://"))
+            {
+                return relativeUrl;
+            }
+            else if(Regex.IsMatch(relativeUrl, @"//"))
+            {
+                return "https:" + relativeUrl;
+            }
+            else
+            {
+                throw new Exception($"相对地址转换为绝对地址时出错，此时网址为{relativeUrl}");
+            }
         }
     }
 }
