@@ -56,6 +56,7 @@
             this.lastPictureBox = new System.Windows.Forms.PictureBox();
             this.nextPictureBox = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureSPButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -248,7 +249,7 @@
             // selectAllButton
             // 
             this.selectAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectAllButton.Location = new System.Drawing.Point(40, 3);
+            this.selectAllButton.Location = new System.Drawing.Point(109, 6);
             this.selectAllButton.Name = "selectAllButton";
             this.selectAllButton.Size = new System.Drawing.Size(90, 28);
             this.selectAllButton.TabIndex = 5;
@@ -259,7 +260,7 @@
             // upDateButton
             // 
             this.upDateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.upDateButton.Location = new System.Drawing.Point(164, 3);
+            this.upDateButton.Location = new System.Drawing.Point(205, 6);
             this.upDateButton.Name = "upDateButton";
             this.upDateButton.Size = new System.Drawing.Size(90, 28);
             this.upDateButton.TabIndex = 6;
@@ -270,7 +271,7 @@
             // openListButton
             // 
             this.openListButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openListButton.Location = new System.Drawing.Point(289, 3);
+            this.openListButton.Location = new System.Drawing.Point(298, 6);
             this.openListButton.Name = "openListButton";
             this.openListButton.Size = new System.Drawing.Size(120, 28);
             this.openListButton.TabIndex = 7;
@@ -355,6 +356,7 @@
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.pictureSPButton);
             this.panel4.Controls.Add(this.selectAllButton);
             this.panel4.Controls.Add(this.upDateButton);
             this.panel4.Controls.Add(this.openListButton);
@@ -362,6 +364,16 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(418, 41);
             this.panel4.TabIndex = 13;
+            // 
+            // pictureSPButton
+            // 
+            this.pictureSPButton.Location = new System.Drawing.Point(3, 6);
+            this.pictureSPButton.Name = "pictureSPButton";
+            this.pictureSPButton.Size = new System.Drawing.Size(100, 28);
+            this.pictureSPButton.TabIndex = 8;
+            this.pictureSPButton.Text = "以图搜图";
+            this.pictureSPButton.UseVisualStyleBackColor = true;
+            this.pictureSPButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // ResWanderForm
             // 
@@ -423,6 +435,7 @@
         internal System.Windows.Forms.Label formatLabel;
         internal System.Windows.Forms.PictureBox nextPictureBox;
         private System.Windows.Forms.PictureBox lastPictureBox;
+        private System.Windows.Forms.Button pictureSPButton;
     }
 }
 
