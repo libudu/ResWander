@@ -378,5 +378,21 @@ namespace ResWander
         {
             nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\primaryRight.png";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();  //显示选择文件对话框
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*"; //所有的文件格式
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+               
+            }
+
+
+        }
     }
 }

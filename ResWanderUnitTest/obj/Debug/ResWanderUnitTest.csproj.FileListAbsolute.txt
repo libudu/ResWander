@@ -90,3 +90,9 @@ D:\ResWander\ResWanderUnitTest\obj\Debug\ResWanderUnitTest.csproj.CoreCompileInp
 D:\ResWander\ResWanderUnitTest\obj\Debug\ResWanderUnitTest.csproj.CopyComplete
 D:\ResWander\ResWanderUnitTest\obj\Debug\ResWanderUnitTest.dll
 D:\ResWander\ResWanderUnitTest\obj\Debug\ResWanderUnitTest.pdb
+C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWander\ResWanderUnitTest\bin\Debug\AipSdk.dll
+C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWander\ResWanderUnitTest\bin\Debug\Newtonsoft.Json.dll
+C:\ZhangHeng\college\大二下学习\软件构造基础（C#）\大作业\ResWander\ResWanderUnitTest\bin\Debug\Newtonsoft.Json.xml
+D:\ResWander\ResWanderUnitTest\bin\Debug\AipSdk.dll
+D:\ResWander\ResWanderUnitTest\bin\Debug\Newtonsoft.Json.dll
+D:\ResWander\ResWanderUnitTest\bin\Debug\Newtonsoft.Json.xml
