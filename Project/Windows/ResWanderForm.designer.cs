@@ -298,7 +298,7 @@
             this.resourceTabPage.Location = new System.Drawing.Point(4, 25);
             this.resourceTabPage.Name = "resourceTabPage";
             this.resourceTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.resourceTabPage.Size = new System.Drawing.Size(1003, 342);
+            this.resourceTabPage.Size = new System.Drawing.Size(1164, 573);
             this.resourceTabPage.TabIndex = 0;
             this.resourceTabPage.Text = "资源爬取情况";
             this.resourceTabPage.UseVisualStyleBackColor = true;
@@ -313,7 +313,7 @@
             this.resourceDataGridView.Name = "resourceDataGridView";
             this.resourceDataGridView.RowHeadersWidth = 51;
             this.resourceDataGridView.RowTemplate.Height = 27;
-            this.resourceDataGridView.Size = new System.Drawing.Size(1012, 333);
+            this.resourceDataGridView.Size = new System.Drawing.Size(1168, 567);
             this.resourceDataGridView.TabIndex = 0;
             // 
             // previewTabPage
