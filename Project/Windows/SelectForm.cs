@@ -134,7 +134,11 @@ namespace ResWander.Windows
                 //对预览中动态生成的图片控件重新赋值，赋值为筛选的图片
                 for(int i = 0; i < count; i++)
                 {
-                    resForm.pictureBox[i].Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;          
+                    resForm.pictureBox[i].Image = Project.ImgResourcesContainer.ProcessedImages[i].Img;
+                    if (resForm.pictureBox[i].Visible)
+                    {
+                        resForm.checkBoxes[i].Visible = true;
+                    }
                 }
                 //对预览中多余的图片控件置为null同时让相应的复选框隐藏并且设置复选框为未选中状态
                 int c = count;
