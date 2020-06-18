@@ -45,17 +45,6 @@ namespace ResWanderUnitTest.ServiceTest
         }
 
         /// <summary>
-        /// 存储关键字照片到默认路径功能测试
-        /// </summary>
-        [TestMethod]
-        public void KeywordImageSaveTest1()
-        {
-            //默认路径
-            string defaultPath = Environment.CurrentDirectory + @"\KeywordImageTest";
-            SaveService.SaveKeywordImages(defaultPath, "关键字2", this.imageSources);
-        }
-
-        /// <summary>
         /// 自选路径存储关键字图片功能测试
         /// </summary>
         [TestMethod]
