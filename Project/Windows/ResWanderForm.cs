@@ -148,11 +148,11 @@ namespace ResWander
                 //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
                 for(int j = 0; j < count; j++)
                 {
-                    if (pictureBox[j] == null)
+                    if (pictureBox[j].Image == null)
                     {
                         for(int k = j + 1; k < count; k++)
                         {
-                            if (pictureBox[k] != null)
+                            if (pictureBox[k].Image != null)
                             {
                                 pictureBox[j].Image = pictureBox[k].Image;  
                                 pictureBox[k].Image = null;
@@ -516,12 +516,27 @@ namespace ResWander
                             pictureBox[k + 8].Location = new Point(820, 400);
                             checkBoxes[k + 8].Location = new Point(870, 570);
                         }
-
+                    }
+                    //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
+                    for (int j = 0; j < count; j++)
+                    {
+                        if (pictureBox[j].Image == null)
+                        {
+                            for (int k = j + 1; k < count; k++)
+                            {
+                                if (pictureBox[k].Image != null)
+                                {
+                                    pictureBox[j].Image = pictureBox[k].Image;
+                                    pictureBox[k].Image = null;
+                                    break;
+                                }
+                            }
+                        }
                     }
                     //一次最多展示9张图片以及9个对应的复选框
                     for (int j = 0; j < 9; j++)
                     {
-                        if (j < count)
+                        if (j < count && pictureBox[j].Image != null)
                         {
                             pictureBox[j].Visible = true;
                             checkBoxes[j].Visible = true;
