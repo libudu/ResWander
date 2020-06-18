@@ -131,8 +131,11 @@ namespace ResWander.Service
                 // 将表情符号过滤
                 if(!Regex.IsMatch(matchUrl.Value, @"W_img_face"))
                 {
-                    imgUrl = matchUrl.Groups["imgSrc"].Value;
-                    imgUrls.Add(WeiboImgParse.RelativeToAbsolute(imgUrl));
+                    if(!Regex.IsMatch(matchUrl.Value, @"W_face_radius"))
+                    {
+                        imgUrl = matchUrl.Groups["imgSrc"].Value;
+                        imgUrls.Add(WeiboImgParse.RelativeToAbsolute(imgUrl));
+                    }
                 }
             }
 
