@@ -29,12 +29,15 @@ namespace ResWander
         //声明一个复选框控件列表，一个复选框在相应的一个图片下面
         public List<CheckBox> checkBoxes = new List<CheckBox>();
 
+        public string filePath { get; set; }
+
         public ResWanderForm()
         {
             InitializeComponent();
             resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
             CrawlerService.DownloadedImag += Crawler_PageDownloaded;
+            this.Size = new Size(1200,800);          
         }
 
  
@@ -83,7 +86,7 @@ namespace ResWander
                     checkBoxes.Add(chekBox);
                     pictureBox[j].Parent = previewTabPage;
                     pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
-                    pictureBox[j].Size = new Size(160, 100);
+                    pictureBox[j].Size = new Size(200, 160);
                     pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.RowImages[j].Img;
                     pictureBox[j].Visible = false;
                     pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
@@ -94,38 +97,61 @@ namespace ResWander
                     checkBoxes[j].Parent = previewTabPage;
                 }
                 //为每个图片以及复选框设置位置
-                for(int k = 0; k < count; k = k + 3)
+                for(int k = 0; k < count; k = k + 9)
                 {
-                    pictureBox[k].Location = new Point(95, 60);
-                    checkBoxes[k].Location = new Point(111,166);
+                    pictureBox[k].Location = new Point(120, 0);
+                    checkBoxes[k].Location = new Point(170,180);
                     if (k + 1 < count)
                     {
-                        pictureBox[k + 1].Location = new Point(295, 60);
-                        checkBoxes[k + 1].Location = new Point(311, 166);
+                        pictureBox[k + 1].Location = new Point(470, 0);
+                        checkBoxes[k + 1].Location = new Point(520, 180);
                     }  
                     if (k + 2 < count)
                     {
-                        pictureBox[k + 2].Location = new Point(495, 60);
-                        checkBoxes[k + 2].Location = new Point(511, 166);
+                        pictureBox[k + 2].Location = new Point(820, 0);
+                        checkBoxes[k + 2].Location = new Point(870, 180);
                     }
-                       
+                    if (k + 3 < count)
+                    {
+                        pictureBox[k + 3].Location = new Point(120, 210);
+                        checkBoxes[k + 3].Location = new Point(170, 380);
+                    }
+                    if (k + 4 < count)
+                    {
+                        pictureBox[k + 4].Location = new Point(470, 210);
+                        checkBoxes[k + 4].Location = new Point(520, 380);
+                    }
+                    if (k + 5 < count)
+                    {
+                        pictureBox[k + 5].Location = new Point(820, 210);
+                        checkBoxes[k + 5].Location = new Point(870, 380);
+                    }
+                    if (k + 6 < count)
+                    {
+                        pictureBox[k + 6].Location = new Point(120, 400);
+                        checkBoxes[k + 6].Location = new Point(170, 570);
+                    }
+                    if (k + 7 < count)
+                    {
+                        pictureBox[k + 7].Location = new Point(470, 400);
+                        checkBoxes[k + 7].Location = new Point(520, 570);
+                    }
+                    if (k + 8 < count)
+                    {
+                        pictureBox[k + 8].Location = new Point(820, 400);
+                        checkBoxes[k + 8].Location = new Point(870, 570);
+                    }
+
                 }
-                //一次最多展示3张图片以及3个对应的复选框
-                if (0 < count)
+                //一次最多展示9张图片以及9个对应的复选框
+                for(int j = 0; j < 9; j++)
                 {
-                    pictureBox[0].Visible = true;
-                    checkBoxes[0].Visible = true;
-                }  
-                if (1 < count)
-                {
-                    pictureBox[1].Visible = true;
-                    checkBoxes[1].Visible = true;
-                }         
-                if (2 < count)
-                {
-                    pictureBox[2].Visible = true;
-                    checkBoxes[2].Visible = true;
-                }
+                    if (j < count)
+                    {
+                        pictureBox[j].Visible = true;
+                        checkBoxes[j].Visible = true;
+                    }
+                }             
            
             }        
         }
@@ -197,16 +223,16 @@ namespace ResWander
                     }
                 }
             }
-           SaveService.SaveImages(img);
+           filePath = SaveService.SaveImages(img);
         }
         /// <summary>
-        /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前指定的资源下载目录，方便查看下载的资源
+        /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前存储的资源的下载目录，方便查看下载的资源
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OpenListButton_Click(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Process.Start("explorer.exe", filePath);
         }
         /// <summary>
         /// 当用户点击设置按钮后，会调用该方法，弹出一个窗口，让用户输入下载路径
@@ -263,26 +289,29 @@ namespace ResWander
             {
                 if (pictureBox[i].Visible)
                 {
-                    if (i + 3 < pictureBox.Count && pictureBox[i+3].Image != null)
-                    {
-                        pictureBox[i].Visible = false;
-                        checkBoxes[i].Visible = false;
-                        pictureBox[i + 1].Visible = false;
-                        checkBoxes[i + 1].Visible = false;
-                        pictureBox[i + 2].Visible = false;
-                        checkBoxes[i + 2].Visible = false;
-                        pictureBox[i + 3].Visible = true;
-                        checkBoxes[i + 3].Visible = true;
-                        if (i + 4 < pictureBox.Count && pictureBox[i + 4].Image != null)
+                    if (i + 9 < pictureBox.Count && pictureBox[i+9].Image != null)
+                    {   
+                        //隐藏前9个图片以及复选框
+                        int k = i + 9;
+                        int kr = i;
+                        while (kr < k)
                         {
-                            pictureBox[i + 4].Visible = true;
-                            checkBoxes[i + 4].Visible = true;
-                        }                  
-                        if (i + 5 < pictureBox.Count && pictureBox[i + 5].Image != null)
+                            pictureBox[kr].Visible = false;
+                            checkBoxes[kr].Visible = false;
+                            kr++;
+                        }
+                        
+                        pictureBox[i + 9].Visible = true;
+                        checkBoxes[i + 9].Visible = true;
+                        for(int j = i + 10; j < i + 18; j++)
                         {
-                            pictureBox[i + 5].Visible = true;
-                            checkBoxes[i + 5].Visible = true;
-                        }  
+                            if (j < pictureBox.Count && pictureBox[j].Image != null)
+                            {
+                                pictureBox[j].Visible = true;
+                                checkBoxes[j].Visible = true;
+                            }
+                        }
+                       
                         return;
                     }
                     else
@@ -304,29 +333,26 @@ namespace ResWander
             {
                 if (pictureBox[i].Visible)
                 {
-                    if (i - 3 >= 0)
+                    if (i - 9 >= 0)
                     {
                         pictureBox[i].Visible = false;
                         checkBoxes[i].Visible = false;
-                        if (i + 1 < pictureBox.Count)
+                        for(int k = i + 1; k < i + 9; k++)
                         {
-                            pictureBox[i + 1].Visible = false;
-                            checkBoxes[i + 1].Visible = false;
-                        }    
-                        if (i + 2 < pictureBox.Count)
+                            if (k < pictureBox.Count)
+                            {
+                                pictureBox[k].Visible = false;
+                                checkBoxes[k].Visible = false;
+                            }
+                        }
+                        
+                        for(int j = i - 1; j > i - 10; j--)
                         {
-                            pictureBox[i + 2].Visible = false;
-                            checkBoxes[i + 2].Visible = false;
-                        }  
-                        pictureBox[i - 1].Visible = true;
-                        if (pictureBox[i - 1].Image != null)
-                            checkBoxes[i - 1].Visible = true;
-                        pictureBox[i - 2].Visible = true;
-                        if (pictureBox[i - 2].Image != null)
-                            checkBoxes[i - 2].Visible = true;
-                        pictureBox[i - 3].Visible = true;
-                        if (pictureBox[i - 3].Image != null)
-                            checkBoxes[i - 3].Visible = true;
+                            pictureBox[j].Visible = true;
+                            if (pictureBox[j].Image != null)
+                                checkBoxes[j].Visible = true;
+                        }
+                       
                         return;
                     }
                     else
@@ -345,12 +371,28 @@ namespace ResWander
         /// <param name="e"></param>
         private void NextPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            nextPictureBox.BackColor = Color.White;
+            nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\right.png";
         }
 
         private void NextPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            nextPictureBox.BackColor = Color.Black;
+            nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\primaryRight.png";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();  //显示选择文件对话框
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*"; //所有的文件格式
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+               
+            }
+
+
         }
     }
 }
