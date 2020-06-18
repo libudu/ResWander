@@ -55,9 +55,30 @@ namespace ResWander
             pictureIndex.Clear();
             resourceBindingSource.Clear();
             saveResourceBindingSource.Clear();
+            if (pictureBox.Count > 0)
+            {
+                for(int j = 0; j < pictureBox.Count; j++)
+                {
+                    pictureBox[j].Dispose();
+                }
+            }
             pictureBox.Clear();
+            if (checkBoxes.Count > 0)
+            {
+                for(int j = 0; j < checkBoxes.Count; j++)
+                {
+                    checkBoxes[j].Dispose();
+                }
+            }
             checkBoxes.Clear();
             //每一次新爬取时都要把以前爬取得到的图片列表给清空
+           /* if (CrawlerProject.ImgResourcesContainer.RowImages.Count > 0)
+            {
+                for(int j = 0; j < CrawlerProject.ImgResourcesContainer.RowImages.Count; j++)
+                {
+                  
+                }
+            }*/
             CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
@@ -73,9 +94,6 @@ namespace ResWander
             {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
                 messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
-                //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
-                //while循环加switch【switch用来判断图片和那个picturebox绑定】
-                //来实现遍历，同时加条件来避免超出索引范围。
 
                 //count用于统计爬取到的图片数量
                 int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
@@ -98,6 +116,7 @@ namespace ResWander
                     checkBoxes[j].Size = new Size(100, 20);
                     checkBoxes[j].Parent = previewTabPage;
                 }
+                
                 //为每个图片以及复选框设置位置
                 for(int k = 0; k < count; k = k + 9)
                 {
