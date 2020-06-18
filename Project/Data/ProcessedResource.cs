@@ -33,6 +33,11 @@ namespace ResWander.Data
         /// </summary>
         public List<ImgResource> ProcessedImages { get; set; }
 
+        /// <summary>
+        /// 百度搜寻关键字得到的图片
+        /// </summary>
+        public List<ImgResource> SearchedImages { get; set; }
+
         public ImgResourcesContainer()
         {
             RowImages = new List<ImgResource>();
