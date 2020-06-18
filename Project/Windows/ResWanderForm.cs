@@ -392,12 +392,12 @@ namespace ResWander
         /// <param name="e"></param>
         private void NextPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\right.png";
+           nextPictureBox.ImageLocation = "right.png";
         }
 
         private void NextPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\primaryRight.png";
+            nextPictureBox.ImageLocation = "primaryRight.png";
         }
         /// <summary>
         /// 实现以图搜图按钮的相关功能
@@ -548,6 +548,16 @@ namespace ResWander
             }
 
 
+        }
+
+        private void LastPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastPictureBox.ImageLocation = "primaryLeft.jpg";
+        }
+
+        private void LastPictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            lastPictureBox.ImageLocation = "left.png";
         }
     }
 }
