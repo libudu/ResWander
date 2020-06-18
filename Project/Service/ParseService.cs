@@ -160,6 +160,12 @@ namespace ResWander.Service
                     continue;
                 }
 
+                // 过滤无法下载的错误图片
+                if (matchUrl.Value.Contains("beacon.sina"))
+                {
+                    continue;
+                }
+
                 imgUrl = matchUrl.Groups["imgSrc"].Value.Replace("orj360","mw690"); // 将缩略图换成高清大图
                 string absoluteUrl;
                 if (WeiboImgParse.RelativeToAbsolute(imgUrl, out absoluteUrl))
