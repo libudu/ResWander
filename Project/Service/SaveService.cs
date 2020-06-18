@@ -27,15 +27,7 @@ namespace ResWander.Service
         }
 
         /// <summary>
-        /// 前端调用接口：将关键字搜索图片保存到默认路径
-        /// </summary>
-        public static void SaveKeywordImages(string defaultPath, string keyword, List<ImgResource> imageSources)
-        {
-            KeywordImgSaver.SaveKeywordImg(defaultPath, keyword, imageSources);
-        }
-
-        /// <summary>
-        /// 
+        /// 前端调用接口：保存关键字搜索图片
         /// </summary>
         public static string SaveKeywordImages(string keyword, List<ImgResource> imageSources)
         {
@@ -104,13 +96,11 @@ namespace ResWander.Service
     internal class KeywordImgSaver
     {
         /// <summary>
-        /// 默认路径保存
+        /// 关键字摘取图片自动保存到目录中
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name=""></param>
-        internal static void SaveKeywordImg(string path, string keyword, List<ImgResource> imageSources)
+        internal static string SaveKeywordImg(string keyword, List<ImgResource> imageSources)
         {
-            //首先在默认路径下创建一个文件夹
+            string path = SelectPath();
             //path是默认路径，文件夹名字是keyword，将它们合并成一个路径
             string savePath = Path.Combine(path, keyword);
 
@@ -119,15 +109,6 @@ namespace ResWander.Service
             {
                 Directory.CreateDirectory(savePath);
             }
-
-            //将图片保存在默认路径中
-            Save(savePath, keyword, imageSources);
-        }
-
-        internal static string SaveKeywordImg(string keyword, List<ImgResource> imageSources)
-        {
-            string savePath = SelectPath();
-
             //将图片保存在路径中
             Save(savePath, keyword, imageSources);
             return savePath;

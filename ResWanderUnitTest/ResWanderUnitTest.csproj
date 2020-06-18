@@ -50,7 +50,6 @@
     <Compile Include="ServiceTest\HTMLServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTest\CrawlerServiceTests.cs" />
-    <Compile Include="ServiceTest\ResourceFilterService.cs" />
     <Compile Include="ServiceTest\SaveServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>

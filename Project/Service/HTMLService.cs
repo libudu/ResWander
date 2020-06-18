@@ -362,8 +362,7 @@ namespace ResWander.Service
             }
             else
             {
-                // TODO 微博网页获取失败，添加异常
-                throw new Exception("微博网页获取失败");
+                throw new CustomException(CustomExceptionValues.ExceptionEnum.WEIBO_HTML_FAILED);
             }
         }
 
@@ -390,8 +389,12 @@ namespace ResWander.Service
                 string c;
                 using (StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream()))
                 {
-                    // TODO 添加异常，以适应无法成功获取的情况
                     string resultString = reader.ReadToEnd();
+                    if (string.IsNullOrEmpty(resultString))
+                    {
+                        // 资源获取失败
+                        throw new CustomException(CustomExceptionValues.ExceptionEnum.WEIBO_HTML_FAILED);
+                    }
 
                     // 获取tid,c,w
                     string patternTid = @"(?<targetInfo>""tid"":""(?<tidMatch>[^""]+)\S*""new_tid"":(?<new_tidMatch>[^},]+))"; // 用于给tid和c赋值
@@ -444,8 +447,7 @@ namespace ResWander.Service
             }
 
             //TODO 以事件的方式提示用户爬取的进度
-            // TODO 如果10次的尝试任然无法成功获取tid则需要抛出异常提示用户
-            throw new Exception("tid已尝试获取多次，获取失败");
+            throw new CustomException(CustomExceptionValues.ExceptionEnum.WEIBO_HTML_FAILED);
         }
 
         /// <summary>
@@ -470,8 +472,11 @@ namespace ResWander.Service
 
             using (StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream()))
             {
-                // TODO 添加异常，以适应无法成功获取的情况
                 string resultString = reader.ReadToEnd();
+                if (string.IsNullOrEmpty(resultString))
+                {
+                    throw new CustomException(CustomExceptionValues.ExceptionEnum.WEIBO_HTML_FAILED);
+                }
 
                 // 利用正则表达式，获取sub，subp的值
                 string pattern = @"(?<targetInfo>""sub"":""(?<sub>[^""]+)\S+""subp"":""(?<subp>[^""]+))";

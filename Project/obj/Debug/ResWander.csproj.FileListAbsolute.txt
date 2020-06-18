@@ -110,3 +110,11 @@ D:\Github\cloneq\ResWander\Project\obj\Debug\ResWander.pdb
 D:\teamworkResWanderCode\Project\bin\Debug\AipSdk.dll
 D:\teamworkResWanderCode\Project\bin\Debug\Newtonsoft.Json.dll
 D:\teamworkResWanderCode\Project\bin\Debug\Newtonsoft.Json.xml
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\AipSdk.dll
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\Newtonsoft.Json.dll
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\System.ComponentModel.Annotations.dll
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\bin\Debug\Newtonsoft.Json.xml
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.ResWanderForm.resources
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Form2.resources
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Picture.resources
+D:\studying\Undergraduate\Sophomore_2nd\CSharp\ResWander\Project\obj\Debug\ResWander.Windows.SelectForm.resources
