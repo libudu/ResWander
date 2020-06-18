@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ResWander.Service
 {
@@ -51,7 +54,11 @@ namespace ResWander.Service
             return url;
         }
 
-        //将相对地址转化为绝对地址
+        /// <summary>
+        /// 传入原始网址，下载网页的源码
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string DownloadUrl(string url)
         {
             try
@@ -224,6 +231,7 @@ namespace ResWander.Service
             return urlList;
         }
     }
+
     /// <summary>
     /// 百度图片使用的HTML解析类
     /// </summary>
@@ -237,6 +245,292 @@ namespace ResWander.Service
         public static bool IsBaiduImgUrl(string url)
         {
             return url.Contains("//image.baidu.com/search");
+        }
+    }
+
+    /// <summary>
+    /// 获取微博的html源代码的相关服务
+    /// </summary>
+    public class WeiboHTMLService
+    {
+        // 动态获取cookie时想服务器端发送的字符串
+        private static string cbString;
+        private static string fpString;
+        private static string a;
+        private static string cb;
+        private static string from;
+        private static string url;
+        private static string cookieSavePath; // 用于保存序列化的cookie使用的路径
+        private static WeiboCookie userCookie; // 用户访问微博的cookie
+
+        [Serializable]
+        private class WeiboCookie
+        {
+            public string Sub { get; set; }
+
+            public string Subp { get; set; }
+
+            /// <summary>
+            /// 初始化微博cookie的构造函数
+            /// </summary>
+            /// <param name="sub">sub参数</param>
+            /// <param name="subp">subp参数</param>
+            public WeiboCookie(string sub, string subp)
+            {
+                this.Sub = sub;
+                this.Subp = subp;
+            }
+
+            /// <summary>
+            /// 无参构造函数，用于序列化
+            /// </summary>
+            public WeiboCookie()
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 静态构造器，初始化发送请求时的字符串
+        /// </summary>
+        static WeiboHTMLService()
+        {
+            WeiboHTMLService.cbString = "gen_callback";
+            WeiboHTMLService.fpString = "{\"os\":\"1\",\"browser\":\"Chrome70,0,3538,25\"," +
+                "\"fonts\":\"undefined\",\"screenInfo\":\"1920 * 1080 * 24\",\"plugins\":\"Portable Document" +
+                " Format::internal-pdf-viewer::Chromium PDF " +
+                "Plugin|::mhjfbmdgcfjbbpaeojofohoefgiehjai::Chromium PDF" +
+                " Viewer|::gbkeegbaiigmenfmjfclcdgdpimamgkj::Google文档、" +
+                "表格及幻灯片的Office编辑扩展程序|::internal-nacl-plugin::Native Client\"}";
+            WeiboHTMLService.a = "incarnate";
+            WeiboHTMLService.cb = "cross_domain";
+            WeiboHTMLService.from = "weibo";
+            WeiboHTMLService.cookieSavePath = "weibo.ck";
+        }
+
+        /// <summary>
+        /// 是否是微博的网址
+        /// </summary>
+        /// <param name="url">待判断的url</param>
+        /// <returns>返回是否是微博url</returns>
+        public static bool IsWeiboUrl(string url)
+        {
+            return Regex.IsMatch(url, @"(weibo.com|weibo.cn)");
+        }
+
+        /// <summary>
+        /// 输入微博的网址，下载微博的网页源代码
+        /// </summary>
+        /// <param name="url">待爬取的微博网页</param>
+        /// <returns>网页源码</returns>
+        public static string DownloadUrl(string url)
+        {
+            // 将weibo.cn替换为weibo.com
+            url = url.Replace(".cn", ".com");
+            WeiboHTMLService.url = url;
+            CookieContainer container = new CookieContainer();
+            string htmlCode; // 爬取到的html网页
+
+            // 判断是否已经获取过cookie
+            if (File.Exists(WeiboHTMLService.cookieSavePath))
+            {
+                // 如果之前已经获取过cookie，则尝试使用以前的cookie
+                using(FileStream reader = new FileStream(WeiboHTMLService.cookieSavePath, FileMode.Open))
+                {
+                    BinaryFormatter deSerializer = new BinaryFormatter();
+                    WeiboHTMLService.userCookie = deSerializer.Deserialize(reader) 
+                        as WeiboHTMLService.WeiboCookie;
+                }
+
+                container.Add(new Cookie("sub", WeiboHTMLService.userCookie.Sub, "/", ".weibo.com"));
+                container.Add(new Cookie("subp", WeiboHTMLService.userCookie.Subp, "/", ".weibo.com"));
+
+                if(WeiboHTMLService.TryDownloadHtml(container, out htmlCode))
+                {
+                    // 如果原有cookie使用成功，则直接返回htmlcode否则还需要重新动态获取cookie
+                    return htmlCode;
+                }
+            }
+
+            // 如果不存在已有cookie，则动态获取cookie
+            string[] dynamicParams = WeiboHTMLService.GetParams(); // 获取三个动态参数
+            container = WeiboHTMLService.GetCookie(dynamicParams); // 获取cookie
+
+            if(WeiboHTMLService.TryDownloadHtml(container, out htmlCode))
+            {
+                return htmlCode;
+            }
+            else
+            {
+                // TODO 微博网页获取失败，添加异常
+                throw new Exception("微博网页获取失败");
+            }
+        }
+
+        /// <summary>
+        /// 动态获取三个字符换参数，用于cookie动态获取
+        /// </summary>
+        /// <returns>三个动态参数，分别是：tid，w，c</returns>
+        private static string[] GetParams()
+        {
+            int attempCount = 0;
+            while (attempCount < 10)
+            {
+                // 将需要传递的参数与目标url拼接，以查询参数的形式传递给服务器
+                string visitorUrl = "https://passport.weibo.com/visitor/genvisitor";
+                string targetUrl = visitorUrl + "?" + "cb=" + WeiboHTMLService.cbString +
+                    "&" + "fp =" + WeiboHTMLService.fpString;
+
+                // 获取参数信息
+                HttpWebRequest request = WebRequest.CreateHttp(targetUrl);
+                request.Method = "POST";
+
+                string tid;
+                string w;
+                string c;
+                using (StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream()))
+                {
+                    // TODO 添加异常，以适应无法成功获取的情况
+                    string resultString = reader.ReadToEnd();
+
+                    // 获取tid,c,w
+                    string patternTid = @"(?<targetInfo>""tid"":""(?<tidMatch>[^""]+)\S*""new_tid"":(?<new_tidMatch>[^},]+))"; // 用于给tid和c赋值
+                    string patternConfidence = @"""confidence"":(?<confidenceMatch>[^},]+)"; // 用于给w赋值
+                    string flag; // 用于接收new_tid
+                    Match match = Regex.Match(resultString, patternTid);
+
+                    // tid
+                    tid = match.Groups["tidMatch"].Value;
+
+                    // c
+                    flag = match.Groups["new_tidMatch"].Value;
+                    if (Convert.ToBoolean(flag))
+                    {
+                        w = "3";
+                    }
+                    else
+                    {
+                        w = "2";
+                    }
+
+                    // w
+                    if (Regex.IsMatch(resultString, patternConfidence))
+                    {
+                        c = Regex.Match(resultString, patternConfidence).Groups["confidenceMatch"].Value;
+                    }
+                    else
+                    {
+                        c = "100";
+                    }
+                }
+
+                // 返回信息
+                string[] dynamicParams = new string[3];
+                dynamicParams[0] = tid;
+                dynamicParams[1] = w;
+                dynamicParams[2] = c;
+
+                if (!Regex.IsMatch(tid, @"[+\\/]"))
+                {
+                    // 如果没有+，/,\则该tid有效，否则需要重新获取
+                    return dynamicParams;
+                }
+                else
+                {
+                    // 否则等待0.2s，继续获取tid
+                    Thread.Sleep(200);
+                    continue;
+                }
+            }
+
+            //TODO 以事件的方式提示用户爬取的进度
+            // TODO 如果10次的尝试任然无法成功获取tid则需要抛出异常提示用户
+            throw new Exception("tid已尝试获取多次，获取失败");
+        }
+
+        /// <summary>
+        /// 传入动态获取的三个参数，以动态获取cookie
+        /// </summary>
+        /// <param name="dynamicParams">包含三个string，分别为t，w，c</param>
+        /// <returns>返回cookie中的name和value的键值对</returns>
+        private static CookieContainer GetCookie(string[] dynamicParams)
+        {
+            // 之前动态获取的参数
+            string t = dynamicParams[0];
+            string w = dynamicParams[1];
+            string c = dynamicParams[2];
+
+            // 在目标网址添加查询参数
+            string destUrl = "https://passport.weibo.com/visitor/visitor";
+            string targetUrl = destUrl + $"?a={a}&t={t}&w={w}&c={c}&cb={cb}&from={from}";
+
+            // 新建http请求
+            HttpWebRequest request = WebRequest.CreateHttp(targetUrl);
+            request.Method = "GET";
+
+            using (StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream()))
+            {
+                // TODO 添加异常，以适应无法成功获取的情况
+                string resultString = reader.ReadToEnd();
+
+                // 利用正则表达式，获取sub，subp的值
+                string pattern = @"(?<targetInfo>""sub"":""(?<sub>[^""]+)\S+""subp"":""(?<subp>[^""]+))";
+                Match match = Regex.Match(resultString, pattern);
+
+                // sub,subp获取
+                WeiboHTMLService.userCookie = new WeiboCookie(match.Groups["sub"].Value,
+                    match.Groups["subp"].Value);
+
+                // 通过序列化写入文件
+                WeiboHTMLService.RecordCookie();
+            }
+
+            CookieContainer cookieContainer = new CookieContainer();
+            cookieContainer.Add(new Cookie("SUB", WeiboHTMLService.userCookie.Sub, "/", ".weibo.com"));
+            cookieContainer.Add(new Cookie("SUBP", WeiboHTMLService.userCookie.Subp, "/", ".weibo.com"));
+
+            return cookieContainer;
+        }
+
+        /// <summary>
+        /// 将cookie以序列化的方式写入文件
+        /// </summary>
+        private static void RecordCookie()
+        {
+            using (FileStream writeStream = new FileStream(WeiboHTMLService.cookieSavePath, FileMode.Create))
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
+                if (WeiboHTMLService.userCookie == null)
+                {
+                    return;
+                }
+                else
+                {
+                    serializer.Serialize(writeStream, WeiboHTMLService.userCookie);
+                }
+            }
+        }
+
+        private static bool TryDownloadHtml(CookieContainer container, out string htmlCode)
+        {
+            HttpWebRequest request = WebRequest.CreateHttp(WeiboHTMLService.url);
+            request.Method = "GET";
+            request.CookieContainer = container;
+            using (StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream()))
+            {
+                htmlCode = reader.ReadToEnd();
+            }
+            
+            // 判断是否识别成功，并返回判断值
+            if(Regex.IsMatch(htmlCode, "Sina Visitor System"))
+            {
+                // 如果爬取失败，则会返回新浪访客系统
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

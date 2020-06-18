@@ -63,9 +63,9 @@ namespace ResWander.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap QQ图片20200612164920 {
+        internal static System.Drawing.Bitmap primaryLeft {
             get {
-                object obj = ResourceManager.GetObject("QQ图片20200612164920", resourceCulture);
+                object obj = ResourceManager.GetObject("primaryLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace ResWander.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap QQ图片20200612190738 {
+        internal static System.Drawing.Bitmap primaryRight {
             get {
-                object obj = ResourceManager.GetObject("QQ图片20200612190738", resourceCulture);
+                object obj = ResourceManager.GetObject("primaryRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

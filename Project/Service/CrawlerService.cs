@@ -35,10 +35,11 @@ namespace ResWander.Service
             {
                 CrawlBaiduImg(project.ImgInputData.Url, out imgUrls);
             }
-            // 如果是微博网址则使用爬取贴吧图片的策略
-            else if (false)
+            // 如果是微博网址则使用爬取微博图片的策略
+            else if (WeiboHTMLService.IsWeiboUrl(project.ImgInputData.Url))
             {
                 //微博
+                CrawlWeiboImg(project.ImgInputData.Url, out imgUrls);
             }
             //如果是其他网址则使用爬取贴吧图片的策略
             else
@@ -56,9 +57,6 @@ namespace ResWander.Service
             CrawlDownload(project, urls, imgUrls);
             return true;
         }
-
-
-
 
         /// <summary>
         /// 对爬虫的进行初始化，主要处理爬虫的输入
@@ -170,6 +168,18 @@ namespace ResWander.Service
                 CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
             }
         }
+
+        /// <summary>
+        /// 对微博上图片爬取的封装
+        /// </summary>
+        /// <param name="weiboImgUrl">待爬取的微博url</param>
+        /// <param name="imgUrls">爬取出来的url列表，已全部转换为绝对地址</param>
+        public static void CrawlWeiboImg(string weiboImgUrl, out List<string> imgUrls)
+        {
+            string htmlCode = WeiboHTMLService.DownloadUrl(weiboImgUrl);
+            imgUrls = WeiboImgParse.GetImgUrls(htmlCode);
+        }
+
 
         public static List<string> ImgSearchImg(string ImgPath)
         {
