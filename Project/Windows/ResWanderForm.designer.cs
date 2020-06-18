@@ -53,10 +53,10 @@
             this.resourceTabPage = new System.Windows.Forms.TabPage();
             this.resourceDataGridView = new System.Windows.Forms.DataGridView();
             this.previewTabPage = new System.Windows.Forms.TabPage();
-            this.lastPictureBox = new System.Windows.Forms.PictureBox();
-            this.nextPictureBox = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureSPButton = new System.Windows.Forms.Button();
+            this.lastPictureBox = new System.Windows.Forms.PictureBox();
+            this.nextPictureBox = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -64,9 +64,9 @@
             this.resourceTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).BeginInit();
             this.previewTabPage.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // crawButton
@@ -329,31 +329,6 @@
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
             // 
-            // lastPictureBox
-            // 
-            this.lastPictureBox.Image = global::ResWander.Properties.Resources.primaryLeft;
-            this.lastPictureBox.Location = new System.Drawing.Point(-5, 294);
-            this.lastPictureBox.Name = "lastPictureBox";
-            this.lastPictureBox.Size = new System.Drawing.Size(90, 130);
-            this.lastPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.lastPictureBox.TabIndex = 4;
-            this.lastPictureBox.TabStop = false;
-            this.lastPictureBox.Click += new System.EventHandler(this.LastPictureBox_Click);
-            // 
-            // nextPictureBox
-            // 
-            this.nextPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nextPictureBox.Image = global::ResWander.Properties.Resources.primaryRight;
-            this.nextPictureBox.Location = new System.Drawing.Point(1079, 294);
-            this.nextPictureBox.Name = "nextPictureBox";
-            this.nextPictureBox.Size = new System.Drawing.Size(90, 130);
-            this.nextPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.nextPictureBox.TabIndex = 3;
-            this.nextPictureBox.TabStop = false;
-            this.nextPictureBox.Click += new System.EventHandler(this.NextPictureBox_Click);
-            this.nextPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseDown);
-            this.nextPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseUp);
-            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -375,6 +350,33 @@
             this.pictureSPButton.Text = "以图搜图";
             this.pictureSPButton.UseVisualStyleBackColor = true;
             this.pictureSPButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lastPictureBox
+            // 
+            this.lastPictureBox.Image = global::ResWander.Properties.Resources.primaryLeft;
+            this.lastPictureBox.Location = new System.Drawing.Point(-5, 294);
+            this.lastPictureBox.Name = "lastPictureBox";
+            this.lastPictureBox.Size = new System.Drawing.Size(90, 130);
+            this.lastPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lastPictureBox.TabIndex = 4;
+            this.lastPictureBox.TabStop = false;
+            this.lastPictureBox.Click += new System.EventHandler(this.LastPictureBox_Click);
+            this.lastPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LastPictureBox_MouseDown);
+            this.lastPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LastPictureBox_MouseUp);
+            // 
+            // nextPictureBox
+            // 
+            this.nextPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextPictureBox.Image = global::ResWander.Properties.Resources.primaryRight;
+            this.nextPictureBox.Location = new System.Drawing.Point(1079, 294);
+            this.nextPictureBox.Name = "nextPictureBox";
+            this.nextPictureBox.Size = new System.Drawing.Size(90, 130);
+            this.nextPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.nextPictureBox.TabIndex = 3;
+            this.nextPictureBox.TabStop = false;
+            this.nextPictureBox.Click += new System.EventHandler(this.NextPictureBox_Click);
+            this.nextPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseDown);
+            this.nextPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseUp);
             // 
             // ResWanderForm
             // 
@@ -401,9 +403,9 @@
             this.resourceTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).EndInit();
             this.previewTabPage.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).EndInit();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

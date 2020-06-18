@@ -129,10 +129,48 @@ namespace ResWander.Service
             foreach(Match matchUrl in matches)
             {
                 // 将表情符号过滤
-                if(!Regex.IsMatch(matchUrl.Value, @"W_img_face"))
+                if(Regex.IsMatch(matchUrl.Value, @"W_img_face") ||
+                    Regex.IsMatch(matchUrl.Value, @"feed_icon"))
                 {
-                    imgUrl = matchUrl.Groups["imgSrc"].Value;
-                    imgUrls.Add(WeiboImgParse.RelativeToAbsolute(imgUrl));
+                    continue;
+                }
+
+                // 将多余的头像过滤
+                if (Regex.IsMatch(matchUrl.Value, @"W_face_radius"))
+                {
+                    continue;
+                }
+
+                // svg图片无法下载
+                if (Regex.IsMatch(matchUrl.Value, @".svg"))
+                {
+                    continue;
+                }
+
+                // 过滤其他用户的头像（关注、粉丝），留下博主的头像
+                if ((matchUrl.Value.Contains("crop.") && !Regex.IsMatch(matchUrl.Value,@"class[\s\t\r\n]*=[\s\t\r\n]*""photo"""))
+                    || matchUrl.Value.Contains("default_avatar"))
+                {
+                    continue;
+                }
+
+                // 过滤默认音乐图片
+                if (matchUrl.Value.Contains("square.180"))
+                {
+                    continue;
+                }
+
+                // 过滤无法下载的错误图片
+                if (matchUrl.Value.Contains("beacon.sina"))
+                {
+                    continue;
+                }
+
+                imgUrl = matchUrl.Groups["imgSrc"].Value.Replace("orj360","mw690"); // 将缩略图换成高清大图
+                string absoluteUrl;
+                if (WeiboImgParse.RelativeToAbsolute(imgUrl, out absoluteUrl))
+                {
+                    imgUrls.Add(absoluteUrl);
                 }
             }
 
@@ -142,22 +180,26 @@ namespace ResWander.Service
         /// <summary>
         /// 用于将微博爬取的url相对地址转为绝对地址
         /// </summary>
-        /// <param name="url">直接爬取的weibourl</param>
-        /// <returns>可以直接使用的绝对地址</returns>
-        private static string RelativeToAbsolute(string relativeUrl)
+        /// <param name="relativeUrl">直接爬取的weibourl</param>
+        /// <param name="absoluteUrl">转换为绝对地址的结果</param>
+        /// <returns>是否转换成功</returns>
+        private static bool RelativeToAbsolute(string relativeUrl, out string absoluteUrl)
         {
             relativeUrl = relativeUrl.Replace(@"\/", "/");
             if(Regex.IsMatch(relativeUrl, @"http[s]*://"))
             {
-                return relativeUrl;
+                absoluteUrl = relativeUrl;
+                return true;
             }
             else if(Regex.IsMatch(relativeUrl, @"//"))
             {
-                return "https:" + relativeUrl;
+                absoluteUrl = "https:" + relativeUrl;
+                return true;
             }
             else
             {
-                throw new Exception($"相对地址转换为绝对地址时出错，此时网址为{relativeUrl}");
+                absoluteUrl = null;
+                return false;
             }
         }
     }
