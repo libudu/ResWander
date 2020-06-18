@@ -16,6 +16,7 @@ namespace ResWander.Service
     public class CrawlerService
     {
         public static event Action<int, string, string, string, long, string> DownloadedImag;
+        public static bool flag { get; set; }
         //单线程，单个网页爬取
         public static bool StartCrawl(Project project/*, CrawlerService crawler*/)
         {
@@ -54,7 +55,7 @@ namespace ResWander.Service
                     project.URLData.ImgUrls.Enqueue(item);
                 }
             }
-            CrawlDownload(project, urls, imgUrls);
+            ThreadCrawlDownload(project/*, urls, imgUrls)*/);
             return true;
         }
 
@@ -168,7 +169,58 @@ namespace ResWander.Service
                 CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
             }
         }
-
+        public static void ThreadCrawlDownload(Project project)
+        {
+            flag= false;
+            List<Thread> Threads = new List<Thread>();
+            int count = project.URLData.ImgUrls.Count();
+            //开始下载图片资源
+            int finish = 0;
+            string imgUrl = project.URLData.ImgUrls.Dequeue();
+            while (finish<count)
+            {
+                if (flag)
+                {
+                    foreach (Thread item in Threads)
+                    {
+                        item.Abort();
+                    }
+                    break;
+                }
+                Thread thread = new Thread(() =>
+                  {
+                      ImgResource img = new ImgResource(DownloadService.DownloadImg(imgUrl), imgUrl);
+                      if (img != null)
+                      {
+                          Stopwatch watch = new Stopwatch();
+                          watch.Start();
+                          project.ImgResourcesContainer.RowImages.Add(img);
+                          watch.Stop();
+                          img.DownloadTime = watch.ElapsedMilliseconds;
+                          if (img.Img != null)
+                          {
+                              img.State = "Successful";
+                          }
+                          else
+                          {
+                              img.State = "Fail";
+                          }
+                          img.ResourceNumber = project.ImgResourcesContainer.RowImages.IndexOf(img) + 1;
+                          string format;
+                          ImageService.GetImageFormat(img.Img, out format);
+                          img.PhotoFormat = format;
+                          img.ResourceName = "待定，测试";
+                          imgUrl = project.URLData.ImgUrls.Count > 0 ? project.URLData.ImgUrls.Dequeue() : null;
+                          //此处可添加事件，与前端互动
+                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
+                          finish++;
+                  }
+                  });
+                Threads.Add(thread);
+                thread.Start();
+                Thread.Sleep(2000);
+            }
+        }
         /// <summary>
         /// 对微博上图片爬取的封装
         /// </summary>

@@ -35,6 +35,7 @@
             this.setButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.FlagLabel = new System.Windows.Forms.Label();
             this.messageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -57,6 +58,7 @@
             this.nextPictureBox = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureSPButton = new System.Windows.Forms.Button();
+            this.StopButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -105,7 +107,7 @@
             // choseButton
             // 
             this.choseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.choseButton.Location = new System.Drawing.Point(893, 60);
+            this.choseButton.Location = new System.Drawing.Point(945, 60);
             this.choseButton.Name = "choseButton";
             this.choseButton.Size = new System.Drawing.Size(100, 28);
             this.choseButton.TabIndex = 6;
@@ -116,7 +118,7 @@
             // setButton
             // 
             this.setButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.setButton.Location = new System.Drawing.Point(1056, 60);
+            this.setButton.Location = new System.Drawing.Point(1070, 60);
             this.setButton.Name = "setButton";
             this.setButton.Size = new System.Drawing.Size(100, 28);
             this.setButton.TabIndex = 7;
@@ -138,12 +140,22 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.FlagLabel);
             this.panel2.Controls.Add(this.messageLabel);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(1, 44);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(813, 54);
             this.panel2.TabIndex = 9;
+            // 
+            // FlagLabel
+            // 
+            this.FlagLabel.AutoSize = true;
+            this.FlagLabel.Location = new System.Drawing.Point(742, 23);
+            this.FlagLabel.Name = "FlagLabel";
+            this.FlagLabel.Size = new System.Drawing.Size(15, 15);
+            this.FlagLabel.TabIndex = 7;
+            this.FlagLabel.Text = "0";
             // 
             // messageLabel
             // 
@@ -376,11 +388,22 @@
             this.pictureSPButton.UseVisualStyleBackColor = true;
             this.pictureSPButton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // StopButton
+            // 
+            this.StopButton.Location = new System.Drawing.Point(832, 60);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(90, 28);
+            this.StopButton.TabIndex = 14;
+            this.StopButton.Text = "停止";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // ResWanderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.Controls.Add(this.StopButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.resourceTabControl);
             this.Controls.Add(this.panel3);
@@ -438,6 +461,8 @@
         internal System.Windows.Forms.PictureBox nextPictureBox;
         private System.Windows.Forms.PictureBox lastPictureBox;
         private System.Windows.Forms.Button pictureSPButton;
+        private System.Windows.Forms.Button StopButton;
+        private System.Windows.Forms.Label FlagLabel;
     }
 }
 
