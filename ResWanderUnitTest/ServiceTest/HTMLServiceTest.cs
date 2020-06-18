@@ -50,7 +50,7 @@ namespace ResWanderUnitTest.ServiceTest
             Assert.AreNotEqual(0, urlList.Count);
             foreach(string url in urlList)
             {
-                Assert.IsTrue(url.Contains("/"));
+                Assert.IsTrue(url.Contains("http"));
             }
         }
 
