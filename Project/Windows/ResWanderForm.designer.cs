@@ -35,7 +35,6 @@
             this.setButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.FlagLabel = new System.Windows.Forms.Label();
             this.messageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -54,11 +53,10 @@
             this.resourceTabPage = new System.Windows.Forms.TabPage();
             this.resourceDataGridView = new System.Windows.Forms.DataGridView();
             this.previewTabPage = new System.Windows.Forms.TabPage();
-            this.lastPictureBox = new System.Windows.Forms.PictureBox();
-            this.nextPictureBox = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureSPButton = new System.Windows.Forms.Button();
-            this.StopButton = new System.Windows.Forms.Button();
+            this.lastPictureBox = new System.Windows.Forms.PictureBox();
+            this.nextPictureBox = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,9 +64,9 @@
             this.resourceTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).BeginInit();
             this.previewTabPage.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // crawButton
@@ -107,7 +105,7 @@
             // choseButton
             // 
             this.choseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.choseButton.Location = new System.Drawing.Point(945, 60);
+            this.choseButton.Location = new System.Drawing.Point(893, 60);
             this.choseButton.Name = "choseButton";
             this.choseButton.Size = new System.Drawing.Size(100, 28);
             this.choseButton.TabIndex = 6;
@@ -118,7 +116,7 @@
             // setButton
             // 
             this.setButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.setButton.Location = new System.Drawing.Point(1070, 60);
+            this.setButton.Location = new System.Drawing.Point(1056, 60);
             this.setButton.Name = "setButton";
             this.setButton.Size = new System.Drawing.Size(100, 28);
             this.setButton.TabIndex = 7;
@@ -140,22 +138,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.FlagLabel);
             this.panel2.Controls.Add(this.messageLabel);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(1, 44);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(813, 54);
             this.panel2.TabIndex = 9;
-            // 
-            // FlagLabel
-            // 
-            this.FlagLabel.AutoSize = true;
-            this.FlagLabel.Location = new System.Drawing.Point(742, 23);
-            this.FlagLabel.Name = "FlagLabel";
-            this.FlagLabel.Size = new System.Drawing.Size(15, 15);
-            this.FlagLabel.TabIndex = 7;
-            this.FlagLabel.Text = "0";
             // 
             // messageLabel
             // 
@@ -341,31 +329,6 @@
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
             // 
-            // lastPictureBox
-            // 
-            this.lastPictureBox.Image = global::ResWander.Properties.Resources.primaryLeft;
-            this.lastPictureBox.Location = new System.Drawing.Point(-5, 294);
-            this.lastPictureBox.Name = "lastPictureBox";
-            this.lastPictureBox.Size = new System.Drawing.Size(90, 130);
-            this.lastPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.lastPictureBox.TabIndex = 4;
-            this.lastPictureBox.TabStop = false;
-            this.lastPictureBox.Click += new System.EventHandler(this.LastPictureBox_Click);
-            // 
-            // nextPictureBox
-            // 
-            this.nextPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nextPictureBox.Image = global::ResWander.Properties.Resources.primaryRight;
-            this.nextPictureBox.Location = new System.Drawing.Point(1079, 294);
-            this.nextPictureBox.Name = "nextPictureBox";
-            this.nextPictureBox.Size = new System.Drawing.Size(90, 130);
-            this.nextPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.nextPictureBox.TabIndex = 3;
-            this.nextPictureBox.TabStop = false;
-            this.nextPictureBox.Click += new System.EventHandler(this.NextPictureBox_Click);
-            this.nextPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseDown);
-            this.nextPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseUp);
-            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -388,22 +351,38 @@
             this.pictureSPButton.UseVisualStyleBackColor = true;
             this.pictureSPButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // StopButton
+            // lastPictureBox
             // 
-            this.StopButton.Location = new System.Drawing.Point(832, 60);
-            this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(90, 28);
-            this.StopButton.TabIndex = 14;
-            this.StopButton.Text = "停止";
-            this.StopButton.UseVisualStyleBackColor = true;
-            this.StopButton.Click += new System.EventHandler(this.button1_Click_1);
+            this.lastPictureBox.Image = global::ResWander.Properties.Resources.primaryLeft;
+            this.lastPictureBox.Location = new System.Drawing.Point(-5, 294);
+            this.lastPictureBox.Name = "lastPictureBox";
+            this.lastPictureBox.Size = new System.Drawing.Size(90, 130);
+            this.lastPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lastPictureBox.TabIndex = 4;
+            this.lastPictureBox.TabStop = false;
+            this.lastPictureBox.Click += new System.EventHandler(this.LastPictureBox_Click);
+            this.lastPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LastPictureBox_MouseDown);
+            this.lastPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LastPictureBox_MouseUp);
+            // 
+            // nextPictureBox
+            // 
+            this.nextPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextPictureBox.Image = global::ResWander.Properties.Resources.primaryRight;
+            this.nextPictureBox.Location = new System.Drawing.Point(1079, 294);
+            this.nextPictureBox.Name = "nextPictureBox";
+            this.nextPictureBox.Size = new System.Drawing.Size(90, 130);
+            this.nextPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.nextPictureBox.TabIndex = 3;
+            this.nextPictureBox.TabStop = false;
+            this.nextPictureBox.Click += new System.EventHandler(this.NextPictureBox_Click);
+            this.nextPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseDown);
+            this.nextPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseUp);
             // 
             // ResWanderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 753);
-            this.Controls.Add(this.StopButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.resourceTabControl);
             this.Controls.Add(this.panel3);
@@ -424,9 +403,9 @@
             this.resourceTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).EndInit();
             this.previewTabPage.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).EndInit();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -461,8 +440,6 @@
         internal System.Windows.Forms.PictureBox nextPictureBox;
         private System.Windows.Forms.PictureBox lastPictureBox;
         private System.Windows.Forms.Button pictureSPButton;
-        private System.Windows.Forms.Button StopButton;
-        private System.Windows.Forms.Label FlagLabel;
     }
 }
 

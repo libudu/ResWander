@@ -23,7 +23,12 @@ namespace ResWander.Service
 
             // 网址无效
             [Display(Name = "网址无效")]
-            NOT_FOUND = 10002
+            NOT_FOUND = 10002,
+
+            /*——————————————微博爬取相关异常异常:10011-10020———————————————*/
+            // tid参数尝试多次获取仍然失败
+            [Display(Name = "微博网页爬取失败")]
+            WEIBO_HTML_FAILED = 10011
         }
         /// <summary>
         /// 作者：邢雄

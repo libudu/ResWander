@@ -10,13 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ResWander.Windows;
-using System.Threading;
 
 namespace ResWander
 {
     public partial class ResWanderForm : Form
     {
-        public Project CrawlerProject { get; set; }
+        public Project  CrawlerProject { get; set; }
         public BindingSource resourceBindingSource = new BindingSource();
         //保存resourceBindingSource中的资源，实现重新筛选
         public BindingSource saveResourceBindingSource = new BindingSource();
@@ -38,10 +37,10 @@ namespace ResWander
             resourceDataGridView.DataSource = resourceBindingSource;
             CrawlerProject = new Project();
             CrawlerService.DownloadedImag += Crawler_PageDownloaded;
-            this.Size = new Size(1200, 800);
+            this.Size = new Size(1200,800);          
         }
 
-
+ 
 
         public string stoPath;             //用来保存用户指定的存储路径
 
@@ -56,35 +55,50 @@ namespace ResWander
             pictureIndex.Clear();
             resourceBindingSource.Clear();
             saveResourceBindingSource.Clear();
+            if (pictureBox.Count > 0)
+            {
+                for(int j = 0; j < pictureBox.Count; j++)
+                {
+                    pictureBox[j].Dispose();
+                }
+            }
             pictureBox.Clear();
+            if (checkBoxes.Count > 0)
+            {
+                for(int j = 0; j < checkBoxes.Count; j++)
+                {
+                    checkBoxes[j].Dispose();
+                }
+            }
             checkBoxes.Clear();
             //每一次新爬取时都要把以前爬取得到的图片列表给清空
+           /* if (CrawlerProject.ImgResourcesContainer.RowImages.Count > 0)
+            {
+                for(int j = 0; j < CrawlerProject.ImgResourcesContainer.RowImages.Count; j++)
+                {
+                  
+                }
+            }*/
             CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            Crawl crawl = new Crawl(CrawlerProject);
-            Thread thread = new Thread(crawl.CrawlFun);
-            thread.Start();
-            //bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
-            bool crawlResult = true;
-
+            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
+ 
+            
             if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
                 messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
             }
             else                //爬取成功               
-            {
+            {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
                 messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
-                //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
-                //while循环加switch【switch用来判断图片和那个picturebox绑定】
-                //来实现遍历，同时加条件来避免超出索引范围。
 
                 //count用于统计爬取到的图片数量
                 int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
                 //将图片和相应的复选框分别加入相应的列表，同时初始化
-                for (int j = 0; j < count; j++)
+                for(int j = 0 ; j < count; j++)
                 {
                     PictureBox pBox = new PictureBox();
                     CheckBox chekBox = new CheckBox();
@@ -102,16 +116,17 @@ namespace ResWander
                     checkBoxes[j].Size = new Size(100, 20);
                     checkBoxes[j].Parent = previewTabPage;
                 }
+                
                 //为每个图片以及复选框设置位置
-                for (int k = 0; k < count; k = k + 9)
+                for(int k = 0; k < count; k = k + 9)
                 {
                     pictureBox[k].Location = new Point(120, 0);
-                    checkBoxes[k].Location = new Point(170, 180);
+                    checkBoxes[k].Location = new Point(170,180);
                     if (k + 1 < count)
                     {
                         pictureBox[k + 1].Location = new Point(470, 0);
                         checkBoxes[k + 1].Location = new Point(520, 180);
-                    }
+                    }  
                     if (k + 2 < count)
                     {
                         pictureBox[k + 2].Location = new Point(820, 0);
@@ -150,15 +165,15 @@ namespace ResWander
 
                 }
                 //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
-                for (int j = 0; j < count; j++)
+                for(int j = 0; j < count; j++)
                 {
-                    if (pictureBox[j] == null)
+                    if (pictureBox[j].Image == null)
                     {
-                        for (int k = j + 1; k < count; k++)
+                        for(int k = j + 1; k < count; k++)
                         {
-                            if (pictureBox[k] != null)
+                            if (pictureBox[k].Image != null)
                             {
-                                pictureBox[j].Image = pictureBox[k].Image;
+                                pictureBox[j].Image = pictureBox[k].Image;  
                                 pictureBox[k].Image = null;
                                 break;
                             }
@@ -166,17 +181,17 @@ namespace ResWander
                     }
                 }
                 //一次最多展示9张图片以及9个对应的复选框
-                for (int j = 0; j < 9; j++)
+                for(int j = 0; j < 9; j++)
                 {
-                    if (j < count && pictureBox[j].Image != null)
+                    if (j < count && pictureBox[j].Image!=null)
                     {
                         pictureBox[j].Visible = true;
                         checkBoxes[j].Visible = true;
                     }
-                }
-
-
-            }
+                }  
+                
+           
+            }        
         }
         /// <summary>
         /// 当用户点击筛选按钮后，会调用该方法，对相应资源按标准进行筛选
@@ -198,7 +213,7 @@ namespace ResWander
             //SelectForm.formatCheckedListBox.SetItemChecked(0, true);
             SelectForm.resForm = this;
             SelectForm.Show();                      //展示筛选条件的窗口
-
+           
         }
         /// <summary>
         /// 当用户点击全选按钮后，会调用该方法，选中所有的资源
@@ -207,7 +222,7 @@ namespace ResWander
         /// <param name="e"></param>
         private void SelectAllButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < checkBoxes.Count; i++)
+            for(int i = 0; i < checkBoxes.Count; i++)
             {
                 if (pictureBox[i].Image != null)
                 {
@@ -227,10 +242,10 @@ namespace ResWander
             //当用户点击筛选按钮，筛选出图片后，下载选中是基于筛选图片的列表里来的【看count是否为0】
             if (CrawlerProject.ImgResourcesContainer.ProcessedImages.Count > 0)
             {
-                for (int f = 0; f < CrawlerProject.ImgResourcesContainer.ProcessedImages.Count; f++)
+                for(int f = 0; f < CrawlerProject.ImgResourcesContainer.ProcessedImages.Count; f++)
                 {
                     //如果相应图片对应的复选框被选中，则加入下载队列
-                    if (checkBoxes[f].Checked)
+                    if(checkBoxes[f].Checked)
                     {
                         img.Add(CrawlerProject.ImgResourcesContainer.ProcessedImages[f]);
                     }
@@ -238,15 +253,15 @@ namespace ResWander
             }
             else
             {
-                for (int f = 0; f < CrawlerProject.ImgResourcesContainer.RowImages.Count; f++)
+                for(int f = 0; f < CrawlerProject.ImgResourcesContainer.RowImages.Count; f++)
                 {
-                    if (checkBoxes[f].Checked)
+                    if(checkBoxes[f].Checked)
                     {
                         img.Add(CrawlerProject.ImgResourcesContainer.RowImages[f]);
                     }
                 }
             }
-            filePath = SaveService.SaveImages(img);
+           filePath = SaveService.SaveImages(img);
         }
         /// <summary>
         /// 当用户点击打开下载目录按钮后，会调用该方法，打开用户之前存储的资源的下载目录，方便查看下载的资源
@@ -280,32 +295,24 @@ namespace ResWander
             picture.Show();
             picture.pictureBox1.Image = pBox.Image;
         }
-
-
+       
+       
 
         private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
         {
-            SetText st = new SetText(UpdateLabel);
             var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
             Action action = () => { resourceBindingSource.Add(pageInfo); saveResourceBindingSource.Add(pageInfo); };
-            Action action1 = () => {            
-                //将第二列URL的宽度设置为自动填充
-                if (this.resourceDataGridView.Columns.Count > 1)
-                    this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            };
             pictureIndex.Add(pageInfo.Index);
-
+            //将第二列URL的宽度设置为自动填充
+            if(this.resourceDataGridView.Columns.Count>1)
+                this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             if (this.InvokeRequired)
             {
-                this.Invoke(action1);
                 this.Invoke(action);
-                this.Invoke(st, number.ToString());
             }
             else
             {
-                action1();
                 action();
-                FlagLabel.Text = number.ToString();
             }
         }
 
@@ -316,12 +323,12 @@ namespace ResWander
         /// <param name="e"></param>
         private void NextPictureBox_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < pictureBox.Count; i++)
+            for(int i = 0; i < pictureBox.Count; i++)
             {
                 if (pictureBox[i].Visible)
                 {
-                    if (i + 9 < pictureBox.Count && pictureBox[i + 9].Image != null)
-                    {
+                    if (i + 9 < pictureBox.Count && pictureBox[i+9].Image != null)
+                    {   
                         //隐藏前9个图片以及复选框
                         int k = i + 9;
                         int kr = i;
@@ -331,10 +338,10 @@ namespace ResWander
                             checkBoxes[kr].Visible = false;
                             kr++;
                         }
-
+                        
                         pictureBox[i + 9].Visible = true;
                         checkBoxes[i + 9].Visible = true;
-                        for (int j = i + 10; j < i + 18; j++)
+                        for(int j = i + 10; j < i + 18; j++)
                         {
                             if (j < pictureBox.Count && pictureBox[j].Image != null)
                             {
@@ -342,7 +349,7 @@ namespace ResWander
                                 checkBoxes[j].Visible = true;
                             }
                         }
-
+                       
                         return;
                     }
                     else
@@ -368,7 +375,7 @@ namespace ResWander
                     {
                         pictureBox[i].Visible = false;
                         checkBoxes[i].Visible = false;
-                        for (int k = i + 1; k < i + 9; k++)
+                        for(int k = i + 1; k < i + 9; k++)
                         {
                             if (k < pictureBox.Count)
                             {
@@ -376,8 +383,8 @@ namespace ResWander
                                 checkBoxes[k].Visible = false;
                             }
                         }
-
-                        for (int j = i - 1; j > i - 10; j--)
+                        
+                        for(int j = i - 1; j > i - 10; j--)
                         {
                             if (pictureBox[j].Image != null)
                             {
@@ -385,7 +392,7 @@ namespace ResWander
                                 checkBoxes[j].Visible = true;
                             }
                         }
-
+                       
                         return;
                     }
                     else
@@ -404,12 +411,12 @@ namespace ResWander
         /// <param name="e"></param>
         private void NextPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\right.png";
+           nextPictureBox.ImageLocation = "right.png";
         }
 
         private void NextPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            nextPictureBox.ImageLocation = @"D:\teamworkResWanderCode\Project\Resources\primaryRight.png";
+            nextPictureBox.ImageLocation = "primaryRight.png";
         }
         /// <summary>
         /// 实现以图搜图按钮的相关功能
@@ -426,15 +433,15 @@ namespace ResWander
             string path;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
+            {   
                 //获取用户选择的文件路径
                 path = openFileDialog1.FileName;
                 List<string> imgKeyWord = CrawlerService.ImgSearchImg(path);
                 //声明一个url列表，存储得到的url
                 List<string> url = new List<string>();
-                for (int i = 0; i < imgKeyWord.Count; i++)
+                for(int i = 0; i < imgKeyWord.Count; i++)
                 {
-                    url.Add(CrawlerService.SearchKeyword(imgKeyWord[i]));
+                   url.Add(CrawlerService.SearchKeyword(imgKeyWord[i]));
                 }
                 //只爬取第一个url，因为此url关联最大
                 if (url.Count > 0)
@@ -450,18 +457,18 @@ namespace ResWander
                 checkBoxes.Clear();
                 //每一次新爬取时都要把以前爬取得到的图片列表给清空
                 CrawlerProject.ImgResourcesContainer.RowImages.Clear();
-
+                
                 //此处填入其他的输入
                 bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
 
 
                 if (!crawlResult)            //爬取失败
                 {
-
+                   
                 }
                 else                //爬取成功               
                 {
-
+                   
                     //count用于统计爬取到的图片数量
                     int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
                     //将图片和相应的复选框分别加入相应的列表，同时初始化
@@ -528,12 +535,27 @@ namespace ResWander
                             pictureBox[k + 8].Location = new Point(820, 400);
                             checkBoxes[k + 8].Location = new Point(870, 570);
                         }
-
+                    }
+                    //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
+                    for (int j = 0; j < count; j++)
+                    {
+                        if (pictureBox[j].Image == null)
+                        {
+                            for (int k = j + 1; k < count; k++)
+                            {
+                                if (pictureBox[k].Image != null)
+                                {
+                                    pictureBox[j].Image = pictureBox[k].Image;
+                                    pictureBox[k].Image = null;
+                                    break;
+                                }
+                            }
+                        }
                     }
                     //一次最多展示9张图片以及9个对应的复选框
                     for (int j = 0; j < 9; j++)
                     {
-                        if (j < count)
+                        if (j < count && pictureBox[j].Image != null)
                         {
                             pictureBox[j].Visible = true;
                             checkBoxes[j].Visible = true;
@@ -547,31 +569,14 @@ namespace ResWander
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void LastPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            CrawlerService.flag = true;
-        }
-        //委托
-        public delegate void SetText(string text);
-        //委托调用的方法
-        private void UpdateLabel(string str)
-        {
-            FlagLabel.Text = str;
-        }
-    }
-    public class Crawl
-    {
-        public Project project;
-        public bool CrawlResult;
-
-        public Crawl(Project project)
-        {
-            this.project = project;
+            lastPictureBox.ImageLocation = "primaryLeft.jpg";
         }
 
-        public void CrawlFun()
+        private void LastPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            CrawlResult= CrawlerService.StartCrawl(project);
+            lastPictureBox.ImageLocation = "left.png";
         }
     }
 }
