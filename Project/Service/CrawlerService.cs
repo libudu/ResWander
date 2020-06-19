@@ -184,10 +184,11 @@ namespace ResWander.Service
             {
                 if (flag)
                 {
-                    foreach (Thread item in Threads)
-                    {
-                        item.Abort();
-                    }
+                    //foreach (Thread item in Threads)
+                    //{
+                    //    item.Abort();
+                    //}
+                    while (finish != Threads.Count) { }
                     break;
                 }
                 Thread thread = new Thread(() =>
@@ -218,11 +219,12 @@ namespace ResWander.Service
                           CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);       
                           CrawlerService.ImgPreview();
                           finish++;
+                          
                   }
                   });
                 Threads.Add(thread);
                 thread.Start();
-                Thread.Sleep(2000);
+                Thread.Sleep(200);
             }
         }
         /// <summary>
