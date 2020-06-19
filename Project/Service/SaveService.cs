@@ -67,6 +67,11 @@ namespace ResWander.Service
                 // 依次保存每个文件
                 for (int i = 0; i < imageSources.Count; i++)
                 {
+                    //若图片下载失败，img为null
+                    if(imageSources[i].Img == null)
+                    {
+                        continue;
+                    }
                     string[] fileName = saveFileDialog.FileName.Split('.');
                     //若选择自适应，按照图片格式保存图片
                     if (saveFileDialog.FilterIndex == 1)
