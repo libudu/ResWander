@@ -264,7 +264,7 @@ namespace ResWander
                     pictureBox[j].Size = new Size(200, 160);
                     pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.RowImages[j].Img;
                     pictureBox[j].Visible = false;
-
+                    pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
                     checkBoxes[j].Visible = false;
                     checkBoxes[j].Checked = false;
                     checkBoxes[j].Text = "选中";
@@ -347,12 +347,7 @@ namespace ResWander
                     }
                 }
             };
-            
-            for (int j = 0; j < pictureBox.Count; j++)
-            {
-                pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
-            }
-
+         
             if (this.InvokeRequired)
             {
                 this.Invoke(action);
