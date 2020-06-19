@@ -22,6 +22,7 @@ namespace ResWander.Data
             ImgResourcesContainer = new ImgResourcesContainer();
             TextInputData = new TextInputData();
             ImgInputData = new ImgInputData();
+            
         }
     }
 }

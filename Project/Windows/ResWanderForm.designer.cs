@@ -150,7 +150,7 @@
             // FlagLabel
             // 
             this.FlagLabel.AutoSize = true;
-            this.FlagLabel.Location = new System.Drawing.Point(1002, 16);
+            this.FlagLabel.Location = new System.Drawing.Point(1017, 16);
             this.FlagLabel.Name = "FlagLabel";
             this.FlagLabel.Size = new System.Drawing.Size(15, 15);
             this.FlagLabel.TabIndex = 7;
@@ -161,7 +161,7 @@
             this.messageLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.messageLabel.Location = new System.Drawing.Point(80, 7);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(787, 47);
+            this.messageLabel.Size = new System.Drawing.Size(783, 47);
             this.messageLabel.TabIndex = 6;
             // 
             // label2

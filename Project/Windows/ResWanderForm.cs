@@ -41,6 +41,8 @@ namespace ResWander
             CrawlerProject = new Project();
             CrawlerService.DownloadedImag += Crawler_PageDownloaded;
             CrawlerService.ImgPreview += Crawl_Preview;
+            CrawlerService.CrawlStart += Crawler_Start;
+            CrawlerService.CrawlFinish += Crawler_Finish;
             this.Size = new Size(1200,800);          
         }
 
@@ -87,17 +89,17 @@ namespace ResWander
             bool crawlResult = true;
 
 
-            if (!crawlResult)            //爬取失败
-            {
-                //中间还应加上爬取失败的网址，这个网址要得到
-                messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
-            }
-            else                //爬取成功               
-            {                   
-                //中间还应加上成功爬取的网址，这个网址要得到
-                messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
+            //if (!crawlResult)            //爬取失败
+            //{
+            //    //中间还应加上爬取失败的网址，这个网址要得到
+            //    messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
+            //}
+            //else                //爬取成功               
+            //{                   
+            //    //中间还应加上成功爬取的网址，这个网址要得到
+            //    messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
               
-            }        
+            //}        
         }
         /// <summary>
         /// 当用户点击筛选按钮后，会调用该方法，对相应资源按标准进行筛选
@@ -185,10 +187,39 @@ namespace ResWander
         }
        
        
-
-        private void Crawler_PageDownloaded(int number, string url, string format, string name, long time, string state)
+        private void Crawler_Finish()
         {
-            var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
+            Action action = () => { messageLabel.Text = "爬取结束！"; };
+            if (this.InvokeRequired)
+            {
+                
+                this.Invoke(action);
+            }
+            else
+            {
+                
+                action();
+            }
+
+        }
+        private void Crawler_Start()
+        {
+            Action action = () => { messageLabel.Text = this.urlTextBox.Text + "开始爬取！"; };
+            if (this.InvokeRequired)
+            {
+
+                this.Invoke(action);
+            }
+            else
+            {
+
+                action();
+            }
+            
+        }
+        private void Crawler_PageDownloaded(int number, string url, string format, string size, long time, string state)
+        {
+            var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceSize = size, DownloadTime = time, Status = state };
             Action action = () => { resourceBindingSource.Add(pageInfo); saveResourceBindingSource.Add(pageInfo); };
             Action action1 = () => {
                 //将第二列URL的宽度设置为自动填充
@@ -214,43 +245,29 @@ namespace ResWander
         /// </summary>
         private void Crawl_Preview()
         {
-            Action action = () =>
+            lock (pictureBox)
             {
-               /* if (pictureBox.Count > 0)
-                {
-                    for (int j = 0; j < pictureBox.Count; j++)
-                    {
-                        pictureBox[j].Dispose();
-                    }
-                }
-                pictureBox.Clear();
-                if (checkBoxes.Count > 0)
-                {
-                    for (int j = 0; j < checkBoxes.Count; j++)
-                    {
-                        checkBoxes[j].Dispose();
-                    }
-                }
-                checkBoxes.Clear();*/
-               //count用于统计爬取到的图片数量
-               int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
-               
-                    //每得到一张图片就相应的建一个图片以及复选框控件并初始化
-                    PictureBox pBox = new PictureBox();
-                    CheckBox chekBox = new CheckBox();
-                    pictureBox.Add(pBox);
-                    checkBoxes.Add(chekBox);
-                    pictureBox[pictureBox.Count - 1].Parent = previewTabPage;
-                    pictureBox[pictureBox.Count - 1].SizeMode = PictureBoxSizeMode.Zoom;
-                    pictureBox[pictureBox.Count - 1].Size = new Size(200, 160);
-                    pictureBox[pictureBox.Count - 1].Image = CrawlerProject.ImgResourcesContainer.RowImages[pictureBox.Count-1].Img;
-                    pictureBox[pictureBox.Count - 1].Visible = false;
-                    pictureBox[pictureBox.Count - 1].DoubleClick += new EventHandler(PictureBox_DoubleClick);
-                    checkBoxes[checkBoxes.Count - 1].Visible = false;
-                    checkBoxes[checkBoxes.Count - 1].Checked = false;
-                    checkBoxes[checkBoxes.Count - 1].Text = "选中";
-                    checkBoxes[checkBoxes.Count - 1].Size = new Size(100, 20);
-                    checkBoxes[checkBoxes.Count - 1].Parent = previewTabPage;
+                Action action = () =>
+            {
+                //count用于统计爬取到的图片数量
+                int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
+
+                //每得到一张图片就相应的建一个图片以及复选框控件并初始化
+                PictureBox pBox = new PictureBox();
+                CheckBox chekBox = new CheckBox();
+                pictureBox.Add(pBox);
+                checkBoxes.Add(chekBox);
+                pictureBox[pictureBox.Count - 1].Parent = previewTabPage;
+                pictureBox[pictureBox.Count - 1].SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox[pictureBox.Count - 1].Size = new Size(200, 160);
+                pictureBox[pictureBox.Count - 1].Image = CrawlerProject.ImgResourcesContainer.RowImages[pictureBox.Count - 1].Img;
+                pictureBox[pictureBox.Count - 1].Visible = false;
+                pictureBox[pictureBox.Count - 1].DoubleClick += new EventHandler(PictureBox_DoubleClick);
+                checkBoxes[checkBoxes.Count - 1].Visible = false;
+                checkBoxes[checkBoxes.Count - 1].Checked = false;
+                checkBoxes[checkBoxes.Count - 1].Text = "选中";
+                checkBoxes[checkBoxes.Count - 1].Size = new Size(100, 20);
+                checkBoxes[checkBoxes.Count - 1].Parent = previewTabPage;
 
                 //为相应的图片以及复选框设置位置
                 int p = (pictureBox.Count - 1) % 9;
@@ -295,9 +312,9 @@ namespace ResWander
                     default:
                         break;
                 }
-                
-                  
-               
+
+
+
                 //记录当前有多个显示的图片【用复选框来表示】
                 int vi = 0;
                 //当加入的图片不为空时
@@ -314,7 +331,7 @@ namespace ResWander
                 //要翻页了
                 if (vi == 9)
                 {
-                    for(int i = 0; i < pictureBox.Count; i++)
+                    for (int i = 0; i < pictureBox.Count; i++)
                     {
                         if (checkBoxes[i].Visible)
                         {
@@ -343,27 +360,28 @@ namespace ResWander
 
                 pictureBox[pictureBox.Count - 1].Visible = true;
                 if (pictureBox[pictureBox.Count - 1].Image != null)
-                {                    
+                {
                     checkBoxes[checkBoxes.Count - 1].Visible = true;
                 }
-                for(int i = 0; i < pictureBox.Count; i++)
+                for (int i = 0; i < pictureBox.Count; i++)
                 {
                     if (pictureBox[i].Visible && pictureBox[i].Image != null)
                     {
                         checkBoxes[i].Visible = true;
                     }
                 }
-               
-                
+
+
             };
-         
-            if (this.InvokeRequired)
-            {
-                this.Invoke(action);
-            }
-            else
-            {
-                action();
+
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(action);
+                }
+                else
+                {
+                    action();
+                }
             }
         }
 
@@ -568,7 +586,7 @@ namespace ResWander
             CrawlerService.flag = true;
         }
     }
-
+    
     public class Crawl
     {
         public Project project;
