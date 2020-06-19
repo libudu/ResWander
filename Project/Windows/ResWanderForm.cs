@@ -576,7 +576,21 @@ namespace ResWander
                 pictureIndex.Clear();
                 resourceBindingSource.Clear();
                 saveResourceBindingSource.Clear();
+                if (pictureBox.Count > 0)
+                {
+                    for (int j = 0; j < pictureBox.Count; j++)
+                    {
+                        pictureBox[j].Dispose();
+                    }
+                }
                 pictureBox.Clear();
+                if (checkBoxes.Count > 0)
+                {
+                    for (int j = 0; j < checkBoxes.Count; j++)
+                    {
+                        checkBoxes[j].Dispose();
+                    }
+                }
                 checkBoxes.Clear();
                 //每一次新爬取时都要把以前爬取得到的图片列表给清空
                 CrawlerProject.ImgResourcesContainer.RowImages.Clear();
@@ -595,7 +609,7 @@ namespace ResWander
                 else                //爬取成功               
                 {
                    
-                    //count用于统计爬取到的图片数量
+                  /*  //count用于统计爬取到的图片数量
                     int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
                     //将图片和相应的复选框分别加入相应的列表，同时初始化
                     for (int j = 0; j < count; j++)
@@ -686,7 +700,7 @@ namespace ResWander
                             pictureBox[j].Visible = true;
                             checkBoxes[j].Visible = true;
                         }
-                    }
+                    }*/
 
                 }
 
