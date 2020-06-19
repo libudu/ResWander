@@ -141,7 +141,7 @@ namespace ResWander.Service
         public static void CrawlDownload(Project project, List<string> urls, List<string> imgUrls)
         {
             //开始下载图片资源
-            project.URLData.ImgUrls.TryDequeue(out string imgUrl);
+            string imgUrl = project.URLData.ImgUrls.Dequeue();
             while (imgUrl != null)
             {
                 ImgResource img = new ImgResource(DownloadService.DownloadImg(imgUrl), imgUrl);
@@ -164,15 +164,11 @@ namespace ResWander.Service
                     string format;
                     ImageService.GetImageFormat(img.Img, out format);
                     img.PhotoFormat = format;
-                    img.ResourceName = "待定，测试";
+                    img.ResourceSize = "待定，测试";
                 }
-                if (project.URLData.ImgUrls.Count > 0) 
-                { 
-                    project.URLData.ImgUrls.TryDequeue(out imgUrl); 
-                }else
-                    imgUrl=null;
+                imgUrl = project.URLData.ImgUrls.Count > 0 ? project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
-                CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
+                CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceSize, img.DownloadTime, img.State);
 
             }
         }
@@ -183,7 +179,7 @@ namespace ResWander.Service
             int count = project.URLData.ImgUrls.Count();
             //开始下载图片资源
             int finish = 0;
-            project.URLData.ImgUrls.TryDequeue(out string imgUrl);
+            string imgUrl = project.URLData.ImgUrls.Dequeue();
             while (finish<count)
             {
                 if (flag)
@@ -217,14 +213,13 @@ namespace ResWander.Service
                           string format;
                           ImageService.GetImageFormat(img.Img, out format);
                           img.PhotoFormat = format;
-                          img.ResourceName = "待定，测试";
-                          if (project.URLData.ImgUrls.Count > 0)
-                          {
-                              project.URLData.ImgUrls.TryDequeue(out imgUrl);
-                          }else
-                              imgUrl=null;
+                          if (img.Img != null)
+                              img.ResourceSize = img.Img.Width + "*" + img.Img.Height;
+                          else
+                              img.ResourceSize = "无";
+                          imgUrl = project.URLData.ImgUrls.Count > 0 ? project.URLData.ImgUrls.Dequeue() : null;
                           //此处可添加事件，与前端互动
-                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);       
+                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceSize, img.DownloadTime, img.State);       
                           CrawlerService.ImgPreview();
                           finish++;
                           
