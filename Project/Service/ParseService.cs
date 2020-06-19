@@ -57,7 +57,10 @@ namespace ResWander.Service
                     url = HTMLService.TransferUrl(url);
                     //字符转义
                     url = HTMLService.ReplaceChar(url);
-                    imgUrlList.Add(url);
+                    if(!imgUrlList.Contains(url))
+                    {
+                        imgUrlList.Add(url);
+                    }
                 }
             }
             return imgUrlList;

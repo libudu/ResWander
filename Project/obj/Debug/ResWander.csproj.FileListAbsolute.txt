@@ -49,7 +49,6 @@ D:\ResWander\Project\bin\Debug\ResWander.pdb
 D:\ResWander\Project\bin\Debug\HtmlAgilityPack.dll
 D:\ResWander\Project\bin\Debug\HtmlAgilityPack.pdb
 D:\ResWander\Project\bin\Debug\HtmlAgilityPack.xml
-D:\ResWander\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
 D:\ResWander\Project\obj\Debug\ResWander.Properties.Resources.resources
 D:\ResWander\Project\obj\Debug\ResWander.ResWanderForm.resources
 D:\ResWander\Project\obj\Debug\ResWander.Form2.resources
@@ -139,3 +138,4 @@ D:\C#\Project\ResWander\ResWander\Project\obj\Debug\ResWander.csproj.CoreCompile
 D:\C#\Project\ResWander\ResWander\Project\obj\Debug\ResWander.csproj.CopyComplete
 D:\C#\Project\ResWander\ResWander\Project\obj\Debug\ResWander.exe
 D:\C#\Project\ResWander\ResWander\Project\obj\Debug\ResWander.pdb
+D:\ResWander\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
