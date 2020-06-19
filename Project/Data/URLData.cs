@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,12 @@ namespace ResWander.Data
         /// </summary>
         public Queue<string> HTMLUrls { get; set; }
 
-        public Queue<string> ImgUrls { get; set; }
+        public ConcurrentQueue<string> ImgUrls { get; set; }
 
         public URLData()
         {
             HTMLUrls = new Queue<string>();
-            ImgUrls = new Queue<string>();
+            ImgUrls = new ConcurrentQueue<string>();
         }
     }
 }

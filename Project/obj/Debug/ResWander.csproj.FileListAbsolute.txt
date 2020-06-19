@@ -147,10 +147,8 @@ D:\C#\Project\ResWander\Project\bin\Debug\System.ComponentModel.Annotations.dll
 D:\C#\Project\ResWander\Project\bin\Debug\HtmlAgilityPack.pdb
 D:\C#\Project\ResWander\Project\bin\Debug\HtmlAgilityPack.xml
 D:\C#\Project\ResWander\Project\bin\Debug\Newtonsoft.Json.xml
-D:\C#\Project\ResWander\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.Properties.Resources.resources
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.ResWanderForm.resources
-D:\C#\Project\ResWander\Project\obj\Debug\ResWander.Form2.resources
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.Picture.resources
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.Windows.SelectForm.resources
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.csproj.GenerateResource.cache

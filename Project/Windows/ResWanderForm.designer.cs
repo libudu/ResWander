@@ -150,7 +150,7 @@
             // FlagLabel
             // 
             this.FlagLabel.AutoSize = true;
-            this.FlagLabel.Location = new System.Drawing.Point(1002, 16);
+            this.FlagLabel.Location = new System.Drawing.Point(1017, 16);
             this.FlagLabel.Name = "FlagLabel";
             this.FlagLabel.Size = new System.Drawing.Size(15, 15);
             this.FlagLabel.TabIndex = 7;
