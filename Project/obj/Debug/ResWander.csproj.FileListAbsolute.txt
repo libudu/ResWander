@@ -49,7 +49,6 @@ D:\ResWander\Project\bin\Debug\HtmlAgilityPack.pdb
 D:\ResWander\Project\bin\Debug\HtmlAgilityPack.xml
 D:\ResWander\Project\obj\Debug\ResWander.Properties.Resources.resources
 D:\ResWander\Project\obj\Debug\ResWander.ResWanderForm.resources
-D:\ResWander\Project\obj\Debug\ResWander.Form2.resources
 D:\ResWander\Project\obj\Debug\ResWander.Picture.resources
 D:\ResWander\Project\obj\Debug\ResWander.Windows.SelectForm.resources
 D:\ResWander\Project\obj\Debug\ResWander.csproj.GenerateResource.cache
