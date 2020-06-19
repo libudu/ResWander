@@ -171,7 +171,11 @@ namespace ResWander.Service
         /// <summary>
         /// 设置最大爬取深度
         /// </summary>
-        private static int MaxPage { get; set; }
+        private static int MaxPage
+        {
+            get => maxPage;
+            set => maxPage = value;
+        }
         /// <summary>
         /// 判断一个网页是否是贴吧网页
         /// </summary>
