@@ -17,7 +17,6 @@ D:\teamworkResWanderCode\Project\bin\Debug\HtmlAgilityPack.dll
 D:\teamworkResWanderCode\Project\bin\Debug\HtmlAgilityPack.pdb
 D:\teamworkResWanderCode\Project\bin\Debug\HtmlAgilityPack.xml
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Properties.Resources.resources
-D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Form2.resources
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.Picture.resources
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csproj.GenerateResource.cache
 D:\teamworkResWanderCode\Project\obj\Debug\ResWander.csproj.CoreCompileInputs.cache

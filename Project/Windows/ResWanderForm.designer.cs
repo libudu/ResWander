@@ -32,9 +32,9 @@
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.choseButton = new System.Windows.Forms.Button();
-            this.setButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.crawLabel = new System.Windows.Forms.Label();
             this.FlagLabel = new System.Windows.Forms.Label();
             this.messageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -75,7 +75,7 @@
             // 
             this.crawButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.crawButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.crawButton.Location = new System.Drawing.Point(1095, 3);
+            this.crawButton.Location = new System.Drawing.Point(1330, 3);
             this.crawButton.Name = "crawButton";
             this.crawButton.Size = new System.Drawing.Size(74, 28);
             this.crawButton.TabIndex = 2;
@@ -89,7 +89,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.urlTextBox.Location = new System.Drawing.Point(90, 3);
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(986, 25);
+            this.urlTextBox.Size = new System.Drawing.Size(1221, 25);
             this.urlTextBox.TabIndex = 3;
             // 
             // label1
@@ -107,24 +107,13 @@
             // choseButton
             // 
             this.choseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.choseButton.Location = new System.Drawing.Point(935, 60);
+            this.choseButton.Location = new System.Drawing.Point(1290, 60);
             this.choseButton.Name = "choseButton";
             this.choseButton.Size = new System.Drawing.Size(100, 28);
             this.choseButton.TabIndex = 6;
             this.choseButton.Text = "筛选";
             this.choseButton.UseVisualStyleBackColor = true;
             this.choseButton.Click += new System.EventHandler(this.ChoseButton_Click);
-            // 
-            // setButton
-            // 
-            this.setButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.setButton.Location = new System.Drawing.Point(1056, 60);
-            this.setButton.Name = "setButton";
-            this.setButton.Size = new System.Drawing.Size(100, 28);
-            this.setButton.TabIndex = 7;
-            this.setButton.Text = "设置";
-            this.setButton.UseVisualStyleBackColor = true;
-            this.setButton.Click += new System.EventHandler(this.SetButton_Click);
             // 
             // panel1
             // 
@@ -135,23 +124,33 @@
             this.panel1.Controls.Add(this.crawButton);
             this.panel1.Location = new System.Drawing.Point(1, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1179, 34);
+            this.panel1.Size = new System.Drawing.Size(1414, 34);
             this.panel1.TabIndex = 8;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.crawLabel);
             this.panel2.Controls.Add(this.FlagLabel);
             this.panel2.Controls.Add(this.messageLabel);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(1, 44);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(813, 54);
+            this.panel2.Size = new System.Drawing.Size(1042, 54);
             this.panel2.TabIndex = 9;
+            // 
+            // crawLabel
+            // 
+            this.crawLabel.AutoSize = true;
+            this.crawLabel.Location = new System.Drawing.Point(893, 16);
+            this.crawLabel.Name = "crawLabel";
+            this.crawLabel.Size = new System.Drawing.Size(112, 15);
+            this.crawLabel.TabIndex = 8;
+            this.crawLabel.Text = "爬取资源数量：";
             // 
             // FlagLabel
             // 
             this.FlagLabel.AutoSize = true;
-            this.FlagLabel.Location = new System.Drawing.Point(782, 16);
+            this.FlagLabel.Location = new System.Drawing.Point(1002, 16);
             this.FlagLabel.Name = "FlagLabel";
             this.FlagLabel.Size = new System.Drawing.Size(15, 15);
             this.FlagLabel.TabIndex = 7;
@@ -162,7 +161,7 @@
             this.messageLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.messageLabel.Location = new System.Drawing.Point(80, 7);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(730, 47);
+            this.messageLabel.Size = new System.Drawing.Size(787, 47);
             this.messageLabel.TabIndex = 6;
             // 
             // label2
@@ -301,7 +300,7 @@
             this.resourceTabControl.Location = new System.Drawing.Point(7, 151);
             this.resourceTabControl.Name = "resourceTabControl";
             this.resourceTabControl.SelectedIndex = 0;
-            this.resourceTabControl.Size = new System.Drawing.Size(1172, 602);
+            this.resourceTabControl.Size = new System.Drawing.Size(1407, 602);
             this.resourceTabControl.TabIndex = 12;
             // 
             // resourceTabPage
@@ -310,22 +309,20 @@
             this.resourceTabPage.Location = new System.Drawing.Point(4, 25);
             this.resourceTabPage.Name = "resourceTabPage";
             this.resourceTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.resourceTabPage.Size = new System.Drawing.Size(1164, 573);
+            this.resourceTabPage.Size = new System.Drawing.Size(1399, 573);
             this.resourceTabPage.TabIndex = 0;
             this.resourceTabPage.Text = "资源爬取情况";
             this.resourceTabPage.UseVisualStyleBackColor = true;
             // 
             // resourceDataGridView
             // 
-            this.resourceDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.resourceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.resourceDataGridView.Location = new System.Drawing.Point(-4, 6);
+            this.resourceDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.resourceDataGridView.Location = new System.Drawing.Point(3, 3);
             this.resourceDataGridView.Name = "resourceDataGridView";
             this.resourceDataGridView.RowHeadersWidth = 51;
             this.resourceDataGridView.RowTemplate.Height = 27;
-            this.resourceDataGridView.Size = new System.Drawing.Size(1168, 567);
+            this.resourceDataGridView.Size = new System.Drawing.Size(1393, 567);
             this.resourceDataGridView.TabIndex = 0;
             // 
             // previewTabPage
@@ -336,7 +333,7 @@
             this.previewTabPage.Location = new System.Drawing.Point(4, 25);
             this.previewTabPage.Name = "previewTabPage";
             this.previewTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.previewTabPage.Size = new System.Drawing.Size(1164, 573);
+            this.previewTabPage.Size = new System.Drawing.Size(1399, 573);
             this.previewTabPage.TabIndex = 1;
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
@@ -358,7 +355,7 @@
             // 
             this.nextPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nextPictureBox.Image = global::ResWander.Properties.Resources.primaryRight;
-            this.nextPictureBox.Location = new System.Drawing.Point(1079, 294);
+            this.nextPictureBox.Location = new System.Drawing.Point(1314, 294);
             this.nextPictureBox.Name = "nextPictureBox";
             this.nextPictureBox.Size = new System.Drawing.Size(90, 130);
             this.nextPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -375,7 +372,7 @@
             this.panel4.Controls.Add(this.selectAllButton);
             this.panel4.Controls.Add(this.upDateButton);
             this.panel4.Controls.Add(this.openListButton);
-            this.panel4.Location = new System.Drawing.Point(653, 104);
+            this.panel4.Location = new System.Drawing.Point(888, 104);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(527, 41);
             this.panel4.TabIndex = 13;
@@ -393,7 +390,7 @@
             // StopButton
             // 
             this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.StopButton.Location = new System.Drawing.Point(824, 60);
+            this.StopButton.Location = new System.Drawing.Point(1110, 60);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(97, 27);
             this.StopButton.TabIndex = 14;
@@ -405,14 +402,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.ClientSize = new System.Drawing.Size(1417, 753);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.resourceTabControl);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.setButton);
             this.Controls.Add(this.choseButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ResWanderForm";
@@ -439,7 +435,6 @@
         private System.Windows.Forms.TextBox urlTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button choseButton;
-        private System.Windows.Forms.Button setButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
@@ -466,6 +461,7 @@
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Label FlagLabel;
         internal System.Windows.Forms.TabPage previewTabPage;
+        private System.Windows.Forms.Label crawLabel;
     }
 }
 
