@@ -215,8 +215,7 @@ namespace ResWander.Service
                           img.ResourceName = "待定，测试";
                           imgUrl = project.URLData.ImgUrls.Count > 0 ? project.URLData.ImgUrls.Dequeue() : null;
                           //此处可添加事件，与前端互动
-                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
-                         
+                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);       
                           CrawlerService.ImgPreview();
                           finish++;
                   }
