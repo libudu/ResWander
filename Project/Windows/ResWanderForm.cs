@@ -46,7 +46,6 @@ namespace ResWander
 
  
 
-        public string stoPath;             //用来保存用户指定的存储路径
 
         /// <summary>
         /// 当用户点击爬取按钮后就会调用该方法，对相应网址进行资源爬取
@@ -109,15 +108,7 @@ namespace ResWander
         {
             //每一次点击筛选按钮都要重置值
             formatLabel.Text = null;
-            SelectForm SelectForm = new SelectForm(CrawlerProject);
-            ////为筛选条件赋默认值
-            //SelectForm.maxWidthTextBox.Text = "2000";
-            //SelectForm.minWidthTextBox.Text = "0";
-            //SelectForm.maxHeightTextBox.Text = "2000";
-            //SelectForm.minHeightTextBox.Text = "0";
-            //SelectForm.maxSizeTextBox.Text = "10240";
-            //SelectForm.minSizeTextBox.Text = "0";
-            //SelectForm.formatCheckedListBox.SetItemChecked(0, true);
+            SelectForm SelectForm = new SelectForm(CrawlerProject);      
             SelectForm.resForm = this;
             SelectForm.Show();                      //展示筛选条件的窗口
            
@@ -179,17 +170,7 @@ namespace ResWander
         {
             System.Diagnostics.Process.Start("explorer.exe", filePath);
         }
-        /// <summary>
-        /// 当用户点击设置按钮后，会调用该方法，弹出一个窗口，让用户输入下载路径
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SetButton_Click(object sender, EventArgs e)
-        {
-            Form2 formtwo = new Form2();                    //新建一个窗口
-            formtwo.Show();                                 //让新窗口显示
-            formtwo.formone = this;
-        }
+       
         /// <summary>
         /// 当用户双击图片，即可看到相应的放大的图片
         /// </summary>
@@ -272,7 +253,7 @@ namespace ResWander
                     checkBoxes[checkBoxes.Count - 1].Parent = previewTabPage;
 
                 //为相应的图片以及复选框设置位置
-                int p = (count - 1) % 9;
+                int p = (pictureBox.Count - 1) % 9;
                 switch (p)
                 {
                     case 0:
@@ -314,53 +295,8 @@ namespace ResWander
                     default:
                         break;
                 }
-                //为每个图片以及复选框设置位置
-                /* for (int k = 0; k < count; k = k + 9)
-                  {
-                      pictureBox[k].Location = new Point(120, 0);
-                      checkBoxes[k].Location = new Point(170, 180);
-                      if (k + 1 < count)
-                      {
-                          pictureBox[k + 1].Location = new Point(470, 0);
-                          checkBoxes[k + 1].Location = new Point(520, 180);
-                      }
-                      if (k + 2 < count)
-                      {
-                          pictureBox[k + 2].Location = new Point(820, 0);
-                          checkBoxes[k + 2].Location = new Point(870, 180);
-                      }
-                      if (k + 3 < count)
-                      {
-                          pictureBox[k + 3].Location = new Point(120, 210);
-                          checkBoxes[k + 3].Location = new Point(170, 380);
-                      }
-                      if (k + 4 < count)
-                      {
-                          pictureBox[k + 4].Location = new Point(470, 210);
-                          checkBoxes[k + 4].Location = new Point(520, 380);
-                      }
-                      if (k + 5 < count)
-                      {
-                          pictureBox[k + 5].Location = new Point(820, 210);
-                          checkBoxes[k + 5].Location = new Point(870, 380);
-                      }
-                      if (k + 6 < count)
-                      {
-                          pictureBox[k + 6].Location = new Point(120, 400);
-                          checkBoxes[k + 6].Location = new Point(170, 570);
-                      }
-                      if (k + 7 < count)
-                      {
-                          pictureBox[k + 7].Location = new Point(470, 400);
-                          checkBoxes[k + 7].Location = new Point(520, 570);
-                      }
-                      if (k + 8 < count)
-                      {
-                          pictureBox[k + 8].Location = new Point(820, 400);
-                          checkBoxes[k + 8].Location = new Point(870, 570);
-                      }
-
-                  }*/
+                
+                  
                
                 //记录当前有多个显示的图片【用复选框来表示】
                 int vi = 0;
@@ -418,15 +354,7 @@ namespace ResWander
                     }
                 }
                
-                //一次最多展示9张图片以及9个对应的复选框
-                /*for (int j = 0; j < 9; j++)
-                {
-                    if (j < count && pictureBox[j].Image != null)
-                    {
-                        pictureBox[j].Visible = true;
-                        checkBoxes[j].Visible = true;
-                    }
-                }*/
+                
             };
          
             if (this.InvokeRequired)
@@ -611,99 +539,7 @@ namespace ResWander
                 //else                //爬取成功               
                 //{
                    
-                //    //count用于统计爬取到的图片数量
-                //    int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
-                //    //将图片和相应的复选框分别加入相应的列表，同时初始化
-                //    for (int j = 0; j < count; j++)
-                //    {
-                //        PictureBox pBox = new PictureBox();
-                //        CheckBox chekBox = new CheckBox();
-                //        pictureBox.Add(pBox);
-                //        checkBoxes.Add(chekBox);
-                //        pictureBox[j].Parent = previewTabPage;
-                //        pictureBox[j].SizeMode = PictureBoxSizeMode.Zoom;
-                //        pictureBox[j].Size = new Size(200, 160);
-                //        pictureBox[j].Image = CrawlerProject.ImgResourcesContainer.RowImages[j].Img;
-                //        pictureBox[j].Visible = false;
-                //        pictureBox[j].DoubleClick += new EventHandler(PictureBox_DoubleClick);
-                //        checkBoxes[j].Visible = false;
-                //        checkBoxes[j].Checked = false;
-                //        checkBoxes[j].Text = "选中";
-                //        checkBoxes[j].Size = new Size(100, 20);
-                //        checkBoxes[j].Parent = previewTabPage;
-                //    }
-                //    //为每个图片以及复选框设置位置
-                //    for (int k = 0; k < count; k = k + 9)
-                //    {
-                //        pictureBox[k].Location = new Point(120, 0);
-                //        checkBoxes[k].Location = new Point(170, 180);
-                //        if (k + 1 < count)
-                //        {
-                //            pictureBox[k + 1].Location = new Point(470, 0);
-                //            checkBoxes[k + 1].Location = new Point(520, 180);
-                //        }
-                //        if (k + 2 < count)
-                //        {
-                //            pictureBox[k + 2].Location = new Point(820, 0);
-                //            checkBoxes[k + 2].Location = new Point(870, 180);
-                //        }
-                //        if (k + 3 < count)
-                //        {
-                //            pictureBox[k + 3].Location = new Point(120, 210);
-                //            checkBoxes[k + 3].Location = new Point(170, 380);
-                //        }
-                //        if (k + 4 < count)
-                //        {
-                //            pictureBox[k + 4].Location = new Point(470, 210);
-                //            checkBoxes[k + 4].Location = new Point(520, 380);
-                //        }
-                //        if (k + 5 < count)
-                //        {
-                //            pictureBox[k + 5].Location = new Point(820, 210);
-                //            checkBoxes[k + 5].Location = new Point(870, 380);
-                //        }
-                //        if (k + 6 < count)
-                //        {
-                //            pictureBox[k + 6].Location = new Point(120, 400);
-                //            checkBoxes[k + 6].Location = new Point(170, 570);
-                //        }
-                //        if (k + 7 < count)
-                //        {
-                //            pictureBox[k + 7].Location = new Point(470, 400);
-                //            checkBoxes[k + 7].Location = new Point(520, 570);
-                //        }
-                //        if (k + 8 < count)
-                //        {
-                //            pictureBox[k + 8].Location = new Point(820, 400);
-                //            checkBoxes[k + 8].Location = new Point(870, 570);
-                //        }
-                //    }
-                //    //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
-                //    for (int j = 0; j < count; j++)
-                //    {
-                //        if (pictureBox[j].Image == null)
-                //        {
-                //            for (int k = j + 1; k < count; k++)
-                //            {
-                //                if (pictureBox[k].Image != null)
-                //                {
-                //                    pictureBox[j].Image = pictureBox[k].Image;
-                //                    pictureBox[k].Image = null;
-                //                    break;
-                //                }
-                //            }
-                //        }
-                //    }
-                //    //一次最多展示9张图片以及9个对应的复选框
-                //    for (int j = 0; j < 9; j++)
-                //    {
-                //        if (j < count && pictureBox[j].Image != null)
-                //        {
-                //            pictureBox[j].Visible = true;
-                //            checkBoxes[j].Visible = true;
-                //        }
-                //    }
-
+                
                 //}
 
             }
