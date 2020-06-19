@@ -35,6 +35,7 @@
             this.setButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.FlagLabel = new System.Windows.Forms.Label();
             this.messageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -53,10 +54,11 @@
             this.resourceTabPage = new System.Windows.Forms.TabPage();
             this.resourceDataGridView = new System.Windows.Forms.DataGridView();
             this.previewTabPage = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureSPButton = new System.Windows.Forms.Button();
             this.lastPictureBox = new System.Windows.Forms.PictureBox();
             this.nextPictureBox = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureSPButton = new System.Windows.Forms.Button();
+            this.StopButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -64,9 +66,9 @@
             this.resourceTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).BeginInit();
             this.previewTabPage.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // crawButton
@@ -105,7 +107,7 @@
             // choseButton
             // 
             this.choseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.choseButton.Location = new System.Drawing.Point(893, 60);
+            this.choseButton.Location = new System.Drawing.Point(935, 60);
             this.choseButton.Name = "choseButton";
             this.choseButton.Size = new System.Drawing.Size(100, 28);
             this.choseButton.TabIndex = 6;
@@ -138,12 +140,22 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.FlagLabel);
             this.panel2.Controls.Add(this.messageLabel);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(1, 44);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(813, 54);
             this.panel2.TabIndex = 9;
+            // 
+            // FlagLabel
+            // 
+            this.FlagLabel.AutoSize = true;
+            this.FlagLabel.Location = new System.Drawing.Point(782, 16);
+            this.FlagLabel.Name = "FlagLabel";
+            this.FlagLabel.Size = new System.Drawing.Size(15, 15);
+            this.FlagLabel.TabIndex = 7;
+            this.FlagLabel.Text = "0";
             // 
             // messageLabel
             // 
@@ -329,28 +341,6 @@
             this.previewTabPage.Text = "预览";
             this.previewTabPage.UseVisualStyleBackColor = true;
             // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.pictureSPButton);
-            this.panel4.Controls.Add(this.selectAllButton);
-            this.panel4.Controls.Add(this.upDateButton);
-            this.panel4.Controls.Add(this.openListButton);
-            this.panel4.Location = new System.Drawing.Point(653, 104);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(527, 41);
-            this.panel4.TabIndex = 13;
-            // 
-            // pictureSPButton
-            // 
-            this.pictureSPButton.Location = new System.Drawing.Point(45, 6);
-            this.pictureSPButton.Name = "pictureSPButton";
-            this.pictureSPButton.Size = new System.Drawing.Size(100, 28);
-            this.pictureSPButton.TabIndex = 8;
-            this.pictureSPButton.Text = "以图搜图";
-            this.pictureSPButton.UseVisualStyleBackColor = true;
-            this.pictureSPButton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // lastPictureBox
             // 
             this.lastPictureBox.Image = global::ResWander.Properties.Resources.primaryLeft;
@@ -378,11 +368,45 @@
             this.nextPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseDown);
             this.nextPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NextPictureBox_MouseUp);
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.pictureSPButton);
+            this.panel4.Controls.Add(this.selectAllButton);
+            this.panel4.Controls.Add(this.upDateButton);
+            this.panel4.Controls.Add(this.openListButton);
+            this.panel4.Location = new System.Drawing.Point(653, 104);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(527, 41);
+            this.panel4.TabIndex = 13;
+            // 
+            // pictureSPButton
+            // 
+            this.pictureSPButton.Location = new System.Drawing.Point(45, 6);
+            this.pictureSPButton.Name = "pictureSPButton";
+            this.pictureSPButton.Size = new System.Drawing.Size(100, 28);
+            this.pictureSPButton.TabIndex = 8;
+            this.pictureSPButton.Text = "以图搜图";
+            this.pictureSPButton.UseVisualStyleBackColor = true;
+            this.pictureSPButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // StopButton
+            // 
+            this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.StopButton.Location = new System.Drawing.Point(824, 60);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(97, 27);
+            this.StopButton.TabIndex = 14;
+            this.StopButton.Text = "停止";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
             // ResWanderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.Controls.Add(this.StopButton);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.resourceTabControl);
             this.Controls.Add(this.panel3);
@@ -403,9 +427,9 @@
             this.resourceTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.resourceDataGridView)).EndInit();
             this.previewTabPage.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lastPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPictureBox)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -440,6 +464,8 @@
         internal System.Windows.Forms.PictureBox nextPictureBox;
         private System.Windows.Forms.PictureBox lastPictureBox;
         private System.Windows.Forms.Button pictureSPButton;
+        private System.Windows.Forms.Button StopButton;
+        private System.Windows.Forms.Label FlagLabel;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ResWander.Windows;
+using System.Threading;
 
 namespace ResWander
 {
@@ -55,15 +56,42 @@ namespace ResWander
             pictureIndex.Clear();
             resourceBindingSource.Clear();
             saveResourceBindingSource.Clear();
+            if (pictureBox.Count > 0)
+            {
+                for(int j = 0; j < pictureBox.Count; j++)
+                {
+                    pictureBox[j].Dispose();
+                }
+            }
             pictureBox.Clear();
+            if (checkBoxes.Count > 0)
+            {
+                for(int j = 0; j < checkBoxes.Count; j++)
+                {
+                    checkBoxes[j].Dispose();
+                }
+            }
             checkBoxes.Clear();
             //每一次新爬取时都要把以前爬取得到的图片列表给清空
+           /* if (CrawlerProject.ImgResourcesContainer.RowImages.Count > 0)
+            {
+                for(int j = 0; j < CrawlerProject.ImgResourcesContainer.RowImages.Count; j++)
+                {
+                  
+                }
+            }*/
             CrawlerProject.ImgResourcesContainer.RowImages.Clear();
             CrawlerProject.ImgInputData.Url = this.urlTextBox.Text;
             //此处填入其他的输入
-            bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
- 
-            
+            //bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
+            //此处填入其他的输入
+            Crawl crawl = new Crawl(CrawlerProject);
+            Thread thread = new Thread(crawl.CrawlFun);
+            thread.Start();
+            //bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
+            bool crawlResult = true;
+
+
             if (!crawlResult)            //爬取失败
             {
                 //中间还应加上爬取失败的网址，这个网址要得到
@@ -73,9 +101,6 @@ namespace ResWander
             {                   
                 //中间还应加上成功爬取的网址，这个网址要得到
                 messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
-                //注意这里的List[i]的索引不能超出范围，即i<count，可以用一个
-                //while循环加switch【switch用来判断图片和那个picturebox绑定】
-                //来实现遍历，同时加条件来避免超出索引范围。
 
                 //count用于统计爬取到的图片数量
                 int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
@@ -98,6 +123,7 @@ namespace ResWander
                     checkBoxes[j].Size = new Size(100, 20);
                     checkBoxes[j].Parent = previewTabPage;
                 }
+                
                 //为每个图片以及复选框设置位置
                 for(int k = 0; k < count; k = k + 9)
                 {
@@ -283,16 +309,22 @@ namespace ResWander
         {
             var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceName = name, DownloadTime = time, Status = state };
             Action action = () => { resourceBindingSource.Add(pageInfo); saveResourceBindingSource.Add(pageInfo); };
+            Action action1 = () => {
+                //将第二列URL的宽度设置为自动填充
+                if (this.resourceDataGridView.Columns.Count > 1)
+                    this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                FlagLabel.Text = number.ToString();
+            };
             pictureIndex.Add(pageInfo.Index);
-            //将第二列URL的宽度设置为自动填充
-            if(this.resourceDataGridView.Columns.Count>1)
-                this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             if (this.InvokeRequired)
             {
+                this.Invoke(action1);
                 this.Invoke(action);
             }
             else
             {
+                action1();
                 action();
             }
         }
@@ -438,9 +470,12 @@ namespace ResWander
                 checkBoxes.Clear();
                 //每一次新爬取时都要把以前爬取得到的图片列表给清空
                 CrawlerProject.ImgResourcesContainer.RowImages.Clear();
-                
-                //此处填入其他的输入
-                bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
+
+                Crawl crawl = new Crawl(CrawlerProject);
+                Thread thread = new Thread(crawl.CrawlFun);
+                thread.Start();
+                //bool crawlResult = CrawlerService.StartCrawl(CrawlerProject/*,crawlerService*/);
+                bool crawlResult = true;
 
 
                 if (!crawlResult)            //爬取失败
@@ -558,6 +593,33 @@ namespace ResWander
         private void LastPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             lastPictureBox.ImageLocation = "left.png";
+        }
+        public delegate void SetText(string text);
+        //委托调用的方法
+        private void UpdateLabel(string str)
+        {
+            FlagLabel.Text = str;
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            CrawlerService.flag = true;
+        }
+    }
+
+    public class Crawl
+    {
+        public Project project;
+        public bool CrawlResult;
+
+        public Crawl(Project project)
+        {
+            this.project = project;
+        }
+
+        public void CrawlFun()
+        {
+            CrawlResult = CrawlerService.StartCrawl(project);
         }
     }
 }
