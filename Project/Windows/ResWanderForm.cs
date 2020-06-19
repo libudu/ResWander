@@ -41,6 +41,8 @@ namespace ResWander
             CrawlerProject = new Project();
             CrawlerService.DownloadedImag += Crawler_PageDownloaded;
             CrawlerService.ImgPreview += Crawl_Preview;
+            CrawlerService.CrawlStart += Crawler_Start;
+            CrawlerService.CrawlFinish += Crawler_Finish;
             this.Size = new Size(1200,800);          
         }
 
@@ -87,17 +89,17 @@ namespace ResWander
             bool crawlResult = true;
 
 
-            if (!crawlResult)            //爬取失败
-            {
-                //中间还应加上爬取失败的网址，这个网址要得到
-                messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
-            }
-            else                //爬取成功               
-            {                   
-                //中间还应加上成功爬取的网址，这个网址要得到
-                messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
+            //if (!crawlResult)            //爬取失败
+            //{
+            //    //中间还应加上爬取失败的网址，这个网址要得到
+            //    messageLabel.Text = this.urlTextBox.Text + "网页爬取失败";
+            //}
+            //else                //爬取成功               
+            //{                   
+            //    //中间还应加上成功爬取的网址，这个网址要得到
+            //    messageLabel.Text = this.urlTextBox.Text + "网页爬取成功";
               
-            }        
+            //}        
         }
         /// <summary>
         /// 当用户点击筛选按钮后，会调用该方法，对相应资源按标准进行筛选
@@ -185,7 +187,36 @@ namespace ResWander
         }
        
        
+        private void Crawler_Finish()
+        {
+            Action action = () => { messageLabel.Text = "爬取结束！"; };
+            if (this.InvokeRequired)
+            {
+                
+                this.Invoke(action);
+            }
+            else
+            {
+                
+                action();
+            }
 
+        }
+        private void Crawler_Start()
+        {
+            Action action = () => { messageLabel.Text = this.urlTextBox.Text + "开始爬取！"; };
+            if (this.InvokeRequired)
+            {
+
+                this.Invoke(action);
+            }
+            else
+            {
+
+                action();
+            }
+            
+        }
         private void Crawler_PageDownloaded(int number, string url, string format, string size, long time, string state)
         {
             var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceSize = size, DownloadTime = time, Status = state };
@@ -555,7 +586,7 @@ namespace ResWander
             CrawlerService.flag = true;
         }
     }
-
+    
     public class Crawl
     {
         public Project project;

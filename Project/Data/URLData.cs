@@ -17,12 +17,12 @@ namespace ResWander.Data
         /// </summary>
         public Queue<string> HTMLUrls { get; set; }
 
-        public ConcurrentQueue<string> ImgUrls { get; set; }
+        public Queue<string> ImgUrls { get; set; }
 
         public URLData()
         {
             HTMLUrls = new Queue<string>();
-            ImgUrls = new ConcurrentQueue<string>();
+            ImgUrls = new Queue<string>();
         }
     }
 }

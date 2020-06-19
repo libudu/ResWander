@@ -156,3 +156,4 @@ D:\C#\Project\ResWander\Project\obj\Debug\ResWander.csproj.CoreCompileInputs.cac
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.csproj.CopyComplete
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.exe
 D:\C#\Project\ResWander\Project\obj\Debug\ResWander.pdb
+D:\C#\Project\ResWander\Project\obj\Debug\ResWander.csprojAssemblyReference.cache
