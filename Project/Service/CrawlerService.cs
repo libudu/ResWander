@@ -164,11 +164,11 @@ namespace ResWander.Service
                     string format;
                     ImageService.GetImageFormat(img.Img, out format);
                     img.PhotoFormat = format;
-                    img.ResourceName = "待定，测试";
+                    img.ResourceSize = "待定，测试";
                 }
                 imgUrl = project.URLData.ImgUrls.Count > 0 ? project.URLData.ImgUrls.Dequeue() : null;
                 //此处可添加事件，与前端互动
-                CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);
+                CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceSize, img.DownloadTime, img.State);
 
             }
         }
@@ -213,10 +213,13 @@ namespace ResWander.Service
                           string format;
                           ImageService.GetImageFormat(img.Img, out format);
                           img.PhotoFormat = format;
-                          img.ResourceName = "待定，测试";
+                          if (img.Img != null)
+                              img.ResourceSize = img.Img.Width + "*" + img.Img.Height;
+                          else
+                              img.ResourceSize = "无";
                           imgUrl = project.URLData.ImgUrls.Count > 0 ? project.URLData.ImgUrls.Dequeue() : null;
                           //此处可添加事件，与前端互动
-                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceName, img.DownloadTime, img.State);       
+                          CrawlerService.DownloadedImag(img.ResourceNumber, img.Url, img.PhotoFormat, img.ResourceSize, img.DownloadTime, img.State);       
                           CrawlerService.ImgPreview();
                           finish++;
                           

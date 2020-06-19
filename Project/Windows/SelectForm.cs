@@ -166,7 +166,7 @@ namespace ResWander.Windows
                     var pageInfo = new { Index = Project.ImgResourcesContainer.ProcessedImages[q].ResourceNumber,
                                          URL = Project.ImgResourcesContainer.ProcessedImages[q].Url,
                                          PhotoFormat = Project.ImgResourcesContainer.ProcessedImages[q].PhotoFormat,
-                                         ResourceName = Project.ImgResourcesContainer.ProcessedImages[q].ResourceName,
+                                         ResourceName = Project.ImgResourcesContainer.ProcessedImages[q].ResourceSize,
                                          DownloadTime = Project.ImgResourcesContainer.ProcessedImages[q].DownloadTime,
                                          Status = Project.ImgResourcesContainer.ProcessedImages[q].State };
                     processedImageSource.Add(pageInfo);

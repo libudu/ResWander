@@ -23,7 +23,7 @@ namespace ResWander.Data
         //图片格式【ImageFormat或者string】，先用string，后面看实现再说
         public string PhotoFormat { get; set; }
         //资源名称
-        public string ResourceName { get; set; }
+        public string ResourceSize { get; set; }
         //下载时间
         public long DownloadTime { get; set; }
         //状态
