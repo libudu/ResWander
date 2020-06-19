@@ -57,7 +57,10 @@ namespace ResWander.Service
                     url = HTMLService.TransferUrl(url);
                     //字符转义
                     url = HTMLService.ReplaceChar(url);
-                    imgUrlList.Add(url);
+                    if(!imgUrlList.Contains(url))
+                    {
+                        imgUrlList.Add(url);
+                    }
                 }
             }
             return imgUrlList;
@@ -99,7 +102,14 @@ namespace ResWander.Service
                     {
                         continue;
                     }
-                    Console.WriteLine(imgUrl);
+
+                    //过滤掉一些表情图片
+                    if(imgUrl.Contains("https://gsp0.baidu.com"))
+                    {
+                        continue;
+                    }
+
+                    //Console.WriteLine(imgUrl);
                     imgUrls.Add(imgUrl);
                 }
             }
@@ -186,6 +196,12 @@ namespace ResWander.Service
         private static bool RelativeToAbsolute(string relativeUrl, out string absoluteUrl)
         {
             relativeUrl = relativeUrl.Replace(@"\/", "/");
+
+            if (relativeUrl.EndsWith("\\"))
+            {
+                relativeUrl = relativeUrl.Substring(0, relativeUrl.Length - 1);
+            }
+
             if(Regex.IsMatch(relativeUrl, @"http[s]*://"))
             {
                 absoluteUrl = relativeUrl;
