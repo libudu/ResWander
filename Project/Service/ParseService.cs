@@ -99,7 +99,14 @@ namespace ResWander.Service
                     {
                         continue;
                     }
-                    Console.WriteLine(imgUrl);
+
+                    //过滤掉一些表情图片
+                    if(imgUrl.Contains("https://gsp0.baidu.com"))
+                    {
+                        continue;
+                    }
+
+                    //Console.WriteLine(imgUrl);
                     imgUrls.Add(imgUrl);
                 }
             }
