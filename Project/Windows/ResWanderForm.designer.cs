@@ -449,7 +449,6 @@
         private System.Windows.Forms.TabControl resourceTabControl;
         private System.Windows.Forms.TabPage resourceTabPage;
         private System.Windows.Forms.DataGridView resourceDataGridView;
-        private System.Windows.Forms.TabPage previewTabPage;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.Label label2;
@@ -466,6 +465,7 @@
         private System.Windows.Forms.Button pictureSPButton;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Label FlagLabel;
+        internal System.Windows.Forms.TabPage previewTabPage;
     }
 }
 
