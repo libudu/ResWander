@@ -63,9 +63,9 @@ namespace ResWander.Data
         /// </summary>
         public ImgInputData()
         {
-            MinX = 0;
+            MinX = 30;
             MaxX = 1080;
-            MinY = 0;
+            MinY = 30;
             MaxY = 1080;
             MinSize = 0;
             MaxSize = 10240;
