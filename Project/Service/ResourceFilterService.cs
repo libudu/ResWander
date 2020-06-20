@@ -46,6 +46,10 @@ namespace ResWander.Service
                 {
                     continue;
                 }
+                if(img.Img == null)
+                {
+                    continue;
+                }
                 if(imgInputData == null)
                 {
                     continue;

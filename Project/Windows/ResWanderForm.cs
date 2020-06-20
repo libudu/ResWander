@@ -226,8 +226,8 @@ namespace ResWander
                 if (this.resourceDataGridView.Columns.Count > 1)
                     this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 FlagLabel.Text = number.ToString();
-            };
-            pictureIndex.Add(pageInfo.Index);
+                pictureIndex.Add(pageInfo.Index);
+            };            
 
             if (this.InvokeRequired)
             {

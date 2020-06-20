@@ -459,9 +459,9 @@
         private System.Windows.Forms.PictureBox lastPictureBox;
         private System.Windows.Forms.Button pictureSPButton;
         private System.Windows.Forms.Button StopButton;
-        private System.Windows.Forms.Label FlagLabel;
         internal System.Windows.Forms.TabPage previewTabPage;
         private System.Windows.Forms.Label crawLabel;
+        internal System.Windows.Forms.Label FlagLabel;
     }
 }
 
