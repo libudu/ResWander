@@ -41,7 +41,10 @@ namespace ResWander
             CrawlerProject = new Project();
             CrawlerService.DownloadedImag += Crawler_PageDownloaded;
             CrawlerService.ImgPreview += Crawl_Preview;
-            this.Size = new Size(1200,800);          
+            this.Size = new Size(1200,800);
+            FlagLabel.Text = "0";
+            FlagLabel.Parent = panel2;
+            FlagLabel.Visible = true;
         }
 
  
@@ -187,160 +190,162 @@ namespace ResWander
        
 
         private void Crawler_PageDownloaded(int number, string url, string format, string size, long time, string state)
-        {
-            var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceSize = size, DownloadTime = time, Status = state };
-            Action action = () => { resourceBindingSource.Add(pageInfo); saveResourceBindingSource.Add(pageInfo); };
-            Action action1 = () => {
+        {         
+                var pageInfo = new { Index = number, URL = url, PhotoFormat = format, ResourceSize = size, DownloadTime = time, Status = state };
+                Action action = () => { resourceBindingSource.Add(pageInfo); saveResourceBindingSource.Add(pageInfo); };
+                Action action1 = () =>
+                {
                 //将第二列URL的宽度设置为自动填充
                 if (this.resourceDataGridView.Columns.Count > 1)
-                    this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                FlagLabel.Text = number.ToString();
-            };
-            pictureIndex.Add(pageInfo.Index);
+                        this.resourceDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    FlagLabel.Text = number.ToString();
+                    pictureIndex.Add(pageInfo.Index);
+                };
 
-            if (this.InvokeRequired)
-            {
-                this.Invoke(action1);
-                this.Invoke(action);
-            }
-            else
-            {
-                action1();
-                action();
-            }
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(action1);
+                    this.Invoke(action);
+                }
+                else
+                {
+                    action1();
+                    action();
+                }            
         }
         /// <summary>
         /// 将爬到的图片一个一个的展示出去，每爬到一个，展示一个
         /// </summary>
         private void Crawl_Preview()
         {
-            lock (pictureBox)
-            {
+           
                 Action action = () =>
             {
-                //count用于统计爬取到的图片数量
-                int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
-
-                //每得到一张图片就相应的建一个图片以及复选框控件并初始化
-                PictureBox pBox = new PictureBox();
-                CheckBox chekBox = new CheckBox();
-                pictureBox.Add(pBox);
-                checkBoxes.Add(chekBox);
-                pictureBox[pictureBox.Count - 1].Parent = previewTabPage;
-                pictureBox[pictureBox.Count - 1].SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox[pictureBox.Count - 1].Size = new Size(200, 160);
-                pictureBox[pictureBox.Count - 1].Image = CrawlerProject.ImgResourcesContainer.RowImages[pictureBox.Count - 1].Img;
-                pictureBox[pictureBox.Count - 1].Visible = false;
-                pictureBox[pictureBox.Count - 1].DoubleClick += new EventHandler(PictureBox_DoubleClick);
-                checkBoxes[checkBoxes.Count - 1].Visible = false;
-                checkBoxes[checkBoxes.Count - 1].Checked = false;
-                checkBoxes[checkBoxes.Count - 1].Text = "选中";
-                checkBoxes[checkBoxes.Count - 1].Size = new Size(100, 20);
-                checkBoxes[checkBoxes.Count - 1].Parent = previewTabPage;
-
-                //为相应的图片以及复选框设置位置
-                int p = (pictureBox.Count - 1) % 9;
-                switch (p)
+                lock (pictureBox)
                 {
-                    case 0:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(120, 0);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(170, 180);
-                        break;
-                    case 1:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(470, 0);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(520, 180);
-                        break;
-                    case 2:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(820, 0);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(870, 180);
-                        break;
-                    case 3:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(120, 210);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(170, 380);
-                        break;
-                    case 4:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(470, 210);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(520, 380);
-                        break;
-                    case 5:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(820, 210);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(870, 380);
-                        break;
-                    case 6:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(120, 400);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(170, 570);
-                        break;
-                    case 7:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(470, 400);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(520, 570);
-                        break;
-                    case 8:
-                        pictureBox[pictureBox.Count - 1].Location = new Point(820, 400);
-                        checkBoxes[checkBoxes.Count - 1].Location = new Point(870, 570);
-                        break;
-                    default:
-                        break;
-                }
+                    //count用于统计爬取到的图片数量
+                    int count = CrawlerProject.ImgResourcesContainer.RowImages.Count;
 
+                    //每得到一张图片就相应的建一个图片以及复选框控件并初始化
+                    PictureBox pBox = new PictureBox();
+                    CheckBox chekBox = new CheckBox();
+                    pictureBox.Add(pBox);
+                    checkBoxes.Add(chekBox);
+                    pictureBox[pictureBox.Count - 1].Parent = previewTabPage;
+                    pictureBox[pictureBox.Count - 1].SizeMode = PictureBoxSizeMode.Zoom;
+                    pictureBox[pictureBox.Count - 1].Size = new Size(200, 160);
+                    pictureBox[pictureBox.Count - 1].Image = CrawlerProject.ImgResourcesContainer.RowImages[pictureBox.Count - 1].Img;
+                    pictureBox[pictureBox.Count - 1].Visible = false;
+                    pictureBox[pictureBox.Count - 1].DoubleClick += new EventHandler(PictureBox_DoubleClick);
+                    checkBoxes[checkBoxes.Count - 1].Visible = false;
+                    checkBoxes[checkBoxes.Count - 1].Checked = false;
+                    checkBoxes[checkBoxes.Count - 1].Text = "选中";
+                    checkBoxes[checkBoxes.Count - 1].Size = new Size(100, 20);
+                    checkBoxes[checkBoxes.Count - 1].Parent = previewTabPage;
 
-
-                //记录当前有多个显示的图片【用复选框来表示】
-                int vi = 0;
-                //当加入的图片不为空时
-                if (pictureBox[pictureBox.Count - 1] != null)
-                {
-                    for (int i = 0; i < pictureBox.Count; i++)
+                    //为相应的图片以及复选框设置位置
+                    int p = (pictureBox.Count - 1) % 9;
+                    switch (p)
                     {
-                        if (checkBoxes[i].Visible)
-                        {
-                            vi++;
-                        }
+                        case 0:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(120, 0);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(170, 180);
+                            break;
+                        case 1:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(470, 0);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(520, 180);
+                            break;
+                        case 2:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(820, 0);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(870, 180);
+                            break;
+                        case 3:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(120, 210);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(170, 380);
+                            break;
+                        case 4:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(470, 210);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(520, 380);
+                            break;
+                        case 5:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(820, 210);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(870, 380);
+                            break;
+                        case 6:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(120, 400);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(170, 570);
+                            break;
+                        case 7:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(470, 400);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(520, 570);
+                            break;
+                        case 8:
+                            pictureBox[pictureBox.Count - 1].Location = new Point(820, 400);
+                            checkBoxes[checkBoxes.Count - 1].Location = new Point(870, 570);
+                            break;
+                        default:
+                            break;
                     }
-                }
-                //要翻页了
-                if (vi == 9)
-                {
-                    for (int i = 0; i < pictureBox.Count; i++)
-                    {
-                        if (checkBoxes[i].Visible)
-                        {
-                            pictureBox[i].Visible = false;
-                            checkBoxes[i].Visible = false;
-                        }
-                    }
-                }
 
-                //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
-                for (int j = 0; j < pictureBox.Count; j++)
-                {
-                    if (pictureBox[j].Image == null)
+
+
+                    //记录当前有多个显示的图片【用复选框来表示】
+                    int vi = 0;
+                    //当加入的图片不为空时
+                    if (pictureBox[pictureBox.Count - 1] != null)
                     {
-                        for (int k = j + 1; k < pictureBox.Count; k++)
+                        for (int i = 0; i < pictureBox.Count; i++)
                         {
-                            if (pictureBox[k].Image != null)
+                            if (checkBoxes[i].Visible)
                             {
-                                pictureBox[j].Image = pictureBox[k].Image;
-                                pictureBox[k].Image = null;
-                                break;
+                                vi++;
                             }
                         }
                     }
-                }
-
-                pictureBox[pictureBox.Count - 1].Visible = true;
-                if (pictureBox[pictureBox.Count - 1].Image != null)
-                {
-                    checkBoxes[checkBoxes.Count - 1].Visible = true;
-                }
-                for (int i = 0; i < pictureBox.Count; i++)
-                {
-                    if (pictureBox[i].Visible && pictureBox[i].Image != null)
+                    //要翻页了
+                    if (vi == 9)
                     {
-                        checkBoxes[i].Visible = true;
+                        for (int i = 0; i < pictureBox.Count; i++)
+                        {
+                            if (checkBoxes[i].Visible)
+                            {
+                                pictureBox[i].Visible = false;
+                                checkBoxes[i].Visible = false;
+                            }
+                        }
                     }
+
+                    //对于picturebox的Img为空的控件进行调整，使得后面的不为空的图象往前移
+                    for (int j = 0; j < pictureBox.Count; j++)
+                    {
+                        if (pictureBox[j].Image == null)
+                        {
+                            for (int k = j + 1; k < pictureBox.Count; k++)
+                            {
+                                if (pictureBox[k].Image != null)
+                                {
+                                    pictureBox[j].Image = pictureBox[k].Image;
+                                    pictureBox[k].Image = null;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    pictureBox[pictureBox.Count - 1].Visible = true;
+                    if (pictureBox[pictureBox.Count - 1].Image != null)
+                    {
+                        checkBoxes[checkBoxes.Count - 1].Visible = true;
+                    }
+                    for (int i = 0; i < pictureBox.Count; i++)
+                    {
+                        if (pictureBox[i].Visible && pictureBox[i].Image != null)
+                        {
+                            checkBoxes[i].Visible = true;
+                        }
+                    }
+
                 }
-
-
             };
 
                 if (this.InvokeRequired)
@@ -351,7 +356,7 @@ namespace ResWander
                 {
                     action();
                 }
-            }
+           
         }
 
         /// <summary>

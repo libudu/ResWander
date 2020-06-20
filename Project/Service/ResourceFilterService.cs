@@ -46,6 +46,10 @@ namespace ResWander.Service
                 {
                     continue;
                 }
+                if(imgInputData == null)
+                {
+                    continue;
+                }
                 // 宽、高度筛选
                 if (img.Img.Width < imgInputData.MinY ||
                 img.Img.Width > imgInputData.MaxY ||
